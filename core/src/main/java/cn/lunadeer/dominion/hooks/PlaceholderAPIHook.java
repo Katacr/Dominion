@@ -1,5 +1,6 @@
 package cn.lunadeer.dominion.hooks;
 
+import cn.lunadeer.dominion.Dominion;
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
 import cn.lunadeer.dominion.api.dtos.GroupDTO;
 import cn.lunadeer.dominion.api.dtos.MemberDTO;
@@ -10,10 +11,13 @@ import cn.lunadeer.dominion.cache.CacheManager;
 import cn.lunadeer.dominion.misc.Others;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
 
@@ -54,6 +58,13 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
                 return "";
             }
             return dominion.getName();
+        }
+        // %dominion_selected_point_1%: Get the player's first selected point
+        // %dominion_selected_point_2%: Get the player's second selected point
+        // %dominion_selected_point_<1|2>_<world|x|y|z>%: Get a single value of the selected point
+        // @Returns world,x,y,z or the requested value, empty if the point has not been selected
+        if (params.startsWith("selected_point_")) {
+            return getSelectedPoint(bukkitPlayer, params.substring("selected_point_".length()));
         }
         // %dominion_tp_loc_x_<dominion_name>%: Get the x coordinate of the teleport location of a dominion
         // %dominion_tp_loc_y_<dominion_name>%: Get the y coordinate of the teleport location of a dominion
@@ -192,6 +203,47 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             return String.valueOf(Others.checkEnvironmentFlag(bukkitPlayer.getLocation(), envFlag, null));
         }
         return null; //
+    }
+
+    private static @Nullable String getSelectedPoint(@Nullable Player bukkitPlayer, @NotNull String selector) {
+        String[] parts = selector.split("_", 2);
+        int index;
+        switch (parts[0]) {
+            case "1" -> index = 0;
+            case "2" -> index = 1;
+            default -> {
+                return null;
+            }
+        }
+
+        Location location = getSelectedPointLocation(bukkitPlayer, index);
+        if (location == null || location.getWorld() == null) {
+            return "";
+        }
+        if (parts.length == 1) {
+            return "%s,%d,%d,%d".formatted(
+                    location.getWorld().getName(),
+                    location.getBlockX(),
+                    location.getBlockY(),
+                    location.getBlockZ()
+            );
+        }
+        return switch (parts[1].toLowerCase()) {
+            case "world" -> location.getWorld().getName();
+            case "x" -> String.valueOf(location.getBlockX());
+            case "y" -> String.valueOf(location.getBlockY());
+            case "z" -> String.valueOf(location.getBlockZ());
+            default -> null;
+        };
+    }
+
+    private static @Nullable Location getSelectedPointLocation(@Nullable Player bukkitPlayer, int index) {
+        if (bukkitPlayer == null) {
+            return null;
+        }
+        return Dominion.pointsSelect
+                .getOrDefault(bukkitPlayer.getUniqueId(), Map.of())
+                .get(index);
     }
 
     private static @Nullable String getGroupName(Player bukkitPlayer, DominionDTO dominion) {
