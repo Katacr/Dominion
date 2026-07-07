@@ -86,10 +86,15 @@ public class EventsRegister {
     }
 
     private void registerVersion() throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-        for (XVersionManager.ImplementationVersion v : XVersionManager.ImplementationVersion.values()) {
+        XVersionManager.ImplementationVersion v = version;
+        while (v != null) {
+            // Only walk from the active implementation version downwards. Higher
+            // version packages may be compiled for a newer Java runtime and must
+            // not be loaded on older servers.
             String packageName = "cn.lunadeer.dominion." + v.name() + ".";
             registerPackageEvents(packageName + "events.player");
             registerPackageEvents(packageName + "events.environment");
+            v = v.getPrevious();
         }
     }
 

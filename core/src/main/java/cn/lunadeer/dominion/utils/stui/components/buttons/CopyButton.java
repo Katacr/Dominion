@@ -5,6 +5,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 public class CopyButton extends Button {
     public CopyButton(String text, String copyText) {
         super(text);
-        this.clickEvent = ClickEvent.copyToClipboard(copyText);
+        ClickEvent event = legacyClickEvent("COPY_TO_CLIPBOARD", copyText);
+        this.clickEvent = event != null ? event : ClickEvent.copyToClipboard(copyText);
     }
 }

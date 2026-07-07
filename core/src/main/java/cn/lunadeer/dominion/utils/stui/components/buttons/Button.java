@@ -8,6 +8,9 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Button {
 
     private String prefix = "[";
@@ -77,5 +80,20 @@ public class Button {
     public Button green() {
         this.color = ViewStyles.NORMAL;
         return this;
+    }
+
+    /**
+     * Creates legacy click events when the runtime still exposes Adventure 4 style actions.
+     */
+    protected static ClickEvent legacyClickEvent(String actionName, String value) {
+        try {
+            Class<?> actionClass = Class.forName("net.kyori.adventure.text.event.ClickEvent$Action");
+            Field actionField = actionClass.getField(actionName);
+            Object action = actionField.get(null);
+            Method clickEvent = ClickEvent.class.getMethod("clickEvent", actionClass, String.class);
+            return (ClickEvent) clickEvent.invoke(null, action, value);
+        } catch (ReflectiveOperationException | LinkageError ignored) {
+            return null;
+        }
     }
 }

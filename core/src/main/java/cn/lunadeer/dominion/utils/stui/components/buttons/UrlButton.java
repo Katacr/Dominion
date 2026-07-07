@@ -5,6 +5,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 public class UrlButton extends Button {
     public UrlButton(String text, String url) {
         super(text);
-        this.clickEvent = ClickEvent.openUrl(url);
+        ClickEvent event = legacyClickEvent("OPEN_URL", url);
+        this.clickEvent = event != null ? event : ClickEvent.openUrl(url);
     }
 }
