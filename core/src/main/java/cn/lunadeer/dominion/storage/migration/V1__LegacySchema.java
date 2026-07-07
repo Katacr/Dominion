@@ -47,8 +47,7 @@ public class V1__LegacySchema extends AbstractJavaMigration {
                 "leave_message " + longText() + " NOT NULL DEFAULT '&3{OWNER}: Leaving {DOM}...', " +
                 "tp_location " + text() + " NOT NULL DEFAULT 'default', " +
                 "color " + text() + " NOT NULL DEFAULT '#00BFFF', " +
-                "server_id INT NOT NULL DEFAULT " + Configuration.multiServer.serverId + ", " +
-                "owner_glow " + bool() + " NOT NULL DEFAULT " + falseLiteral() +
+                "server_id INT NOT NULL DEFAULT " + Configuration.multiServer.serverId +
                 ")");
 
         execute(connection, "CREATE TABLE IF NOT EXISTS privilege_template (" +
@@ -102,7 +101,6 @@ public class V1__LegacySchema extends AbstractJavaMigration {
             addColumnIfMissing(connection, "dominion", "tp_location " + text() + " NOT NULL DEFAULT 'default'");
             addColumnIfMissing(connection, "dominion", "color " + text() + " NOT NULL DEFAULT '#00BFFF'");
             addColumnIfMissing(connection, "dominion", "server_id INT NOT NULL DEFAULT " + Configuration.multiServer.serverId);
-            addColumnIfMissing(connection, "dominion", "owner_glow " + bool() + " NOT NULL DEFAULT " + falseLiteral());
             execute(connection, "UPDATE dominion SET server_id = -1 WHERE id = -1");
         }
 
@@ -175,7 +173,7 @@ public class V1__LegacySchema extends AbstractJavaMigration {
             }
         }
         if (!existsById(connection, "dominion", -1)) {
-            try (PreparedStatement insert = connection.prepareStatement("INSERT INTO dominion (id, owner, name, world_uid, x1, y1, z1, x2, y2, z2, parent_dom_id, join_message, leave_message, tp_location, color, server_id, owner_glow) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement insert = connection.prepareStatement("INSERT INTO dominion (id, owner, name, world_uid, x1, y1, z1, x2, y2, z2, parent_dom_id, join_message, leave_message, tp_location, color, server_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
                 insert.setInt(1, -1);
                 insert.setString(2, UUID.fromString("00000000-0000-0000-0000-000000000000").toString());
                 insert.setString(3, "根领地");
@@ -192,7 +190,6 @@ public class V1__LegacySchema extends AbstractJavaMigration {
                 insert.setString(14, "default");
                 insert.setString(15, "#00BFFF");
                 insert.setInt(16, -1);
-                insert.setBoolean(17, false);
                 insert.executeUpdate();
             }
         }
@@ -210,7 +207,4 @@ public class V1__LegacySchema extends AbstractJavaMigration {
         }
     }
 
-    private String falseLiteral() {
-        return type.isMySqlFamily() ? "0" : "false";
-    }
 }

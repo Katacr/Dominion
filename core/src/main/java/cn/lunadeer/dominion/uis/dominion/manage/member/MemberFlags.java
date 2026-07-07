@@ -94,7 +94,6 @@ public class MemberFlags extends AbstractUI {
         view.add(Line.create().append(SelectTemplate.button(player, dominionName, playerName).build()));
         if (member.getFlagValue(Flags.ADMIN)) {
             view.add(createOption(player, Flags.ADMIN, true, playerName, dominion.getName(), page));
-            view.add(createOption(player, Flags.GLOW, member.getFlagValue(Flags.GLOW), playerName, dominion.getName(), page));
         } else {
             for (PriFlag flag : Flags.getAllPriFlagsEnable()) {
                 view.add(createOption(player, flag, member.getFlagValue(flag), playerName, dominion.getName(), page));

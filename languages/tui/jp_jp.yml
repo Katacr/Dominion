@@ -26,8 +26,6 @@ dominion-manage-tui-text:
   button: 管理
   set-tp-button: TP設定
   set-tp-description: 現在地をTP地点として設定します。
-  owner-glow-button: '所有者の発光: {0}'
-  owner-glow-description: 領地の所有者に発光エフェクトを付けるかどうかを設定します。
 set-size-tui-text:
   title: '{0} のサイズ変更'
   button: サイズ変更

@@ -248,9 +248,6 @@ flags:
   villager_killing:
     display-name: 擊殺村民
     description: 是否可以傷害村民。
-  glow:
-    display-name: 發光
-    description: 類似發光箭效果。
 dominion-text:
   loading-config: 正在載入配置...
   plugin-enabled: 外掛已啟用！
@@ -364,8 +361,6 @@ dominion-provider-handler-text:
   set-env-flag-failed: '設定環境許可權 {0} 為 {1} 失敗，原因：{2}'
   set-guest-flag-success: 設定訪客許可權 {0} 為 {1} 成功。
   set-guest-flag-failed: '設定訪客許可權 {0} 為 {1} 失敗，原因：{2}'
-  set-owner-glow-flag-success: 設定所有者發光許可權為 {0} 成功。
-  set-owner-glow-flag-failed: '設定所有者發光許可權為 {0} 失敗，原因：{1}'
 member-provider-handler-text:
   set-flag-success: 已成功為 {1} 在 {2} 中設定許可權 {0}。
   owner-only: 只有所有者可以管理管理員成員。

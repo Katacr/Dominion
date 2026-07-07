@@ -248,9 +248,6 @@ flags:
   villager_killing:
     display-name: Villager Killing
     description: Whether can do harm to villager.
-  glow:
-    display-name: Glow
-    description: Like glowing arrow effect.
 dominion-text:
   loading-config: Loading Configurations...
   plugin-enabled: Plugin Enabled!
@@ -364,8 +361,6 @@ dominion-provider-handler-text:
   set-env-flag-failed: 'Set env flag {0} to {1} failed, reason: {2}'
   set-guest-flag-success: Set guest flag {0} to {1} success.
   set-guest-flag-failed: 'Set guest flag {0} to {1} failed, reason: {2}'
-  set-owner-glow-flag-success: Set owner Glow Flag to {0} success.
-  set-owner-glow-flag-failed: 'Set owner Glow Flag to {0} failed, reason: {1}'
 member-provider-handler-text:
   set-flag-success: Successfully set flag {0} for {1} in {2}.
   owner-only: Only owner can manage admin member.

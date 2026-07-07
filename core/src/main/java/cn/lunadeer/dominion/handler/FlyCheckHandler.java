@@ -27,12 +27,12 @@ import java.util.UUID;
 
 import static cn.lunadeer.dominion.misc.Others.checkPrivilegeFlagSilence;
 
-public class FlyGlowCheckHandler implements Listener {
+public class FlyCheckHandler implements Listener {
 
     // 记录由 Dominion 主动开启飞行的玩家，用于区分 Dominion 和其他插件（Essentials/CMI）授予的飞行
     private static final Set<UUID> dominionFlightPlayers = new HashSet<>();
 
-    public FlyGlowCheckHandler(JavaPlugin plugin) {
+    public FlyCheckHandler(JavaPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -40,22 +40,6 @@ public class FlyGlowCheckHandler implements Listener {
     @EventHandler
     public void onPlayerCrossBorder(PlayerCrossDominionBorderEvent event) {
         Player player = event.getPlayer();
-        handle(event.getPlayer(), event.getTo(), Flags.GLOW, 
-        () -> {
-            // If the player is the owner of the dominion, check the owner glow flag
-            if (event.getPlayer().getUniqueId().equals(event.getTo().getOwner())){
-                if (event.getTo().getOwnerGlow()) {
-                    player.setGlowing(true);
-                } else {
-                    player.setGlowing(false);
-                }
-                return;
-            }
-            player.setGlowing(true);
-        }, 
-        () -> {
-            player.setGlowing(false);
-        });
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
             return;
         }
@@ -74,7 +58,6 @@ public class FlyGlowCheckHandler implements Listener {
         dominionFlightPlayers.remove(player.getUniqueId());
         player.setAllowFlight(false);
         if (event.getPlayer().isFlying()) player.setFlying(false);
-        player.setGlowing(false);
     }
 
     @EventHandler

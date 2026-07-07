@@ -13,7 +13,7 @@ public class DominionRepository extends RepositorySupport {
     public record DominionRow(Integer id, UUID owner, String name, UUID worldUid, Integer x1, Integer y1, Integer z1,
                               Integer x2, Integer y2, Integer z2, Integer parentDomId, String joinMessage,
                               String leaveMessage, Map<EnvFlag, Boolean> envFlags, Map<PriFlag, Boolean> guestFlags,
-                              String tpLocation, String color, Integer serverId, Boolean ownerGlow) {
+                              String tpLocation, String color, Integer serverId) {
     }
 
     public static List<DominionRow> selectAll(Integer serverId) throws SQLException {
@@ -46,7 +46,6 @@ public class DominionRepository extends RepositorySupport {
             values.put(DOM_TP_LOCATION, dominion.tpLocation());
             values.put(DOM_COLOR, dominion.color());
             values.put(DOM_SERVER_ID, dominion.serverId());
-            values.put(DOM_OWNER_GLOW, dominion.ownerGlow());
             putEnvFlags(values, dominion.envFlags());
             putPriFlags(values, dominion.guestFlags());
             mapper.insert(DOMINION, values);
@@ -103,10 +102,6 @@ public class DominionRepository extends RepositorySupport {
         update(DOM_COLOR, color, id);
     }
 
-    public static void updateOwnerGlow(Integer id, Boolean ownerGlow) throws SQLException {
-        update(DOM_OWNER_GLOW, ownerGlow, id);
-    }
-
     public static void updateEnvFlag(Integer id, EnvFlag flag, Boolean value) throws SQLException {
         sql((session, mapper) -> {
             updateFlag(mapper, DOMINION, DOM_ID, id, flag, value);
@@ -157,8 +152,7 @@ public class DominionRepository extends RepositorySupport {
                 readPriFlags(row),
                 string(row, DOM_TP_LOCATION),
                 string(row, DOM_COLOR),
-                integer(row, DOM_SERVER_ID),
-                toBoolean(value(row, DOM_OWNER_GLOW), false)
+                integer(row, DOM_SERVER_ID)
         );
     }
 }

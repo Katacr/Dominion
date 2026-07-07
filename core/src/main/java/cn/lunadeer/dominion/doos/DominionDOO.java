@@ -34,7 +34,6 @@ public class DominionDOO implements DominionDTO {
     private String color = "#00BFFF";
     private UUID world_uid;
     private Integer serverId;
-    private Boolean owner_glow = false;
 
     // Cache for the parsed UUID to avoid repeated string parsing
     private UUID cachedWorldUid = null;
@@ -56,8 +55,7 @@ public class DominionDOO implements DominionDTO {
                 row.guestFlags(),
                 row.tpLocation(),
                 row.color(),
-                row.serverId(),
-                row.ownerGlow()
+                row.serverId()
         );
     }
 
@@ -73,7 +71,7 @@ public class DominionDOO implements DominionDTO {
                 -1,
                 "null", "null",
                 new HashMap<>(), new HashMap<>(),
-                "default", "#00BFFF", -1, false);
+                "default", "#00BFFF", -1);
     }
 
     public static @Nullable DominionDOO select(Integer id) throws SQLException {
@@ -110,8 +108,7 @@ public class DominionDOO implements DominionDTO {
                         Map<PriFlag, Boolean> preFlags,
                         String tp_location,
                         String color,
-                        Integer serverId,
-                        Boolean ownerGlow) {
+                        Integer serverId) {
         this.id = id;
         this.owner = owner;
         this.name = name;
@@ -125,7 +122,6 @@ public class DominionDOO implements DominionDTO {
         this.tp_location = tp_location;
         this.color = color;
         this.serverId = serverId;
-        this.owner_glow = ownerGlow;
     }
 
     // constructor for new dominion
@@ -142,7 +138,6 @@ public class DominionDOO implements DominionDTO {
         this.joinMessage = Configuration.pluginMessage.defaultEnterMessage;
         this.leaveMessage = Configuration.pluginMessage.defaultLeaveMessage;
         this.serverId = Configuration.multiServer.serverId;
-        this.owner_glow = false;
         for (EnvFlag flag : Flags.getAllEnvFlagsEnable()) {
             this.envFlags.put(flag, flag.getDefaultValue());
         }
@@ -155,7 +150,7 @@ public class DominionDOO implements DominionDTO {
         return new DominionRepository.DominionRow(
                 id, owner, name, world_uid,
                 cuboid.x1(), cuboid.y1(), cuboid.z1(), cuboid.x2(), cuboid.y2(), cuboid.z2(),
-                parentDomId, joinMessage, leaveMessage, envFlags, preFlags, tp_location, color, serverId, owner_glow
+                parentDomId, joinMessage, leaveMessage, envFlags, preFlags, tp_location, color, serverId
         );
     }
 
@@ -426,15 +421,4 @@ public class DominionDOO implements DominionDTO {
         DominionRepository.deleteByPlayerUuid(playerUUID);
     }
 
-    @Override
-    public Boolean getOwnerGlow() {
-        return owner_glow;
-    }
-
-    @Override
-    public @NotNull DominionDOO setOwnerGlow(Boolean ownerGlow) throws SQLException {
-        this.owner_glow = ownerGlow;
-        DominionRepository.updateOwnerGlow(id, ownerGlow);
-        return this;
-    }
 }
