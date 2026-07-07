@@ -13,9 +13,8 @@ public class Button {
     private String prefix = "[";
     private String suffix = "]";
     protected String text = "";
-    protected ClickEvent.Action action = null;
+    protected ClickEvent clickEvent = null;
     private String hoverText = "";
-    protected String clickExecute = "";
     TextColor color = ViewStyles.ACTION;
     TextColor disabledColor = TextColor.color(0x666666);
 
@@ -26,8 +25,8 @@ public class Button {
         builder.append(Component.text(prefix, color));
         builder.append(Component.text(text, color));
         builder.append(Component.text(suffix, color));
-        if (action != null && !clickExecute.isEmpty() && disabledText == null) {
-            builder.clickEvent(ClickEvent.clickEvent(action, clickExecute));
+        if (clickEvent != null && disabledText == null) {
+            builder.clickEvent(clickEvent);
         }
         if (disabledText != null) {
             builder.hoverEvent(Component.text(disabledText)).style(Style.style(TextDecoration.STRIKETHROUGH));

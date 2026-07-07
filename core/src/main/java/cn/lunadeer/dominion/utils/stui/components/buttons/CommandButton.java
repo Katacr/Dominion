@@ -6,7 +6,6 @@ public class CommandButton extends Button {
 
     public CommandButton(String text, String command) {
         super(text);
-        this.action = ClickEvent.Action.RUN_COMMAND;
-        this.clickExecute = command;
+        this.clickEvent = ClickEvent.runCommand(command);
     }
 }
