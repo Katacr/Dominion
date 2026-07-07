@@ -95,7 +95,6 @@ public class GroupFlags extends AbstractUI {
 
         if (group.getFlagValue(Flags.ADMIN)) {
             view.add(createOption(player, Flags.ADMIN, true, dominion.getName(), group.getNamePlain(), args[2]));
-            view.add(createOption(player, Flags.GLOW, group.getFlagValue(Flags.GLOW), dominion.getName(), group.getNamePlain(), args[2]));
         } else {
             for (PriFlag flag : Flags.getAllPriFlagsEnable()) {
                 view.add(createOption(player, flag, group.getFlagValue(flag), dominion.getName(), group.getNamePlain(), args[2]));

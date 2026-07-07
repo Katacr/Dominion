@@ -35,7 +35,6 @@ public final class DatabaseSchema {
     public static final String DOM_TP_LOCATION = "tp_location";
     public static final String DOM_COLOR = "color";
     public static final String DOM_SERVER_ID = "server_id";
-    public static final String DOM_OWNER_GLOW = "owner_glow";
 
     public static final String MEMBER = "dominion_member";
     public static final String MEMBER_ID = "id";

@@ -248,9 +248,6 @@ flags:
   villager_killing:
     display-name: 击杀村民
     description: 是否可以伤害村民。
-  glow:
-    display-name: 发光
-    description: 类似发光箭效果。
 dominion-text:
   loading-config: 正在加载配置...
   plugin-enabled: 插件已启用！
@@ -364,8 +361,6 @@ dominion-provider-handler-text:
   set-env-flag-failed: '设置环境权限 {0} 为 {1} 失败，原因：{2}'
   set-guest-flag-success: 设置访客权限 {0} 为 {1} 成功。
   set-guest-flag-failed: '设置访客权限 {0} 为 {1} 失败，原因：{2}'
-  set-owner-glow-flag-success: 设置所有者发光权限为 {0} 成功。
-  set-owner-glow-flag-failed: '设置所有者发光权限为 {0} 失败，原因：{1}'
 member-provider-handler-text:
   set-flag-success: 已成功为 {1} 在 {2} 中设置权限 {0}。
   owner-only: 只有所有者可以管理管理员成员。

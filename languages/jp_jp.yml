@@ -248,9 +248,6 @@ flags:
   villager_killing:
     display-name: 村人攻撃
     description: 村人にダメージを与えられるかどうか。
-  glow:
-    display-name: 発光
-    description: 発光の矢のような効果です。
 dominion-text:
   loading-config: 設定を読み込み中...
   plugin-enabled: プラグインを有効化しました！
@@ -364,8 +361,6 @@ dominion-provider-handler-text:
   set-env-flag-failed: '環境フラグ {0} を {1} に設定できませんでした。理由: {2}'
   set-guest-flag-success: ゲストフラグ {0} を {1} に設定しました。
   set-guest-flag-failed: 'ゲストフラグ {0} を {1} に設定できませんでした。理由: {2}'
-  set-owner-glow-flag-success: 所有者の発光フラグを {0} に設定しました。
-  set-owner-glow-flag-failed: '所有者の発光フラグを {0} に設定できませんでした。理由: {1}'
 member-provider-handler-text:
   set-flag-success: '{2} 内の {1} にフラグ {0} を設定しました。'
   owner-only: 所有者のみが管理者メンバーを管理できます。

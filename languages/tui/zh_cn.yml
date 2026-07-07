@@ -26,8 +26,6 @@ dominion-manage-tui-text:
   button: 管理
   set-tp-button: 设置 TP
   set-tp-description: 将你当前位置设置为传送点。
-  owner-glow-button: '领主发光: {0}'
-  owner-glow-description: 设置领地所有者是否拥有发光效果。
 set-size-tui-text:
   title: 调整 {0} 大小
   button: 调整大小
