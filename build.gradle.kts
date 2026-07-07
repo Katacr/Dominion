@@ -101,12 +101,12 @@ allprojects {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project("versions:v1_20_1"))
-    implementation(project("versions:v1_21"))
-    implementation(project("versions:v1_21_4"))
-    implementation(project("versions:v1_21_6"))
-    implementation(project("versions:v1_21_8"))
-    implementation(project("versions:v1_21_9"))
+    implementation(project(path = ":versions:v1_20_1", configuration = "reobf"))
+    implementation(project(path = ":versions:v1_21", configuration = "reobf"))
+    implementation(project(path = ":versions:v1_21_4", configuration = "reobf"))
+    implementation(project(path = ":versions:v1_21_6", configuration = "reobf"))
+    implementation(project(path = ":versions:v1_21_8", configuration = "reobf"))
+    implementation(project(path = ":versions:v1_21_9", configuration = "reobf"))
     implementation(project(path = ":versions:v26", configuration = "shadowRuntimeElements"))
     implementation(project(path = ":versions:v26_2", configuration = "shadowRuntimeElements"))
 }
