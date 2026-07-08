@@ -3,6 +3,7 @@ package cn.lunadeer.dominion.v1_20_1.events.environment;
 import cn.lunadeer.dominion.api.dtos.DominionDTO;
 import cn.lunadeer.dominion.api.dtos.flag.Flags;
 import cn.lunadeer.dominion.cache.CacheManager;
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -17,18 +18,30 @@ public class HopperOutside implements Listener {
         if (event.isCancelled()) return;
         Inventory hopper = event.getDestination();
         Inventory inventory = event.getSource();
-        if (hopper.getLocation() == null || inventory.getLocation() == null) {
+        Location hopperLocation = hopper.getLocation();
+        Location inventoryLocation = inventory.getLocation();
+        if (hopperLocation == null || inventoryLocation == null) {
             return;
         }
-        DominionDTO hopperDom = CacheManager.instance.getDominion(hopper.getLocation());
-        DominionDTO inventoryDom = CacheManager.instance.getDominion(inventory.getLocation());
-        if (hopperDom == null && inventoryDom != null) {
-            checkEnvironmentFlag(inventory.getLocation(), Flags.HOPPER_OUTSIDE, event);
+
+        DominionDTO inventoryDom = CacheManager.instance.getDominion(
+                inventoryLocation.getWorld(),
+                inventoryLocation.getBlockX(),
+                inventoryLocation.getBlockY(),
+                inventoryLocation.getBlockZ()
+        );
+        if (inventoryDom == null) {
+            return;
         }
-        if (hopperDom != null && inventoryDom != null) {
-            if (!hopperDom.getId().equals(inventoryDom.getId())) {
-                checkEnvironmentFlag(inventory.getLocation(), Flags.HOPPER_OUTSIDE, event);
-            }
+
+        DominionDTO hopperDom = CacheManager.instance.getDominion(
+                hopperLocation.getWorld(),
+                hopperLocation.getBlockX(),
+                hopperLocation.getBlockY(),
+                hopperLocation.getBlockZ()
+        );
+        if (hopperDom == null || !hopperDom.getId().equals(inventoryDom.getId())) {
+            checkEnvironmentFlag(inventoryDom, Flags.HOPPER_OUTSIDE, event);
         }
     }
 }
