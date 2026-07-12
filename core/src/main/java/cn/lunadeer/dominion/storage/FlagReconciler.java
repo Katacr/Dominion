@@ -96,7 +96,11 @@ final class FlagReconciler {
     private boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
         DatabaseMetaData metaData = connection.getMetaData();
         String normalized = columnName.toLowerCase(Locale.ROOT);
-        try (ResultSet rs = metaData.getColumns(null, null, tableName, "%")) {
+        try (ResultSet rs = metaData.getColumns(
+                DatabaseMetadataScope.catalog(connection),
+                DatabaseMetadataScope.schema(connection, type),
+                tableName,
+                "%")) {
             while (rs.next()) {
                 if (normalized.equals(rs.getString("COLUMN_NAME").toLowerCase(Locale.ROOT))) {
                     return true;
