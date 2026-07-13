@@ -4,6 +4,7 @@ import cn.lunadeer.dominion.Dominion;
 import cn.lunadeer.dominion.cache.CacheManager;
 import cn.lunadeer.dominion.configuration.Language;
 import cn.lunadeer.dominion.storage.DatabaseManager;
+import cn.lunadeer.dominion.storage.DatabaseMetadataScope;
 import cn.lunadeer.dominion.storage.DatabaseType;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.XLogger;
@@ -234,12 +235,17 @@ public class DatabaseBackupManager {
         Set<String> columns = new HashSet<>();
         try (Connection connection = DatabaseManager.instance.getConnection()) {
             DatabaseMetaData metaData = connection.getMetaData();
-            try (ResultSet rs = metaData.getColumns(null, null, tableName, "%")) {
+            DatabaseType type = DatabaseManager.instance.getType();
+            try (ResultSet rs = metaData.getColumns(
+                    DatabaseMetadataScope.catalog(connection),
+                    DatabaseMetadataScope.schema(connection, type),
+                    tableName,
+                    "%")) {
                 while (rs.next()) {
                     columns.add(rs.getString("COLUMN_NAME").toLowerCase(Locale.ROOT));
                 }
             }
-            if (columns.isEmpty() && DatabaseManager.instance.getType() == cn.lunadeer.dominion.storage.DatabaseType.SQLITE) {
+            if (columns.isEmpty() && type == DatabaseType.SQLITE) {
                 try (Statement statement = connection.createStatement();
                      ResultSet rs = statement.executeQuery("PRAGMA table_info(" + tableName + ")")) {
                     while (rs.next()) {

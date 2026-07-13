@@ -82,6 +82,19 @@ public class DominionCache extends Cache {
     }
 
     /**
+     * Retrieves a DominionDTO by its block coordinates.
+     *
+     * @param world the world of the block
+     * @param x     the block x-coordinate
+     * @param y     the block y-coordinate
+     * @param z     the block z-coordinate
+     * @return the DominionDTO associated with the given block, or null if not found
+     */
+    public @Nullable DominionDTO getDominion(@NotNull World world, int x, int y, int z) {
+        return dominionNodeSectored.getDominionByLocation(world, x, y, z);
+    }
+
+    /**
      * Retrieves the dominion nodes managed by a player.
      *
      * @param player the UUID of the player
@@ -236,6 +249,7 @@ public class DominionCache extends Cache {
 
         // Atomically replace all cache data
         synchronized (this) {
+            dominionNodeSectored.clearLocationCache();
             idDominions = tempIdDominions;
             dominionChildrenMap = tempDominionChildrenMap;
             dominionNameToId = tempDominionNameToId;
@@ -252,6 +266,7 @@ public class DominionCache extends Cache {
         if (dominion == null) {
             return;
         }
+        dominionNodeSectored.clearLocationCache();
         DominionDTO oldData = idDominions.put(dominion.getId(), dominion);
         // remove old data
         if (oldData != null) {
@@ -269,6 +284,7 @@ public class DominionCache extends Cache {
 
     @Override
     void deleteExecution(Integer idToDelete) throws Exception {
+        dominionNodeSectored.clearLocationCache();
         DominionDTO dominionToDelete = idDominions.remove(idToDelete);
         if (dominionToDelete == null) {
             return;
@@ -305,6 +321,7 @@ public class DominionCache extends Cache {
                 CopyOnWriteArrayList<DominionNode> nodeTree = DominionNode.BuildNodeTree(-1, new CopyOnWriteArrayList<>(idDominions.values()));
                 parseNodeTree(tempPlayerDominionNodes, tempDominionNodeMap, nodeTree, idDominions);
 
+                dominionNodeSectored.clearLocationCache();
                 playerDominionNodes = tempPlayerDominionNodes;
                 dominionNodeMap = tempDominionNodeMap;
                 dominionNodeSectored.buildAsync(nodeTree);

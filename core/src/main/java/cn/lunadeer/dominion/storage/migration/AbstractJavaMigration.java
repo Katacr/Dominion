@@ -1,6 +1,7 @@
 package cn.lunadeer.dominion.storage.migration;
 
 import cn.lunadeer.dominion.storage.DatabaseType;
+import cn.lunadeer.dominion.storage.DatabaseMetadataScope;
 import org.flywaydb.core.api.migration.BaseJavaMigration;
 
 import java.sql.*;
@@ -26,7 +27,7 @@ abstract class AbstractJavaMigration extends BaseJavaMigration {
     protected boolean tableExists(Connection connection, String tableName) throws SQLException {
         DatabaseMetaData metaData = connection.getMetaData();
         String normalized = tableName.toLowerCase(Locale.ROOT);
-        try (ResultSet rs = metaData.getTables(null, null, "%", new String[]{"TABLE"})) {
+        try (ResultSet rs = metaData.getTables(catalog(connection), schema(connection), "%", new String[]{"TABLE"})) {
             while (rs.next()) {
                 if (normalized.equals(rs.getString("TABLE_NAME").toLowerCase(Locale.ROOT))) {
                     return true;
@@ -39,7 +40,7 @@ abstract class AbstractJavaMigration extends BaseJavaMigration {
     protected boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
         DatabaseMetaData metaData = connection.getMetaData();
         String normalized = columnName.toLowerCase(Locale.ROOT);
-        try (ResultSet rs = metaData.getColumns(null, null, tableName, "%")) {
+        try (ResultSet rs = metaData.getColumns(catalog(connection), schema(connection), tableName, "%")) {
             while (rs.next()) {
                 if (normalized.equals(rs.getString("COLUMN_NAME").toLowerCase(Locale.ROOT))) {
                     return true;
@@ -62,7 +63,7 @@ abstract class AbstractJavaMigration extends BaseJavaMigration {
     protected Set<String> columns(Connection connection, String tableName) throws SQLException {
         Set<String> columns = new HashSet<>();
         DatabaseMetaData metaData = connection.getMetaData();
-        try (ResultSet rs = metaData.getColumns(null, null, tableName, "%")) {
+        try (ResultSet rs = metaData.getColumns(catalog(connection), schema(connection), tableName, "%")) {
             while (rs.next()) {
                 columns.add(rs.getString("COLUMN_NAME").toLowerCase(Locale.ROOT));
             }
@@ -81,7 +82,7 @@ abstract class AbstractJavaMigration extends BaseJavaMigration {
     protected boolean indexExists(Connection connection, String tableName, String indexName) throws SQLException {
         String normalized = indexName.toLowerCase(Locale.ROOT);
         DatabaseMetaData metaData = connection.getMetaData();
-        try (ResultSet rs = metaData.getIndexInfo(null, null, tableName, false, false)) {
+        try (ResultSet rs = metaData.getIndexInfo(catalog(connection), schema(connection), tableName, false, false)) {
             while (rs.next()) {
                 String name = rs.getString("INDEX_NAME");
                 if (name != null && normalized.equals(name.toLowerCase(Locale.ROOT))) {
@@ -97,6 +98,14 @@ abstract class AbstractJavaMigration extends BaseJavaMigration {
         if (!columnExists(connection, tableName, columnName)) {
             execute(connection, "ALTER TABLE " + tableName + " ADD COLUMN " + columnDefinition);
         }
+    }
+
+    private String catalog(Connection connection) throws SQLException {
+        return DatabaseMetadataScope.catalog(connection);
+    }
+
+    private String schema(Connection connection) throws SQLException {
+        return DatabaseMetadataScope.schema(connection, type);
     }
 
     protected String autoId() {
