@@ -14,6 +14,8 @@ import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -34,6 +36,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Asserts.assertDominionAdmin;
@@ -76,10 +79,20 @@ public class GroupFlags extends AbstractUI {
 
     @Override
     protected void showTUI(Player player, String... args) {
+        int page = toIntegrity(args[2], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("group_flags")) {
+            // Keep the legacy entry point while group identity remains server-owned route state.
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "group_flags", page, Map.of(
+                    "dominion.name", args[0],
+                    "group.name", args[1]
+            )));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(args[0]);
         assertDominionAdmin(player, dominion);
         GroupDTO group = toGroupDTO(dominion, args[1]);
-        int page = toIntegrity(args[2], 1);
 
         ListView view = ListView.create(10, button(player, dominion.getName(), group.getNamePlain()));
         view.title(formatString(TextUserInterface.groupSettingTuiText.title, group.getNameColoredBukkit()));
@@ -164,6 +177,16 @@ public class GroupFlags extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) {
+        String dominionName = args[0];
+        String groupName = args[1];
+        int configuredPage = toIntegrity(args.length > 2 ? args[2] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("group_flags")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "group_flags", configuredPage,
+                    Map.of("dominion.name", dominionName, "group.name", groupName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(args[0]);
         assertDominionAdmin(player, dominion);
         GroupDTO group = toGroupDTO(dominion, args[1]);

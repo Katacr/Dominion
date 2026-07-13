@@ -1,0 +1,44 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6选择模板 &8------------'
+  - '&7选择要应用于成员 &f{route.member.name} &7的权限模板。'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页，共 &f{page.items} &7项 {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7你还没有可用的权限模板。'
+    Layout:
+      - '&8- {apply} &f{entry.name}'
+    Buttons:
+      apply:
+        type: BUTTON
+        text: '&a[应用]'
+        hover: '&7将模板 &f{entry.name} &7应用于成员 &f{route.member.name}'
+        disabled-text: '&8[不可用]'
+        permission: dominion.default
+        action-group: apply-template
+
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+
+  back:
+    type: BUTTON
+    text: '&c[返回成员设置]'
+    permission: dominion.default
+    action-group: back-member-flags

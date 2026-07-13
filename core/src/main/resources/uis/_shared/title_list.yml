@@ -1,0 +1,14 @@
+schema-version: 1
+menu-id: title_list
+data:
+  entries:
+    provider: titles.available
+action-groups:
+  toggle-title:
+    actions: ['dominion: toggle-title']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back:
+    actions: ['dominion: back-title-main-menu']

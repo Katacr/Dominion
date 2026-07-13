@@ -1,0 +1,59 @@
+schema-version: 1
+Title: '&6权限模板 {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7你还没有权限模板。'
+  layout: '&f{entry.name} {open} {delete}'
+  width: 440
+  buttons:
+    open:
+      text: '&a[管理]'
+      action-group: open-template
+    delete:
+      text: '&c[删除]'
+      action-group: delete-template
+      confirmation:
+        title: '&c确认删除模板'
+        body: '&7确定要删除模板 &f{entry.name}&7 吗？'
+        confirm:
+          text: '&c确认删除'
+        deny:
+          text: '&a取消'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&a创建模板'
+      action-group: create-template
+      input-capture:
+        title: '&a创建模板'
+        body: '&7输入新模板名称。'
+        input:
+          key: template_name
+          type: input
+          text: '&f模板名称'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&a创建'
+        deny:
+          text: '&c取消'
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回主菜单'
+      action-group: back-main-menu
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

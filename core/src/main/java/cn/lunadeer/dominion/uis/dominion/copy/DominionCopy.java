@@ -7,6 +7,8 @@ import cn.lunadeer.dominion.configuration.Language;
 import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.uis.AbstractUI;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
@@ -25,6 +27,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Asserts.assertDominionAdmin;
@@ -95,6 +98,16 @@ public class DominionCopy extends AbstractUI {
         String toDominionName = args[0];
         CopyType copyType = CopyType.valueOf(args[1]);
         int page = toIntegrity(args[2]);
+
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("dominion_copy")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "dominion_copy", page, Map.of(
+                    "dominion.name", toDominionName,
+                    "copy.type", copyType.name()
+            )));
+            return;
+        }
 
         DominionDTO dominion = toDominionDTO(toDominionName);
         assertDominionAdmin(player, dominion);
@@ -171,7 +184,16 @@ public class DominionCopy extends AbstractUI {
     protected void showCUI(Player player, String... args) throws Exception {
         String toDominionName = args[0];
         CopyType copyType = CopyType.valueOf(args[1]);
-        int page = toIntegrity(args[2]);
+        int page = toIntegrity(args[2], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("dominion_copy")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "dominion_copy", page, Map.of(
+                    "dominion.name", toDominionName,
+                    "copy.type", copyType.name()
+            )));
+            return;
+        }
 
         DominionDTO dominion = toDominionDTO(toDominionName);
         assertDominionAdmin(player, dominion);

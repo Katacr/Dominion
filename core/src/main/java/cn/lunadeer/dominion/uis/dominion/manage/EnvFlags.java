@@ -12,6 +12,8 @@ import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -32,6 +34,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Asserts.assertDominionAdmin;
@@ -76,9 +79,16 @@ public class EnvFlags extends AbstractUI {
     protected void showTUI(Player player, String... args) {
         String dominionName = args[0];
         String pageStr = args.length > 1 ? args[1] : "1";
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("env_flags")) {
+            // CUI remains unchanged; only resolved TUI requests enter the configured router.
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "env_flags", page, Map.of("dominion.name", dominionName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);
-        int page = toIntegrity(pageStr);
 
         ListView view = ListView.create(10, button(player, dominionName));
         view.title(formatString(TextUserInterface.envSettingTuiText.title, dominion.getName()))
@@ -158,6 +168,15 @@ public class EnvFlags extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) {
+        String dominionName = args[0];
+        int configuredPage = toIntegrity(args.length > 1 ? args[1] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("env_flags")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "env_flags", configuredPage, Map.of("dominion.name", dominionName)));
+            return;
+        }
+
         DominionDTO dominion = toDominionDTO(args[0]);
         assertDominionAdmin(player, dominion);
 

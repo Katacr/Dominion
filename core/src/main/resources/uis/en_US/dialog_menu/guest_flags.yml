@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6Guest Flags: {route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7No guest flags are available.'
+  layout: '&e[{entry.state}] &f{entry.name}: &7{entry.description} {toggle-guest-flag}'
+  width: 520
+  buttons:
+    toggle-guest-flag:
+      text: '&a[Toggle]'
+      tooltip: '&7Toggle this guest flag'
+      action-group: toggle-guest-flag
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Management'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

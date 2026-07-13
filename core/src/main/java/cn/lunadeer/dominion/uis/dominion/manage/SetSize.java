@@ -10,6 +10,8 @@ import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
@@ -26,6 +28,7 @@ import org.bukkit.event.inventory.ClickType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Asserts.assertDominionOwner;
@@ -73,6 +76,12 @@ public class SetSize extends AbstractUI {
     @Override
     protected void showTUI(Player player, String... args) {
         String dominionName = args[0];
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("set_size")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "set_size", 1, Map.of("dominion.name", dominionName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionOwner(player, dominion);
 
@@ -270,6 +279,12 @@ public class SetSize extends AbstractUI {
     @Override
     protected void showCUI(Player player, String... args) {
         String dominionName = args[0];
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("set_size")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "set_size", 1, Map.of("dominion.name", dominionName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionOwner(player, dominion);
 

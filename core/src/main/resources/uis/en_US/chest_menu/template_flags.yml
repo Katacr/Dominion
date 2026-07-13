@@ -1,0 +1,58 @@
+schema-version: 1
+Title: '&0Template: {route.template.name}'
+Layout:
+  - '#r#######'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'r':
+    Display:
+      material: NAME_TAG
+      name: '&eRename Template'
+    Clicks:
+      left:
+        action-group: rename-template
+  'e':
+    source: entries
+    Display:
+      material: '{entry.material}'
+      name: '&e[{entry.state}] &f{entry.name}'
+      lore:
+        - '&7{entry.description}'
+        - '&eClick to toggle'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No template flags are enabled.'
+    Clicks:
+      left:
+        action-group: toggle-template-flag
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Template List'
+    Clicks:
+      left:
+        action-group: back-template-list
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

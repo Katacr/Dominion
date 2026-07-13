@@ -1,0 +1,98 @@
+schema-version: 1
+Title: '&0Manage: {route.dominion.name}'
+Layout:
+  - '#########'
+  - '#s#e#g###'
+  - '#m#r#c###'
+  - '#t#n#o###'
+  - '#i#l#####'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  's':
+    Display:
+      material: PISTON
+      name: '&aResize'
+    Clicks:
+      left:
+        action-group: size
+  'e':
+    Display:
+      material: GRASS_BLOCK
+      name: '&aEnvironment'
+    Clicks:
+      left:
+        action-group: environment
+  'g':
+    Display:
+      material: OAK_DOOR
+      name: '&aGuest Flags'
+    Clicks:
+      left:
+        action-group: guest
+  'm':
+    Display:
+      material: PLAYER_HEAD
+      name: '&aMembers'
+    Clicks:
+      left:
+        action-group: members
+  'r':
+    Display:
+      material: CHEST
+      name: '&aGroups'
+    Clicks:
+      left:
+        action-group: groups
+  'c':
+    Display:
+      material: GLASS
+      name: '&aCopy Settings'
+    Clicks:
+      left:
+        action-group: copy
+  't':
+    Display:
+      material: ENDER_PEARL
+      name: '&eSet Teleport'
+    Clicks:
+      left:
+        action-group: set-tp
+  'n':
+    Display:
+      material: NAME_TAG
+      name: '&eRename'
+    Clicks:
+      left:
+        action-group: rename
+  'o':
+    Display:
+      material: FILLED_MAP
+      name: '&eMap Color'
+    Clicks:
+      left:
+        action-group: map-color
+  'i':
+    Display:
+      material: WRITABLE_BOOK
+      name: '&eEnter Message'
+    Clicks:
+      left:
+        action-group: enter-message
+  'l':
+    Display:
+      material: BOOK
+      name: '&eLeave Message'
+    Clicks:
+      left:
+        action-group: leave-message
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Dominion List'
+    Clicks:
+      left:
+        action-group: back

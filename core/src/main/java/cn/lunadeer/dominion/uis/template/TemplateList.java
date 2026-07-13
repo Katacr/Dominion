@@ -7,6 +7,7 @@ import cn.lunadeer.dominion.doos.TemplateDOO;
 import cn.lunadeer.dominion.inputters.CreateTemplateInputter;
 import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
@@ -56,6 +57,12 @@ public class TemplateList extends AbstractUI {
     @Override
     protected void showTUI(Player player, String... args) throws Exception {
         int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("template_list")) {
+            // Keep the legacy entry point while routing migrated TUI players through the configured page.
+            ConfiguredTuiManager.getInstance().show(player, "template_list", page);
+            return;
+        }
         List<TemplateDOO> templates = TemplateDOO.selectAll(player.getUniqueId());
 
         ListView view = ListView.create(10, button(player));
@@ -138,9 +145,16 @@ public class TemplateList extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
+        int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("template_list")) {
+            ConfiguredTuiManager.getInstance().showCui(player, "template_list", page);
+            return;
+        }
+
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(ChestUserInterface.templateListCui.title);
-        view.applyListConfiguration(ChestUserInterface.templateListCui.listConfiguration, toIntegrity(args[0], 1));
+        view.applyListConfiguration(ChestUserInterface.templateListCui.listConfiguration, page);
 
         view.addItem(new ChestButton(ChestUserInterface.templateListCui.createTemplateButton) {
             @Override

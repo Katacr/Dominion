@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6Add Group Member: {route.group.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7No ungrouped members are available.'
+  layout: '&f{entry.name} {add}'
+  width: 400
+  buttons:
+    add:
+      text: '&a[Add]'
+      action-group: add-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Group Management'
+      action-group: back-group-manage
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

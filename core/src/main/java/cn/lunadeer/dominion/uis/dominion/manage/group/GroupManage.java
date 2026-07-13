@@ -7,6 +7,8 @@ import cn.lunadeer.dominion.commands.GroupCommand;
 import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.inputters.RenameGroupInputter;
 import cn.lunadeer.dominion.uis.AbstractUI;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
 import cn.lunadeer.dominion.utils.scui.ChestListView;
@@ -19,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.misc.Asserts.assertDominionAdmin;
 import static cn.lunadeer.dominion.misc.Converts.*;
@@ -34,6 +37,15 @@ public class GroupManage extends AbstractUI {
 
     @Override
     protected void showTUI(Player player, String... args) {
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("group_manage")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "group_manage", toIntegrity(args[2], 1), Map.of(
+                    "dominion.name", args[0],
+                    "group.name", args[1]
+            )));
+            return;
+        }
         throw new UnsupportedOperationException("GroupManage does not support TUI.");
     }
 
@@ -130,6 +142,16 @@ public class GroupManage extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
+        String dominionName = args[0];
+        String groupName = args[1];
+        int configuredPage = toIntegrity(args.length > 2 ? args[2] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("group_manage")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "group_manage", configuredPage,
+                    Map.of("dominion.name", dominionName, "group.name", groupName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(args[0]);
         assertDominionAdmin(player, dominion);
         GroupDTO group = toGroupDTO(dominion, args[1]);

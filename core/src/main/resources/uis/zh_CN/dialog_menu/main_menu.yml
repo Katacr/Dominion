@@ -1,0 +1,66 @@
+schema-version: 1
+Title: '&6领地主菜单'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 320
+    text: '&7选择要执行的领地操作。'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&a创建领地'
+      permission: dominion.default
+      action-group: create
+      input-capture:
+        title: '&a创建领地'
+        body: '&7输入领地名称，将在当前位置周围自动创建领地。'
+        input:
+          key: dominion_name
+          type: input
+          text: '&f领地名称'
+          min_length: 1
+          max_length: 64
+          pattern: '[^ .§&~,]+'
+        confirm:
+          text: '&a创建'
+        deny:
+          text: '&c取消'
+    dominions:
+      text: '&a我的领地'
+      action-group: dominions
+    titles:
+      text: '&a权限组称号'
+      action-group: titles
+    templates:
+      text: '&a权限模板'
+      action-group: templates
+    migrate:
+      text: '&eResidence 迁移'
+      action-group: migrate
+    all-dominions:
+      text: '&c全部领地'
+      permission: dominion.admin
+      action-group: all-dominions
+    reload-cache:
+      text: '&c重载缓存'
+      permission: dominion.admin
+      action-group: reload-cache
+    reload-config:
+      text: '&c重载配置'
+      permission: dominion.admin
+      action-group: reload-config
+    interface:
+      text: '&e界面类型'
+      action-group: ui-preferences
+    language:
+      text: '&b语言'
+      action-group: language
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

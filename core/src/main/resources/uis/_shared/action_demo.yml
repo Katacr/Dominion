@@ -1,0 +1,23 @@
+schema-version: 1
+menu-id: action_demo
+
+action-groups:
+  actionbar-demo:
+    actions:
+      - 'actionbar: {text.actionbar-demo}'
+
+  toast-demo:
+    actions:
+      - 'toast: icon=GRASS_BLOCK;title={text.toast};frame=task'
+
+  hovertext-demo:
+    actions:
+      - 'hovertext: {text.hover-prefix} <text="{text.hover-button}";hover="{text.hover-tip}";actions="nested-tell">'
+
+  nested-tell:
+    actions:
+      - 'tell: {text.nested-tell}'
+
+  legacy-main-menu:
+    actions:
+      - 'dominion: legacy-main-menu'

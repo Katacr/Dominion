@@ -1,0 +1,16 @@
+schema-version: 1
+menu-id: select_member
+route:
+  required: [dominion.name, group.name]
+data:
+  entries:
+    provider: members.ungrouped
+action-groups:
+  add-member:
+    actions: ['dominion: add-group-member']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-group-manage:
+    actions: ['dominion: back-group-manage']

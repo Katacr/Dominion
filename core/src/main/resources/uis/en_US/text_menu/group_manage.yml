@@ -1,0 +1,50 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Group Management &8------------'
+  - '&7Group: &f{route.group.name} &8| &7Dominion: &f{route.dominion.name}'
+  - '{flags} {add} {rename} {delete}'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7This group has no members.'
+    Layout: ['&8- {remove} &f{entry.name}']
+    Buttons:
+      remove:
+        type: BUTTON
+        text: '&c[Remove]'
+        action-group: remove-group-member
+  flags:
+    type: BUTTON
+    text: '&a[Permissions]'
+    action-group: group-flags
+  add:
+    type: BUTTON
+    text: '&a[Add Member]'
+    action-group: select-member
+  rename:
+    type: BUTTON
+    text: '&e[Rename]'
+    action-group: rename-group
+  delete:
+    type: BUTTON
+    text: '&c[Delete Group]'
+    action-group: delete-group
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Group List]'
+    action-group: back-group-list

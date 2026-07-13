@@ -1,0 +1,24 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Interface Type &8------------'
+  - '{tui} &7Clickable text in chat.'
+  - '{cui} &7Chest inventory menus.'
+  - '{dui} &7Native Dialog menus.'
+  - '{back}'
+Buttons:
+  tui:
+    type: BUTTON
+    text: '&a[TUI]'
+    action-group: tui
+  cui:
+    type: BUTTON
+    text: '&a[CUI]'
+    action-group: cui
+  dui:
+    type: BUTTON
+    text: '&a[DUI]'
+    action-group: dui
+  back:
+    type: BUTTON
+    text: '&c[Back]'
+    action-group: back

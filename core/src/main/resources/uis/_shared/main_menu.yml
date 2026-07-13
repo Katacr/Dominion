@@ -1,0 +1,23 @@
+schema-version: 1
+menu-id: main_menu
+action-groups:
+  create:
+    actions: ['dominion: start-create-dominion-input']
+  dominions:
+    actions: ['dominion: open-dominion-list']
+  titles:
+    actions: ['dominion: open-title-list']
+  templates:
+    actions: ['dominion: open-template-list']
+  migrate:
+    actions: ['dominion: open-migrate-list']
+  all-dominions:
+    actions: ['dominion: open-all-dominions']
+  reload-cache:
+    actions: ['dominion: reload-cache']
+  reload-config:
+    actions: ['dominion: reload-config']
+  ui-preferences:
+    actions: ['dominion: open-ui-preferences']
+  language:
+    actions: ['dominion: open-language-preferences']

@@ -1,0 +1,58 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6模板列表 &8------------'
+  - '&7模板可用于快速设置成员权限。'
+  - '{create}'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页，共 &f{page.items} &7项 {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7你还没有权限模板。'
+    Layout:
+      - '&8- {delete} {manage} &f{entry.name}'
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[删除]'
+        hover: '&7删除模板 &f{entry.name}'
+        disabled-text: '&8[删除]'
+        permission: dominion.default
+        action-group: delete-template
+      manage:
+        type: BUTTON
+        text: '&a[设置]'
+        hover: '&7管理模板 &f{entry.name}'
+        disabled-text: '&8[设置]'
+        permission: dominion.default
+        action-group: open-template
+
+  create:
+    type: BUTTON
+    text: '&a[创建模板]'
+    hover: '&7创建新的权限模板'
+    permission: dominion.default
+    action-group: create-template
+
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+
+  back:
+    type: BUTTON
+    text: '&c[返回主菜单]'
+    action-group: back-main-menu

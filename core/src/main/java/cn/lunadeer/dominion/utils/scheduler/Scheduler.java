@@ -128,6 +128,26 @@ public class Scheduler {
         }
     }
 
+    /**
+     * Runs a delayed task on the entity scheduler used by Paper/Folia or the main Spigot scheduler.
+     *
+     * @param task   the task to run
+     * @param entity the entity that owns the scheduled task
+     * @param delay  the delay in server ticks
+     * @return the platform-specific cancellable task
+     */
+    public static CancellableTask runEntityTaskLater(Runnable task, Entity entity, long delay) {
+        if (delay <= 0) {
+            return runEntityTask(task, entity);
+        }
+        if (instance.isPaper) {
+            return new PaperTask(entity.getScheduler().runDelayed(
+                    instance.plugin, plugin -> task.run(), null, delay));
+        }
+        return new SpigotTask(instance.plugin.getServer().getScheduler()
+                .runTaskLater(instance.plugin, task, delay));
+    }
+
     public static CancellableTask runLocationTask(Runnable task, Location location) {
         if (instance.isPaper) {
             return new PaperTask(instance.plugin.getServer().getRegionScheduler().run(instance.plugin, location, (scheduledTask) -> task.run()));

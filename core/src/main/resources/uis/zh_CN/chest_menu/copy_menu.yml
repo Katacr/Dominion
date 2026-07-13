@@ -1,0 +1,46 @@
+schema-version: 1
+Title: '&0复制设置：{route.dominion.name}'
+Layout:
+  - '#########'
+  - '#e#g#m#p#'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    Display:
+      material: GRASS_BLOCK
+      name: '&a环境设置'
+    Clicks:
+      left:
+        action-group: environment
+  'g':
+    Display:
+      material: OAK_DOOR
+      name: '&a访客权限'
+    Clicks:
+      left:
+        action-group: guest
+  'm':
+    Display:
+      material: PLAYER_HEAD
+      name: '&a成员权限'
+    Clicks:
+      left:
+        action-group: member
+  'p':
+    Display:
+      material: CHEST
+      name: '&a权限组'
+    Clicks:
+      left:
+        action-group: group
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回领地管理'
+    Clicks:
+      left:
+        action-group: back

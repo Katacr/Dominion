@@ -1,0 +1,50 @@
+schema-version: 1
+Title: '&0复制来源：{route.dominion.name}'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    Display:
+      material: CHEST
+      name: '&f{entry.name}'
+      lore:
+        - '&e点击复制设置'
+    Empty-Display:
+      material: BARRIER
+      name: '&7暂无可用的来源领地。'
+    Clicks:
+      left:
+        action-group: copy
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a上一页'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回复制设置'
+    Clicks:
+      left:
+        action-group: back
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a下一页'
+    Clicks:
+      left:
+        action-group: next-page

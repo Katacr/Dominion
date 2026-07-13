@@ -1,0 +1,57 @@
+schema-version: 1
+Title: '&6Resize: {route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  hint:
+    type: message
+    width: 360
+    text: '&7Choose a direction and enter the distance in chat.'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    north-expand:
+      text: '&aExpand North'
+      action-group: north-expand
+    north-contract:
+      text: '&cContract North'
+      action-group: north-contract
+    south-expand:
+      text: '&aExpand South'
+      action-group: south-expand
+    south-contract:
+      text: '&cContract South'
+      action-group: south-contract
+    west-expand:
+      text: '&aExpand West'
+      action-group: west-expand
+    west-contract:
+      text: '&cContract West'
+      action-group: west-contract
+    east-expand:
+      text: '&aExpand East'
+      action-group: east-expand
+    east-contract:
+      text: '&cContract East'
+      action-group: east-contract
+    up-expand:
+      text: '&aExpand Up'
+      action-group: up-expand
+    up-contract:
+      text: '&cContract Up'
+      action-group: up-contract
+    down-expand:
+      text: '&aExpand Down'
+      action-group: down-expand
+    down-contract:
+      text: '&cContract Down'
+      action-group: down-contract
+    back:
+      text: '&cBack to Management'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

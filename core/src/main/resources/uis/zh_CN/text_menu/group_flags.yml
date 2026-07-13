@@ -1,0 +1,48 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6权限组设置 &8------------'
+  - '&7权限组：&f{route.group.name} &8| &7领地：&f{route.dominion.name}'
+  - '{rename}'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页，共 &f{page.items} &7项 {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7当前没有可编辑的权限组权限。'
+    Layout:
+      - '&8- {toggle} &f{entry.name}'
+    Buttons:
+      toggle:
+        type: BUTTON
+        text: '&e[{entry.state}]'
+        hover: '&f{entry.description}'
+        disabled-text: '&8[不可用]'
+        permission: dominion.default
+        action-group: toggle-group-flag
+  rename:
+    type: BUTTON
+    text: '&e[重命名权限组]'
+    hover: '&7在聊天栏输入新的权限组名称'
+    permission: dominion.default
+    action-group: rename-group
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回权限组列表]'
+    permission: dominion.default
+    action-group: back-group-list

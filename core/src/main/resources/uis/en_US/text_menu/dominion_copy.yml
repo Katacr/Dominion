@@ -1,0 +1,33 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Select Copy Source &8------------'
+  - '&7Target: &f{route.dominion.name} &8| &7Type: &f{route.copy.type}'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7No other owned dominion is available.'
+    Layout: ['&8- {copy} &f{entry.name}']
+    Buttons:
+      copy:
+        type: BUTTON
+        text: '&a[Copy From]'
+        action-group: copy
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Copy Types]'
+    action-group: back

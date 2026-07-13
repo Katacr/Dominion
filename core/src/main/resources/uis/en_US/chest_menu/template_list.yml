@@ -1,0 +1,60 @@
+schema-version: 1
+Title: '&0Privilege Templates'
+Layout:
+  - '#c#######'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'c':
+    Display:
+      material: LIME_DYE
+      name: '&aCreate Template'
+    Clicks:
+      left:
+        action-group: create-template
+  'e':
+    source: entries
+    Display:
+      material: WRITABLE_BOOK
+      name: '&f{entry.name}'
+      lore:
+        - '&eLeft: manage'
+        - '&cShift-left: delete'
+    Empty-Display:
+      material: BARRIER
+      name: '&7You have no templates.'
+    Clicks:
+      left:
+        action-group: open-template
+      shift-left:
+        action-group: delete-template
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Main Menu'
+    Clicks:
+      left:
+        action-group: back-main-menu
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

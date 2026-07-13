@@ -1,0 +1,29 @@
+schema-version: 1
+menu-id: dominion_manage
+route:
+  required: [dominion.name]
+action-groups:
+  size:
+    actions: ['dominion: open-size-menu']
+  environment:
+    actions: ['dominion: open-env-flags']
+  guest:
+    actions: ['dominion: open-guest-flags']
+  members:
+    actions: ['dominion: open-member-list']
+  groups:
+    actions: ['dominion: open-group-list']
+  set-tp:
+    actions: ['dominion: set-dominion-tp']
+  rename:
+    actions: ['dominion: start-rename-dominion-input']
+  enter-message:
+    actions: ['dominion: start-enter-message-input']
+  leave-message:
+    actions: ['dominion: start-leave-message-input']
+  map-color:
+    actions: ['dominion: start-map-color-input']
+  copy:
+    actions: ['dominion: open-copy-menu']
+  back:
+    actions: ['dominion: back-dominion-list']

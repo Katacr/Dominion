@@ -1,0 +1,24 @@
+schema-version: 1
+menu-id: guest_flags
+
+route:
+  required:
+    - dominion.name
+
+data:
+  entries:
+    provider: flags.guest
+
+action-groups:
+  toggle-guest-flag:
+    actions:
+      - 'dominion: toggle-guest-flag'
+  previous-page:
+    actions:
+      - 'page: previous'
+  next-page:
+    actions:
+      - 'page: next'
+  back-dominion-manage:
+    actions:
+      - 'dominion: back-guest-dominion-manage'

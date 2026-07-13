@@ -1,0 +1,52 @@
+schema-version: 1
+Title: '&0我的领地 {page.current}/{page.total}'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    Display:
+      material: PAPER
+      name: '&f{entry.prefix}{entry.name}'
+    Empty-Display:
+      material: BARRIER
+      name: '&7暂无可显示的领地。'
+    Clicks:
+      left:
+        action-group: manage-dominion
+      right:
+        action-group: teleport-dominion
+      shift-left:
+        action-group: delete-dominion
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a上一页'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回主菜单'
+    Clicks:
+      left:
+        action-group: back-main
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a下一页'
+    Clicks:
+      left:
+        action-group: next-page

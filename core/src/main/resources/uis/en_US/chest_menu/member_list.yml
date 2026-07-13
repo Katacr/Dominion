@@ -1,0 +1,61 @@
+schema-version: 1
+Title: '&0Members: {route.dominion.name}'
+Layout:
+  - '#a#######'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'a':
+    Display:
+      material: LIME_DYE
+      name: '&aAdd Member'
+    Clicks:
+      left:
+        action-group: add-member
+  'e':
+    source: entries
+    Display:
+      material: PLAYER_HEAD
+      name: '&f{entry.name} {entry.tag}'
+      lore:
+        - '&7Group: {entry.group}'
+        - '&eLeft: permissions'
+        - '&cShift-left: remove'
+    Empty-Display:
+      material: BARRIER
+      name: '&7This dominion has no members.'
+    Clicks:
+      left:
+        action-group: open-member-flags
+      shift-left:
+        action-group: remove-member
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Dominion Management'
+    Clicks:
+      left:
+        action-group: back-dominion-manage
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

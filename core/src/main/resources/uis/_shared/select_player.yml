@@ -1,0 +1,16 @@
+schema-version: 1
+menu-id: select_player
+route:
+  required: [dominion.name]
+data:
+  entries:
+    provider: players.member-candidates
+action-groups:
+  add-member:
+    actions: ['dominion: add-member']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-member-list:
+    actions: ['dominion: back-member-list-route']

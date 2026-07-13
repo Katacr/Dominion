@@ -10,6 +10,8 @@ import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.misc.CommandArguments;
 import cn.lunadeer.dominion.misc.Converts;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -26,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.adminPermission;
 import static cn.lunadeer.dominion.managers.TeleportManager.teleportToDominion;
@@ -69,6 +72,13 @@ public class AllDominionOfPlayer extends AbstractUI {
     protected void showTUI(Player sender, String... args) {
         PlayerDTO playerDTO = Converts.toPlayerDTO(args[0]);
         int page = toIntegrity(args[1], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("all_dominions_of_player")) {
+            ConfiguredTuiManager.getInstance().show(sender, new MenuRoute(
+                    "all_dominions_of_player", page,
+                    Map.of("player.name", playerDTO.getLastKnownName())));
+            return;
+        }
         ListView view = ListView.create(10, button(sender, playerDTO.getLastKnownName()));
 
         view.title(TextUserInterface.allDominionOfPlayerTuiText.title);
@@ -98,9 +108,18 @@ public class AllDominionOfPlayer extends AbstractUI {
     @Override
     protected void showCUI(Player player, String... args) {
         PlayerDTO playerDTO = Converts.toPlayerDTO(args[0]);
+        int page = toIntegrity(args[1], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("all_dominions_of_player")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "all_dominions_of_player", page,
+                    Map.of("player.name", playerDTO.getLastKnownName())));
+            return;
+        }
+
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(ChestUserInterface.allDominionOfPlayerCui.title);
-        view.applyListConfiguration(ChestUserInterface.allDominionOfPlayerCui.listConfiguration, toIntegrity(args[1]));
+        view.applyListConfiguration(ChestUserInterface.allDominionOfPlayerCui.listConfiguration, page);
 
         List<DominionDTO> dominions = DominionAPI.getInstance().getAllDominionsOfPlayer(playerDTO.getUuid());
         for (DominionDTO dominion : dominions) {

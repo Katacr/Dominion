@@ -1,0 +1,42 @@
+schema-version: 1
+Title: '&0界面类型'
+Layout:
+  - '#########'
+  - '#t##c##d#'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  't':
+    Display:
+      material: OAK_SIGN
+      name: '&a文本菜单'
+      lore: ['&7使用聊天栏可点击文本。']
+    Clicks:
+      left:
+        action-group: tui
+  'c':
+    Display:
+      material: CHEST
+      name: '&a箱子菜单'
+      lore: ['&7使用箱子物品栏菜单。']
+    Clicks:
+      left:
+        action-group: cui
+  'd':
+    Display:
+      material: BOOK
+      name: '&a对话框菜单'
+      lore: ['&7使用原生 Dialog 对话框。']
+    Clicks:
+      left:
+        action-group: dui
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回'
+    Clicks:
+      left:
+        action-group: back

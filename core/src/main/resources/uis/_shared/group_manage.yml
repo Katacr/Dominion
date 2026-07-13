@@ -1,0 +1,24 @@
+schema-version: 1
+menu-id: group_manage
+route:
+  required: [dominion.name, group.name]
+data:
+  entries:
+    provider: members.by-group
+action-groups:
+  remove-group-member:
+    actions: ['dominion: remove-group-member']
+  group-flags:
+    actions: ['dominion: open-group-flags']
+  select-member:
+    actions: ['dominion: open-group-member-selection']
+  rename-group:
+    actions: ['dominion: rename-group-input']
+  delete-group:
+    actions: ['dominion: delete-group']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-group-list:
+    actions: ['dominion: back-group-list-route']

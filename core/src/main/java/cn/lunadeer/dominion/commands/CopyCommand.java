@@ -38,6 +38,13 @@ public class CopyCommand {
     }
 
     public static void copyEnvironment(CommandSender sender, String from, String to) {
+        copyEnvironment(sender, from, to, true);
+    }
+
+    /**
+     * Copies environment flags while optionally leaving navigation to a configured renderer.
+     */
+    public static void copyEnvironment(CommandSender sender, String from, String to, boolean reopenLegacyMenu) {
         try {
             DominionDTO fromDominion = toDominionDTO(from);
             DominionDTO toDominion = toDominionDTO(to);
@@ -46,7 +53,9 @@ public class CopyCommand {
                 toDominion.setEnvFlagValue(flag, fromDominion.getEnvFlagValue(flag));
             }
             Notification.info(sender, Language.copyCommandText.copyEnvSuccess, fromDominion.getName(), toDominion.getName());
-            EnvFlags.show(sender, to, "1");
+            if (reopenLegacyMenu) {
+                EnvFlags.show(sender, to, "1");
+            }
         } catch (Exception e) {
             Notification.error(sender, e);
         }
@@ -63,6 +72,13 @@ public class CopyCommand {
     }.needPermission(defaultPermission).register();
 
     public static void copyGuest(CommandSender sender, String from, String to) {
+        copyGuest(sender, from, to, true);
+    }
+
+    /**
+     * Copies guest flags while optionally leaving navigation to a configured renderer.
+     */
+    public static void copyGuest(CommandSender sender, String from, String to, boolean reopenLegacyMenu) {
         try {
             DominionDTO fromDominion = toDominionDTO(from);
             DominionDTO toDominion = toDominionDTO(to);
@@ -71,7 +87,9 @@ public class CopyCommand {
                 toDominion.setGuestFlagValue(flag, fromDominion.getGuestFlagValue(flag));
             }
             Notification.info(sender, Language.copyCommandText.copyGuestSuccess, fromDominion.getName(), toDominion.getName());
-            GuestFlags.show(sender, to, "1");
+            if (reopenLegacyMenu) {
+                GuestFlags.show(sender, to, "1");
+            }
         } catch (Exception e) {
             Notification.error(sender, e);
         }
@@ -88,6 +106,13 @@ public class CopyCommand {
     }.needPermission(defaultPermission).register();
 
     public static void copyMember(CommandSender sender, String from, String to) {
+        copyMember(sender, from, to, true);
+    }
+
+    /**
+     * Copies members while optionally leaving navigation to a configured renderer.
+     */
+    public static void copyMember(CommandSender sender, String from, String to, boolean reopenLegacyMenu) {
         try {
             DominionDTO fromDominion = toDominionDTO(from);
             DominionDTO toDominion = toDominionDTO(to);
@@ -111,7 +136,9 @@ public class CopyCommand {
                 }
             }
             Notification.info(sender, Language.copyCommandText.copyMemberSuccess, fromDominion.getName(), toDominion.getName());
-            MemberList.show(sender, to, "1");
+            if (reopenLegacyMenu) {
+                MemberList.show(sender, to, "1");
+            }
         } catch (Exception e) {
             Notification.error(sender, e);
         }
@@ -128,8 +155,15 @@ public class CopyCommand {
     }.needPermission(defaultPermission).register();
 
     public static void copyGroup(CommandSender sender, String from, String to) {
+        copyGroup(sender, from, to, true);
+    }
+
+    /**
+     * Copies groups and their members while optionally leaving navigation to a configured renderer.
+     */
+    public static void copyGroup(CommandSender sender, String from, String to, boolean reopenLegacyMenu) {
         try {
-            copyMember(sender, from, to); // copy member first
+            copyMember(sender, from, to, false); // copy member first
             DominionDTO fromDominion = toDominionDTO(from);
             DominionDTO toDominion = toDominionDTO(to);
             for (GroupDTO group : fromDominion.getGroups()) {
@@ -165,7 +199,9 @@ public class CopyCommand {
                 }
             }
             Notification.info(sender, Language.copyCommandText.copyGroupSuccess, fromDominion.getName(), toDominion.getName());
-            GroupList.show(sender, to, "1");
+            if (reopenLegacyMenu) {
+                GroupList.show(sender, to, "1");
+            }
         } catch (Exception e) {
             Notification.error(sender, e);
         }

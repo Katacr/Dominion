@@ -90,6 +90,16 @@ public class MigrationCommand {
      * @param pageStr the page string
      */
     public static void migrate(CommandSender sender, String resName, String pageStr) {
+        migrate(sender, resName, pageStr, true);
+    }
+
+    /**
+     * Migrates one residence while allowing configured renderers to reopen themselves.
+     */
+    public static void migrate(CommandSender sender,
+                               String resName,
+                               String pageStr,
+                               boolean reopenLegacyMenu) {
         try {
             if (!Configuration.residenceMigration) {
                 Notification.error(sender, TextUserInterface.migrateListTuiText.notEnabled);
@@ -109,7 +119,9 @@ public class MigrationCommand {
                 }
             }
             doMigrateCreate(sender, resNode, null);
-            MigrateList.show(sender, pageStr);
+            if (reopenLegacyMenu) {
+                MigrateList.show(sender, pageStr);
+            }
         } catch (Exception e) {
             Notification.error(sender, Language.migrationCommandText.migrateFailed, e.getMessage());
         }

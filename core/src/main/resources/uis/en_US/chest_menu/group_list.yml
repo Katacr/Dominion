@@ -1,0 +1,61 @@
+schema-version: 1
+Title: '&0Groups: {route.dominion.name}'
+Layout:
+  - '#c#######'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'c':
+    Display:
+      material: LIME_DYE
+      name: '&aCreate Group'
+    Clicks:
+      left:
+        action-group: create-group
+  'e':
+    source: entries
+    Display:
+      material: CHEST
+      name: '&f{entry.name}'
+      lore:
+        - '&7Members: {entry.members}'
+        - '&eLeft: manage'
+        - '&cShift-left: delete'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No groups are available.'
+    Clicks:
+      left:
+        action-group: open-group
+      shift-left:
+        action-group: delete-group
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Dominion Management'
+    Clicks:
+      left:
+        action-group: back-dominion-manage
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

@@ -15,7 +15,7 @@ import static cn.lunadeer.dominion.storage.DatabaseSchema.*;
 public class PlayerRepository extends RepositorySupport {
 
     public record PlayerRow(Integer id, UUID uuid, String lastKnownName, LocalDateTime lastJoinAt,
-                            Integer usingGroupTitleId, String skinUrl, String uiPreference) {
+                            Integer usingGroupTitleId, String skinUrl, String uiPreference, String language) {
     }
 
     public static List<PlayerRow> all() throws SQLException {
@@ -44,6 +44,7 @@ public class PlayerRepository extends RepositorySupport {
                 values.put(PLAYER_LAST_KNOWN_NAME, name);
                 values.put(PLAYER_LAST_JOIN_AT, Timestamp.valueOf(now));
                 values.put(PLAYER_UI_PREFERENCE, uiPreference);
+                values.put(PLAYER_LANGUAGE, "NONE");
                 mapper.insert(PLAYER_NAME, values);
                 Integer id = toInteger(values.get(PLAYER_ID));
                 if (id != null) {
@@ -81,6 +82,17 @@ public class PlayerRepository extends RepositorySupport {
         });
     }
 
+    /**
+     * Persists one normalized player menu locale.
+     */
+    public static void updateLanguage(UUID uuid, String language) throws SQLException {
+        sql((session, mapper) -> {
+            Map<String, Object> values = new LinkedHashMap<>();
+            values.put(PLAYER_LANGUAGE, language);
+            return mapper.updateColumns(PLAYER_NAME, PLAYER_UUID, uuid.toString(), values);
+        });
+    }
+
     public static void updateUsingGroupTitle(Integer id, Integer groupTitleId) throws SQLException {
         sql((session, mapper) -> {
             Map<String, Object> values = new LinkedHashMap<>();
@@ -106,11 +118,12 @@ public class PlayerRepository extends RepositorySupport {
                 toLocalDateTime(value(row, PLAYER_LAST_JOIN_AT)),
                 integer(row, PLAYER_USING_GROUP_TITLE_ID),
                 string(row, PLAYER_SKIN_URL),
-                string(row, PLAYER_UI_PREFERENCE)
+                string(row, PLAYER_UI_PREFERENCE),
+                string(row, PLAYER_LANGUAGE)
         );
     }
 
     private enum PlayerUiType {
-        CUI, TUI
+        CUI, TUI, DUI
     }
 }

@@ -10,6 +10,7 @@ import cn.lunadeer.dominion.managers.TeleportManager;
 import cn.lunadeer.dominion.misc.InitCommands;
 import cn.lunadeer.dominion.misc.Others;
 import cn.lunadeer.dominion.uis.MainMenu;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.VaultConnect.VaultConnect;
 import cn.lunadeer.dominion.utils.XLogger;
@@ -86,6 +87,13 @@ public final class Dominion extends JavaPlugin {
         CommandManager commandManager = new CommandManager(this, "dominion", (sender) -> {
             MainMenu.show(sender, "1");
         });
+        try {
+            new ConfiguredTuiManager(this);
+        } catch (Exception exception) {
+            // Configured menus are additive in the first version; legacy UIs must remain available.
+            XLogger.error("Failed to initialize configured TUI menus: {0}", exception.getMessage());
+            XLogger.error(exception);
+        }
 
         bStatsMetrics metrics = new bStatsMetrics(this, 21445);
         metrics.addCustomChart(new bStatsMetrics.SimplePie("database", () -> Configuration.database.type));
@@ -104,6 +112,8 @@ public final class Dominion extends JavaPlugin {
         HoloManager.instance().removeAll(); // Clean up hologram display entities
         if (DatabaseManager.instance != null)
             DatabaseManager.instance.close();
+        if (ConfiguredTuiManager.isInitialized())
+            ConfiguredTuiManager.getInstance().close();
         Scheduler.cancelAll();
     }
 

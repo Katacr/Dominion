@@ -1,0 +1,55 @@
+schema-version: 1
+Title: '&6Dominion Dialog 样板'
+Settings:
+  can_escape: true
+  pause: false
+  after_action: NONE
+Variables:
+  text:
+    intro: '&7此菜单用于验证第一版 Spigot Dialog 适配器。'
+    input-label: '&f消息内容'
+Body:
+  icon:
+    type: item
+    material: GRASS_BLOCK
+    description: '&7由当前平台适配器渲染的原生物品 Body。'
+    width: 32
+    height: 32
+    show_overlays: true
+    show_tooltip: true
+  intro:
+    type: message
+    width: 320
+    text:
+      - '{text.intro}'
+      - '&8回调使用绑定玩家的一次性短期令牌。'
+Inputs:
+  message:
+    type: input
+    text: '{text.input-label}'
+    default: '你好 Dominion'
+    min_length: 1
+    max_length: 64
+    width: 280
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    submit:
+      text: '&a发送输入'
+      tooltip: '&7将输入内容发送到聊天栏'
+      actions:
+        - 'tell: &a{input.message}'
+    actionbar:
+      text: '&eAction Bar'
+      action-group: actionbar-demo
+    toast:
+      text: '&bToast'
+      action-group: toast-demo
+    back:
+      text: '&c旧版主菜单'
+      action-group: legacy-main-menu
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

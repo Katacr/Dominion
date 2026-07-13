@@ -1,0 +1,41 @@
+schema-version: 1
+Layout:
+  - '&8------ &6从 Residence 迁移 &8------'
+  - '{migrate-all}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7暂无可迁移的 Residence 数据。'
+    Layout: ['{migrate} &f{entry.prefix}{entry.name}']
+    Buttons:
+      migrate:
+        type: BUTTON
+        text: '&a[迁移]'
+        hover: '&7迁移该 Residence 及其全部子区域。'
+        disabled-text: '&8[随父区域迁移]'
+        action-group: migrate-residence
+  migrate-all:
+    type: BUTTON
+    text: '&c[迁移全部]'
+    action-group: migrate-all
+    permission: dominion.admin
+    hidden-when-disabled: true
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回主菜单]'
+    action-group: back-main

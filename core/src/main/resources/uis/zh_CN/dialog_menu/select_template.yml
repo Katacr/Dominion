@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6选择模板：{route.member.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7暂无可用模板。'
+  layout: '&f{entry.name} {apply}'
+  width: 400
+  buttons:
+    apply:
+      text: '&a[应用]'
+      action-group: apply-template
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回成员权限'
+      action-group: back-member-flags
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

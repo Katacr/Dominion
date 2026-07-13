@@ -1,0 +1,27 @@
+schema-version: 1
+menu-id: env_flags
+
+route:
+  required:
+    - dominion.name
+
+data:
+  entries:
+    provider: flags.environment
+
+action-groups:
+  toggle-env-flag:
+    actions:
+      - 'dominion: toggle-env-flag'
+
+  previous-page:
+    actions:
+      - 'page: previous'
+
+  next-page:
+    actions:
+      - 'page: next'
+
+  back-dominion-manage:
+    actions:
+      - 'dominion: back-dominion-manage'

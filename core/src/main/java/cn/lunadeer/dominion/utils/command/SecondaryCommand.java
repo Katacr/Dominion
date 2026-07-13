@@ -14,6 +14,7 @@ public abstract class SecondaryCommand {
     private final List<Argument> arguments;
     private final List<String> permissions = new ArrayList<>();
     private boolean dynamic = false;
+    private boolean hidden = false;
     private String description;
 
     // ThreadLocal to store arguments for the current thread
@@ -247,6 +248,23 @@ public abstract class SecondaryCommand {
      */
     public boolean isDynamic() {
         return dynamic;
+    }
+
+    /**
+     * Hides a persistent internal command without marking it for dynamic cleanup.
+     *
+     * @return the current command
+     */
+    public SecondaryCommand hidden() {
+        hidden = true;
+        return this;
+    }
+
+    /**
+     * Returns whether this command should be excluded from help and completion.
+     */
+    public boolean isHidden() {
+        return hidden || dynamic;
     }
 
     /**

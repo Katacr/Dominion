@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6权限组称号 {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7暂无可用的权限组称号。'
+  layout: '&e[{entry.state}] &f{entry.name} {toggle}'
+  width: 440
+  buttons:
+    toggle:
+      text: '&a[切换]'
+      action-group: toggle-title
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回主菜单'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

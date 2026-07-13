@@ -1,0 +1,28 @@
+schema-version: 1
+Title: '&6Copy Settings: {route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    environment:
+      text: '&aCopy Environment Flags'
+      action-group: environment
+    guest:
+      text: '&aCopy Guest Flags'
+      action-group: guest
+    member:
+      text: '&aCopy Member Flags'
+      action-group: member
+    group:
+      text: '&aCopy Groups'
+      action-group: group
+    back:
+      text: '&cBack to Management'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

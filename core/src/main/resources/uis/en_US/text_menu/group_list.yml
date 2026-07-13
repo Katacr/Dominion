@@ -1,0 +1,41 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Groups &8------------'
+  - '&7Dominion: &f{route.dominion.name} {create}'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7This dominion has no groups.'
+    Layout: ['&8- {delete} {manage} &f{entry.name} &7({entry.members})']
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[Delete]'
+        action-group: delete-group
+      manage:
+        type: BUTTON
+        text: '&a[Manage]'
+        action-group: open-group
+  create:
+    type: BUTTON
+    text: '&a[Create Group]'
+    action-group: create-group
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion Management]'
+    action-group: back-dominion-manage

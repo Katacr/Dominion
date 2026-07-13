@@ -15,6 +15,8 @@ import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -37,6 +39,7 @@ import org.bukkit.event.inventory.ClickType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.doos.MemberDOO.selectByDominionId;
@@ -85,9 +88,15 @@ public class GroupList extends AbstractUI {
     protected void showTUI(Player player, String... args) throws Exception {
         String dominionName = args[0];
         String pageStr = args[1];
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("group_list")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "group_list", page, Map.of("dominion.name", dominionName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);
-        int page = toIntegrity(pageStr);
 
         List<GroupDOO> groups = GroupDOO.selectByDominionId(dominion.getId());
 
@@ -197,6 +206,13 @@ public class GroupList extends AbstractUI {
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
         String dominionName = args[0];
+        int page = toIntegrity(args.length > 1 ? args[1] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("group_list")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "group_list", page, Map.of("dominion.name", dominionName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);

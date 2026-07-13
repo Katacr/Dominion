@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6语言 {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7暂无可用的菜单语言。'
+  layout: '&f{entry.name} {select}'
+  width: 360
+  buttons:
+    select:
+      text: '&a[选择]'
+      tooltip: '&7使用 &f{entry.name}'
+      action-group: select-language
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

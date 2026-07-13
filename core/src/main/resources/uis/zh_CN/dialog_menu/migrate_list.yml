@@ -1,0 +1,44 @@
+schema-version: 1
+Title: '&6从 Residence 迁移 {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7没有可迁移的 Residence 数据。'
+  layout: '&f{entry.prefix}{entry.name} {migrate}'
+  width: 460
+  buttons:
+    migrate:
+      text: '&a[迁移]'
+      tooltip: '&7迁移该 Residence 及其子区域'
+      action-group: migrate-residence
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    migrate-all:
+      text: '&c迁移全部领地'
+      permission: dominion.admin
+      action-group: migrate-all
+      confirmation:
+        title: '&c确认批量迁移'
+        body: '&7确定要迁移全部可用 Residence 数据吗？'
+        confirm:
+          text: '&c确认迁移全部'
+        deny:
+          text: '&a取消'
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回主菜单'
+      action-group: back-main
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

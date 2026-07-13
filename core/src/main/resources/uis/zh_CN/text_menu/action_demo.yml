@@ -1,0 +1,84 @@
+schema-version: 1
+
+Variables:
+  text:
+    tell-demo: '&a配置化聊天消息动作已正常执行。'
+    actionbar-demo: '&e配置化 Action Bar 动作已正常执行。'
+    title: '&6Dominion'
+    subtitle: '&f配置化 TUI 动作'
+    toast: '&aDominion TUI'
+    hover-prefix: '&7生成的可点击文本：'
+    hover-button: '&a[点击]'
+    hover-tip: '&e执行另一个共享 operation'
+    nested-tell: '&b可点击文本回调已正常执行。'
+    ordered-step-1: '&7步骤 1：聊天消息'
+    ordered-step-2: '&e步骤 2：Action Bar'
+    ordered-step-3: '&a步骤 3'
+    ordered-subtitle: '&f动作列表按顺序执行'
+
+Layout:
+  - '&8------------ &6Dominion 动作样板 &8------------'
+  - '&7该独立菜单用于验证第一版配置化 TUI。'
+  - ''
+  - '{tell} &7发送聊天消息'
+  - '{actionbar} &7发送 Action Bar'
+  - '{title} &7显示标题'
+  - '{toast} &7显示 Toast'
+  - '{hovertext} &7生成可点击文本'
+  - '{ordered} &7按顺序执行动作列表'
+  - ''
+  - '{copy} {documentation} {back}'
+
+Buttons:
+  tell:
+    type: BUTTON
+    text: '&a[聊天消息]'
+    hover: '&7执行按钮内联 actions'
+    actions:
+      - 'tell: {text.tell-demo}'
+
+  actionbar:
+    type: BUTTON
+    text: '&e[Action Bar]'
+    action-group: actionbar-demo
+
+  title:
+    type: BUTTON
+    text: '&6[标题]'
+    actions:
+      - 'title: title={text.title};subtitle={text.subtitle}'
+
+  toast:
+    type: BUTTON
+    text: '&b[Toast]'
+    action-group: toast-demo
+
+  hovertext:
+    type: BUTTON
+    text: '&d[可点击文本]'
+    action-group: hovertext-demo
+
+  ordered:
+    type: BUTTON
+    text: '&2[顺序动作]'
+    actions:
+      - 'tell: {text.ordered-step-1}'
+      - 'actionbar: {text.ordered-step-2}'
+      - 'title: title={text.ordered-step-3};subtitle={text.ordered-subtitle}'
+
+  copy:
+    type: COPY
+    text: '&f[复制菜单 ID]'
+    hover: '&7复制 action_demo 到剪贴板'
+    copy: 'action_demo'
+
+  documentation:
+    type: URL
+    text: '&9[项目文档]'
+    hover: '&7打开 Dominion 文档'
+    url: 'https://dominion.lunadeer.cn/'
+
+  back:
+    type: BUTTON
+    text: '&c[旧版主菜单]'
+    action-group: legacy-main-menu

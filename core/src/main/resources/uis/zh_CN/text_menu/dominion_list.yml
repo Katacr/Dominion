@@ -1,0 +1,46 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6我的领地 &8------------'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7暂无可显示的领地。'
+    Layout: ['{delete} {manage} {teleport} &f{entry.prefix}{entry.name}']
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[删除]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: delete-dominion
+      manage:
+        type: BUTTON
+        text: '&a[管理]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: manage-dominion
+      teleport:
+        type: BUTTON
+        text: '&b[传送]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: teleport-dominion
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回主菜单]'
+    action-group: back-main

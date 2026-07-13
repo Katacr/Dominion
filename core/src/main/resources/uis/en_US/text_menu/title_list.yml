@@ -1,0 +1,32 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Group Titles &8------------'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7No group titles are available.'
+    Layout: ['&8- {toggle} &f{entry.name} &7- {entry.dominion} &e[{entry.state}]']
+    Buttons:
+      toggle:
+        type: BUTTON
+        text: '&a[Use/Remove]'
+        action-group: toggle-title
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Main Menu]'
+    action-group: back

@@ -7,6 +7,8 @@ rootProject.name = "Dominion"
 include(
     "api",
     "core",
+    "dialog-paper",
+    "dialog-spigot",
     "versions:v1_20_1",
     "versions:v1_21",
     "versions:v1_21_4",

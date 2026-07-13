@@ -104,6 +104,13 @@ public class AdministratorCommand {
     }
 
     public static void reloadCache(CommandSender sender) {
+        reloadCache(sender, true);
+    }
+
+    /**
+     * Reloads all Dominion caches while allowing configured renderers to own the navigation lifecycle.
+     */
+    public static void reloadCache(CommandSender sender, boolean reopenLegacyMenu) {
         Notification.info(sender, Language.administratorCommandText.reloadingDominionCache);
         CacheManager.instance.getCache().getDominionCache().load();
         Notification.info(sender, Language.administratorCommandText.reloadedDominionCache);
@@ -116,7 +123,9 @@ public class AdministratorCommand {
         CacheManager.instance.getCache().getGroupCache().load();
         Notification.info(sender, Language.administratorCommandText.reloadedGroupCache);
 
-        MainMenu.show(sender, "1");
+        if (reopenLegacyMenu) {
+            MainMenu.show(sender, "1");
+        }
     }
 
     public static PermissionButton reloadConfigButton(CommandSender sender) {
@@ -129,10 +138,19 @@ public class AdministratorCommand {
     }
 
     public static void reloadConfig(CommandSender sender) {
+        reloadConfig(sender, true);
+    }
+
+    /**
+     * Reloads configuration while allowing configured renderers to reopen the originating surface.
+     */
+    public static void reloadConfig(CommandSender sender, boolean reopenLegacyMenu) {
         try {
             Notification.info(sender, Language.administratorCommandText.reloadingConfig);
             Configuration.loadConfigurationAndDatabase(sender);
-            MainMenu.show(sender, "1");
+            if (reopenLegacyMenu) {
+                MainMenu.show(sender, "1");
+            }
         } catch (Exception e) {
             Notification.error(sender, e);
         }

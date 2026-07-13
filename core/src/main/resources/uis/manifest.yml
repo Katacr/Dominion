@@ -1,0 +1,85 @@
+schema-version: 1
+
+locales:
+  - en_US
+  - zh_CN
+
+text-menus:
+  - action_demo
+  - template_list
+  - select_template
+  - env_flags
+  - template_flags
+  - member_flags
+  - guest_flags
+  - group_flags
+  - member_list
+  - select_player
+  - group_list
+  - group_manage
+  - select_member
+  - copy_menu
+  - dominion_copy
+  - title_list
+  - set_size
+  - main_menu
+  - ui_preferences
+  - language_preferences
+  - dominion_manage
+  - dominion_list
+  - all_dominions
+  - all_dominions_of_player
+  - migrate_list
+
+chest-menus:
+  - main_menu
+  - ui_preferences
+  - language_preferences
+  - dominion_list
+  - env_flags
+  - dominion_manage
+  - copy_menu
+  - set_size
+  - group_list
+  - group_manage
+  - group_flags
+  - select_member
+  - guest_flags
+  - member_list
+  - select_player
+  - member_flags
+  - select_template
+  - template_list
+  - template_flags
+  - dominion_copy
+  - title_list
+  - all_dominions
+  - all_dominions_of_player
+  - migrate_list
+
+dialog-menus:
+  - action_demo
+  - main_menu
+  - ui_preferences
+  - language_preferences
+  - dominion_manage
+  - copy_menu
+  - set_size
+  - dominion_list
+  - all_dominions
+  - all_dominions_of_player
+  - migrate_list
+  - env_flags
+  - guest_flags
+  - group_flags
+  - member_flags
+  - template_flags
+  - member_list
+  - select_player
+  - group_list
+  - group_manage
+  - select_member
+  - select_template
+  - template_list
+  - dominion_copy
+  - title_list

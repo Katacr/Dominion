@@ -9,8 +9,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Inputter implements Listener {
 
@@ -26,35 +27,33 @@ public class Inputter implements Listener {
     public Inputter(JavaPlugin plugin) {
         instance = this;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        cachedInputters = new HashMap<>();
+        cachedInputters = new ConcurrentHashMap<>();
     }
 
-    private final Map<Player, InputterRunner> cachedInputters;
+    private final Map<UUID, InputterRunner> cachedInputters;
 
     public void register(InputterRunner inputterRunner) {
-        cachedInputters.put(inputterRunner.getSender(), inputterRunner);
+        cachedInputters.put(inputterRunner.getSender().getUniqueId(), inputterRunner);
     }
 
-    public void unregister(InputterRunner inputterRunner) {
-        cachedInputters.remove(inputterRunner.getSender());
+    public boolean unregister(InputterRunner inputterRunner) {
+        return cachedInputters.remove(inputterRunner.getSender().getUniqueId(), inputterRunner);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInput(AsyncPlayerChatEvent event) {
         Player sender = event.getPlayer();
-        if (!cachedInputters.containsKey(sender)) return;
+        InputterRunner runner = cachedInputters.remove(sender.getUniqueId());
+        if (runner == null) return;
         event.setCancelled(true);
-        // run synchronously to avoid concurrency issues
         String messageClone = event.getMessage();
-        Scheduler.runTask(() -> {
-            cachedInputters.get(sender).runner(messageClone);
-        });
+        Scheduler.runEntityTask(() -> runner.runner(messageClone), sender);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerLogout(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        cachedInputters.remove(player);
+        cachedInputters.remove(player.getUniqueId());
     }
 
 }

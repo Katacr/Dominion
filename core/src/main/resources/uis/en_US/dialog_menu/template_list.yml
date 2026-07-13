@@ -1,0 +1,59 @@
+schema-version: 1
+Title: '&6Templates {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7You do not have any templates.'
+  layout: '&f{entry.name} {open} {delete}'
+  width: 440
+  buttons:
+    open:
+      text: '&a[Manage]'
+      action-group: open-template
+    delete:
+      text: '&c[Delete]'
+      action-group: delete-template
+      confirmation:
+        title: '&cConfirm Template Deletion'
+        body: '&7Delete template &f{entry.name}&7?'
+        confirm:
+          text: '&cDelete'
+        deny:
+          text: '&aCancel'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&aCreate Template'
+      action-group: create-template
+      input-capture:
+        title: '&aCreate Template'
+        body: '&7Enter a name for the new template.'
+        input:
+          key: template_name
+          type: input
+          text: '&fTemplate Name'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&aCreate'
+        deny:
+          text: '&cCancel'
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Main Menu'
+      action-group: back-main-menu
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

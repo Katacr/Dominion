@@ -7,6 +7,7 @@ import cn.lunadeer.dominion.configuration.Language;
 import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.misc.CommandArguments;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.ResMigration;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
@@ -81,6 +82,11 @@ public class MigrateList extends AbstractUI {
             return;
         }
         int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("migrate_list")) {
+            ConfiguredTuiManager.getInstance().show(player, "migrate_list", page);
+            return;
+        }
         ListView view = ListView.create(10, button(player));
         view.title(TextUserInterface.migrateListTuiText.title);
         view.navigator(Line.create()
@@ -186,10 +192,16 @@ public class MigrateList extends AbstractUI {
             Notification.error(player, TextUserInterface.migrateListTuiText.notEnabled);
             return;
         }
+        int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("migrate_list")) {
+            ConfiguredTuiManager.getInstance().showCui(player, "migrate_list", page);
+            return;
+        }
 
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(ChestUserInterface.migrateListCui.title);
-        view.applyListConfiguration(ChestUserInterface.migrateListCui.listConfiguration, toIntegrity(args[0], 1));
+        view.applyListConfiguration(ChestUserInterface.migrateListCui.listConfiguration, page);
 
         List<ResMigration.ResidenceNode> res_data;
 

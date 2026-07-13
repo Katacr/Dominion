@@ -1,0 +1,64 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6调整领地尺寸 &8------------'
+  - '&7领地：&f{route.dominion.name}'
+  - '&7北：{north-expand} {north-contract}'
+  - '&7南：{south-expand} {south-contract}'
+  - '&7西：{west-expand} {west-contract}'
+  - '&7东：{east-expand} {east-contract}'
+  - '&7上：{up-expand} {up-contract}'
+  - '&7下：{down-expand} {down-contract}'
+  - '{back}'
+Buttons:
+  north-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: north-expand
+  north-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: north-contract
+  south-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: south-expand
+  south-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: south-contract
+  west-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: west-expand
+  west-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: west-contract
+  east-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: east-expand
+  east-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: east-contract
+  up-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: up-expand
+  up-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: up-contract
+  down-expand:
+    type: BUTTON
+    text: '&a[扩张]'
+    action-group: down-expand
+  down-contract:
+    type: BUTTON
+    text: '&c[收缩]'
+    action-group: down-contract
+  back:
+    type: BUTTON
+    text: '&c[返回领地管理]'
+    action-group: back

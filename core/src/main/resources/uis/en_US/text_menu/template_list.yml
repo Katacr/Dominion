@@ -1,0 +1,58 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6Template List &8------------'
+  - '&7Templates can quickly configure member privileges.'
+  - '{create}'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total}&7, &f{page.items} &7items {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7You do not have any privilege templates.'
+    Layout:
+      - '&8- {delete} {manage} &f{entry.name}'
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[Delete]'
+        hover: '&7Delete template &f{entry.name}'
+        disabled-text: '&8[Delete]'
+        permission: dominion.default
+        action-group: delete-template
+      manage:
+        type: BUTTON
+        text: '&a[Manage]'
+        hover: '&7Manage template &f{entry.name}'
+        disabled-text: '&8[Manage]'
+        permission: dominion.default
+        action-group: open-template
+
+  create:
+    type: BUTTON
+    text: '&a[Create Template]'
+    hover: '&7Create a new privilege template'
+    permission: dominion.default
+    action-group: create-template
+
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+
+  back:
+    type: BUTTON
+    text: '&c[Back to Main Menu]'
+    action-group: back-main-menu

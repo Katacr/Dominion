@@ -51,12 +51,24 @@ public class GroupTitleCommand {
      * @param pageStr         The page number as a string.
      */
     public static void useTitle(CommandSender sender, String groupTitleIdStr, String pageStr) {
+        useTitle(sender, groupTitleIdStr, pageStr, true);
+    }
+
+    /**
+     * Applies a title while allowing configured UI renderers to own the refresh lifecycle.
+     */
+    public static void useTitle(CommandSender sender,
+                                String groupTitleIdStr,
+                                String pageStr,
+                                boolean reopenLegacyMenu) {
         try {
             Player player = toPlayer(sender);
             int titleId = toIntegrity(groupTitleIdStr);
             if (titleId == -1) {
                 ((PlayerDOO) toPlayerDTO(player.getUniqueId())).setUsingGroupTitleID(-1);
-                TitleList.show(sender, pageStr);
+                if (reopenLegacyMenu) {
+                    TitleList.show(sender, pageStr);
+                }
                 return;
             }
             PlayerDTO playerDto = toPlayerDTO(player.getUniqueId());
@@ -76,7 +88,9 @@ public class GroupTitleCommand {
             ((PlayerDOO) playerDto).setUsingGroupTitleID(group.getId());
 
             Notification.info(sender, Language.groupTitleCommandText.usingTitleSuccess, group.getNamePlain());
-            TitleList.show(sender, pageStr);
+            if (reopenLegacyMenu) {
+                TitleList.show(sender, pageStr);
+            }
         } catch (Exception e) {
             Notification.error(sender, Language.groupTitleCommandText.usingTitleFail, e.getMessage());
         }

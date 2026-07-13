@@ -3,7 +3,9 @@ package cn.lunadeer.dominion.utils;
 import cn.lunadeer.dominion.utils.scheduler.Scheduler;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.title.Title;
+import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
@@ -168,12 +170,19 @@ public class Notification {
      * @param msg    The message to display.
      */
     public static void actionBar(Player player, String msg) {
-        Component adventureMessage = LegacyToMiniMessage.parse(msg);
-        if (adventure != null) {
-            adventure.player(player).sendActionBar(adventureMessage);
-        } else {
+        actionBar(player, LegacyToMiniMessage.parse(msg));
+    }
+
+    /**
+     * Sends a prebuilt action bar component without reparsing dynamic text.
+     */
+    public static void actionBar(Player player, Component adventureMessage) {
+        if (Misc.isPaper()) {
             player.sendActionBar(adventureMessage);
+            return;
         }
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                BungeeComponentSerializer.get().serialize(adventureMessage));
     }
 
     /**
@@ -215,8 +224,13 @@ public class Notification {
      * @param subtitle The subtitle text.
      */
     public static void title(Player player, String title, String subtitle) {
-        Component titleAdventureMessage = LegacyToMiniMessage.parse(title);
-        Component subtitleAdventureMessage = LegacyToMiniMessage.parse(subtitle);
+        title(player, LegacyToMiniMessage.parse(title), LegacyToMiniMessage.parse(subtitle));
+    }
+
+    /**
+     * Shows prebuilt title components without reparsing dynamic text.
+     */
+    public static void title(Player player, Component titleAdventureMessage, Component subtitleAdventureMessage) {
         Title adventureTitle = Title.title(titleAdventureMessage, subtitleAdventureMessage, DEFAULT_TIMES);
         if (adventure != null) {
             adventure.player(player).showTitle(adventureTitle);

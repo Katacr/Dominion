@@ -1,0 +1,28 @@
+schema-version: 1
+menu-id: group_flags
+
+route:
+  required:
+    - dominion.name
+    - group.name
+
+data:
+  entries:
+    provider: flags.group
+
+action-groups:
+  toggle-group-flag:
+    actions:
+      - 'dominion: toggle-group-flag'
+  rename-group:
+    actions:
+      - 'dominion: rename-group-input'
+  previous-page:
+    actions:
+      - 'page: previous'
+  next-page:
+    actions:
+      - 'page: next'
+  back-group-list:
+    actions:
+      - 'dominion: back-group-list'

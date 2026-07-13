@@ -1,0 +1,67 @@
+schema-version: 1
+Title: '&6Group: {route.group.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7This group has no members.'
+  layout: '&f{entry.name} {remove}'
+  width: 420
+  buttons:
+    remove:
+      text: '&c[Remove]'
+      tooltip: '&7Remove this member from the group'
+      action-group: remove-group-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    flags:
+      text: '&aFlag Settings'
+      action-group: group-flags
+    select:
+      text: '&aAdd Member'
+      action-group: select-member
+    rename:
+      text: '&eRename Group'
+      action-group: rename-group
+      input-capture:
+        title: '&eRename Group'
+        body: '&7Enter a new name for this group.'
+        input:
+          key: group_new_name
+          type: input
+          text: '&fNew Name'
+          default: '{route.group.name}'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&aSave'
+        deny:
+          text: '&cCancel'
+    delete:
+      text: '&cDelete Group'
+      action-group: delete-group
+      confirmation:
+        title: '&cConfirm Group Deletion'
+        body: '&7Delete group &f{route.group.name}&7?'
+        confirm:
+          text: '&cDelete'
+        deny:
+          text: '&aCancel'
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Groups'
+      action-group: back-group-list
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

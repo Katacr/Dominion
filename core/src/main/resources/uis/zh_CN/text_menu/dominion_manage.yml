@@ -1,0 +1,58 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6领地管理 &8------------'
+  - '&7领地：&f{route.dominion.name}'
+  - '{size} {environment} {guest}'
+  - '{members} {groups} {copy}'
+  - '{tp} {rename} {color}'
+  - '{enter} {leave}'
+  - '{back}'
+Buttons:
+  size:
+    type: BUTTON
+    text: '&a[调整尺寸]'
+    action-group: size
+  environment:
+    type: BUTTON
+    text: '&a[环境设置]'
+    action-group: environment
+  guest:
+    type: BUTTON
+    text: '&a[访客权限]'
+    action-group: guest
+  members:
+    type: BUTTON
+    text: '&a[成员管理]'
+    action-group: members
+  groups:
+    type: BUTTON
+    text: '&a[权限组]'
+    action-group: groups
+  copy:
+    type: BUTTON
+    text: '&a[复制设置]'
+    action-group: copy
+  tp:
+    type: BUTTON
+    text: '&e[设置传送点]'
+    action-group: set-tp
+  rename:
+    type: BUTTON
+    text: '&e[重命名]'
+    action-group: rename
+  color:
+    type: BUTTON
+    text: '&e[地图颜色]'
+    action-group: map-color
+  enter:
+    type: BUTTON
+    text: '&e[进入提示]'
+    action-group: enter-message
+  leave:
+    type: BUTTON
+    text: '&e[离开提示]'
+    action-group: leave-message
+  back:
+    type: BUTTON
+    text: '&c[返回领地列表]'
+    action-group: back

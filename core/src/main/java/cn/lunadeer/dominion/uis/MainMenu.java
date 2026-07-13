@@ -11,6 +11,7 @@ import cn.lunadeer.dominion.inputters.CreateDominionInputter;
 import cn.lunadeer.dominion.misc.CommandArguments;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.template.TemplateList;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.CommandManager;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
@@ -42,6 +43,10 @@ import static cn.lunadeer.dominion.misc.Converts.toIntegrity;
 public class MainMenu extends AbstractUI {
 
     public static void show(CommandSender sender, String pageStr) {
+        if (sender instanceof Player player && ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().showOnboardingIfRequired(player)) {
+            return;
+        }
         new MainMenu().displayByPreference(sender, pageStr);
     }
 
@@ -84,6 +89,11 @@ public class MainMenu extends AbstractUI {
     @Override
     protected void showTUI(Player player, String... args) {
         int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("main_menu")) {
+            ConfiguredTuiManager.getInstance().show(player, "main_menu", page);
+            return;
+        }
 
         Line create = Line.create()
                 .append(CreateDominionInputter.createTuiButtonOn(player).needPermission(defaultPermission).build())
@@ -268,6 +278,13 @@ public class MainMenu extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) {
+        int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("main_menu")) {
+            ConfiguredTuiManager.getInstance().showCui(player, "main_menu", page);
+            return;
+        }
+
         ChestView view = ChestUserInterfaceManager.getInstance().getViewOf(player).setTitle(ChestUserInterface.mainMenuCui.title);
 
         if (player.hasPermission(adminPermission)) {

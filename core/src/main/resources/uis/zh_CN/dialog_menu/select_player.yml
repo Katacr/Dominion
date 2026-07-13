@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6添加成员：{route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7暂无可添加的玩家。'
+  layout: '&f{entry.name} {add}'
+  width: 400
+  buttons:
+    add:
+      text: '&a[添加]'
+      tooltip: '&7将该玩家添加为领地成员'
+      action-group: add-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回成员列表'
+      action-group: back-member-list
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

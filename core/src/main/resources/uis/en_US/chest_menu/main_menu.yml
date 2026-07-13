@@ -1,0 +1,105 @@
+schema-version: 1
+Title: '&0Dominion Menu'
+Layout:
+  - '#########'
+  - '#c d t p#'
+  - '#m a r f#'
+  - '#   l   #'
+  - '#       #'
+  - '####i####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'c':
+    permission: dominion.default
+    Display:
+      material: GRASS_BLOCK
+      name: '&aCreate Dominion'
+      lore: ['&7Create a new dominion.']
+    Clicks:
+      left:
+        action-group: create
+  'd':
+    Display:
+      material: FILLED_MAP
+      name: '&aMy Dominions'
+      lore: ['&7View dominions you can manage.']
+    Clicks:
+      left:
+        action-group: dominions
+  't':
+    capability: group-title
+    hidden-when-disabled: true
+    Display:
+      material: NAME_TAG
+      name: '&aGroup Titles'
+      lore: ['&7Select a group title.']
+    Clicks:
+      left:
+        action-group: titles
+  'p':
+    Display:
+      material: WRITABLE_BOOK
+      name: '&aPrivilege Templates'
+      lore: ['&7Manage reusable privilege templates.']
+    Clicks:
+      left:
+        action-group: templates
+  'm':
+    capability: residence-migration
+    hidden-when-disabled: true
+    Display:
+      material: MINECART
+      name: '&aResidence Migration'
+      lore: ['&7Migrate Residence data to Dominion.']
+    Clicks:
+      left:
+        action-group: migrate
+  'a':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: COMPASS
+      name: '&cAll Dominions'
+      lore: ['&7Open the administrator dominion list.']
+    Clicks:
+      left:
+        action-group: all-dominions
+  'r':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: CLOCK
+      name: '&cReload Cache'
+      lore: ['&7Reload Dominion cache data.']
+    Clicks:
+      left:
+        action-group: reload-cache
+  'f':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: REPEATER
+      name: '&cReload Configuration'
+      lore: ['&7Reload Dominion configuration.']
+    Clicks:
+      left:
+        action-group: reload-config
+  'i':
+    Display:
+      material: COMPARATOR
+      name: '&eInterface Type'
+      lore: ['&7Choose Text, Chest, or Dialog UI.']
+    Clicks:
+      left:
+        action-group: ui-preferences
+  'l':
+    Display:
+      material: PAPER
+      name: '&bLanguage'
+      lore: ['&7Select your menu language.']
+    Clicks:
+      left:
+        action-group: language

@@ -1,0 +1,50 @@
+schema-version: 1
+Title: '&6My Dominions {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 8
+  empty: '&7No dominions are available.'
+  layout: '&f{entry.prefix}{entry.name} {manage} {teleport} {delete}'
+  width: 500
+  buttons:
+    manage:
+      text: '&a[Manage]'
+      tooltip: '&7Open dominion management'
+      action-group: manage-dominion
+    teleport:
+      text: '&b[Teleport]'
+      tooltip: '&7Teleport to this dominion'
+      action-group: teleport-dominion
+    delete:
+      text: '&c[Delete]'
+      tooltip: '&7Delete this dominion'
+      action-group: delete-dominion
+      confirmation:
+        title: '&cConfirm Dominion Deletion'
+        body: '&7Delete &f{entry.name}&7 permanently? This cannot be undone.'
+        confirm:
+          text: '&cDelete'
+          tooltip: '&7Permanently delete this dominion'
+        deny:
+          text: '&aCancel'
+          tooltip: '&7Return to the dominion list'
+Bottom:
+  type: multi
+  columns: 3
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Main Menu'
+      action-group: back-main
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

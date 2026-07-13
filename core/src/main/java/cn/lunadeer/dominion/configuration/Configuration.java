@@ -5,6 +5,7 @@ import cn.lunadeer.dominion.api.dtos.PlayerDTO;
 import cn.lunadeer.dominion.api.dtos.flag.Flag;
 import cn.lunadeer.dominion.api.dtos.flag.Flags;
 import cn.lunadeer.dominion.utils.MessageDisplay;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.XLogger;
 import cn.lunadeer.dominion.utils.configuration.*;
@@ -463,5 +464,15 @@ public class Configuration extends ConfigurationFile {
         Notification.info(sender != null ? sender : Dominion.instance.getServer().getConsoleSender()
                 , Language.configurationText.databaseConnected);
         DatabaseManager.instance.migrate();
+        if (ConfiguredTuiManager.isInitialized()) {
+            try {
+                ConfiguredTuiManager.getInstance().reload();
+            } catch (Exception exception) {
+                CommandSender target = sender != null ? sender : Dominion.instance.getServer().getConsoleSender();
+                // Invalid UI files keep the previous atomic menu snapshot active.
+                Notification.error(target, "Failed to reload configured UI menus: {0}", exception.getMessage());
+                XLogger.error(exception);
+            }
+        }
     }
 }

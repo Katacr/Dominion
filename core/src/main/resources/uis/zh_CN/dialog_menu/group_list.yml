@@ -1,0 +1,60 @@
+schema-version: 1
+Title: '&6权限组：{route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7该领地暂无权限组。'
+  layout: '&f{entry.name} {open} {delete}'
+  width: 440
+  buttons:
+    open:
+      text: '&a[管理]'
+      action-group: open-group
+    delete:
+      text: '&c[删除]'
+      action-group: delete-group
+      confirmation:
+        title: '&c确认删除权限组'
+        body: '&7确定要删除权限组 &f{entry.name}&7 吗？'
+        confirm:
+          text: '&c确认删除'
+        deny:
+          text: '&a取消'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&a创建权限组'
+      action-group: create-group
+      input-capture:
+        title: '&a创建权限组'
+        body: '&7输入新权限组名称。'
+        input:
+          key: group_name
+          type: input
+          text: '&f权限组名称'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&a创建'
+          tooltip: '&7使用输入的名称创建权限组'
+        deny:
+          text: '&c取消'
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回领地管理'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

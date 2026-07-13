@@ -1,0 +1,98 @@
+schema-version: 1
+Title: '&0管理领地：{route.dominion.name}'
+Layout:
+  - '#########'
+  - '#s#e#g###'
+  - '#m#r#c###'
+  - '#t#n#o###'
+  - '#i#l#####'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  's':
+    Display:
+      material: PISTON
+      name: '&a调整尺寸'
+    Clicks:
+      left:
+        action-group: size
+  'e':
+    Display:
+      material: GRASS_BLOCK
+      name: '&a环境设置'
+    Clicks:
+      left:
+        action-group: environment
+  'g':
+    Display:
+      material: OAK_DOOR
+      name: '&a访客权限'
+    Clicks:
+      left:
+        action-group: guest
+  'm':
+    Display:
+      material: PLAYER_HEAD
+      name: '&a成员管理'
+    Clicks:
+      left:
+        action-group: members
+  'r':
+    Display:
+      material: CHEST
+      name: '&a权限组'
+    Clicks:
+      left:
+        action-group: groups
+  'c':
+    Display:
+      material: GLASS
+      name: '&a复制设置'
+    Clicks:
+      left:
+        action-group: copy
+  't':
+    Display:
+      material: ENDER_PEARL
+      name: '&e设置传送点'
+    Clicks:
+      left:
+        action-group: set-tp
+  'n':
+    Display:
+      material: NAME_TAG
+      name: '&e重命名'
+    Clicks:
+      left:
+        action-group: rename
+  'o':
+    Display:
+      material: FILLED_MAP
+      name: '&e地图颜色'
+    Clicks:
+      left:
+        action-group: map-color
+  'i':
+    Display:
+      material: WRITABLE_BOOK
+      name: '&e进入提示'
+    Clicks:
+      left:
+        action-group: enter-message
+  'l':
+    Display:
+      material: BOOK
+      name: '&e离开提示'
+    Clicks:
+      left:
+        action-group: leave-message
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回领地列表'
+    Clicks:
+      left:
+        action-group: back

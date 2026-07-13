@@ -1,0 +1,28 @@
+schema-version: 1
+menu-id: select_template
+
+route:
+  required:
+    - dominion.name
+    - member.name
+
+data:
+  entries:
+    provider: templates.member-apply-candidates
+
+action-groups:
+  apply-template:
+    actions:
+      - 'dominion: apply-member-template'
+
+  previous-page:
+    actions:
+      - 'page: previous'
+
+  next-page:
+    actions:
+      - 'page: next'
+
+  back-member-flags:
+    actions:
+      - 'dominion: back-member-flags'

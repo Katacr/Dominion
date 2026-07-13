@@ -1,0 +1,46 @@
+schema-version: 1
+Title: '&0Copy Settings: {route.dominion.name}'
+Layout:
+  - '#########'
+  - '#e#g#m#p#'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    Display:
+      material: GRASS_BLOCK
+      name: '&aEnvironment'
+    Clicks:
+      left:
+        action-group: environment
+  'g':
+    Display:
+      material: OAK_DOOR
+      name: '&aGuest Flags'
+    Clicks:
+      left:
+        action-group: guest
+  'm':
+    Display:
+      material: PLAYER_HEAD
+      name: '&aMembers'
+    Clicks:
+      left:
+        action-group: member
+  'p':
+    Display:
+      material: CHEST
+      name: '&aGroups'
+    Clicks:
+      left:
+        action-group: group
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Dominion Management'
+    Clicks:
+      left:
+        action-group: back

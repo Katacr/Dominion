@@ -1,0 +1,40 @@
+schema-version: 1
+Title: '&6Members: {route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7This dominion has no members.'
+  layout: '&f{entry.name} {entry.tag} {flags} {remove}'
+  width: 480
+  buttons:
+    flags:
+      text: '&a[Flags]'
+      tooltip: '&7Manage this member flags'
+      action-group: open-member-flags
+    remove:
+      text: '&c[Remove]'
+      tooltip: '&7Remove this member'
+      action-group: remove-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    add:
+      text: '&aAdd Member'
+      action-group: add-member
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Management'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

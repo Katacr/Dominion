@@ -1,0 +1,58 @@
+schema-version: 1
+Title: '&0{route.player.name} 的领地'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    permission: dominion.admin
+    Display:
+      material: FILLED_MAP
+      name: '&f{entry.prefix}{entry.name}'
+      lore:
+        - '&7所有者：{entry.owner}'
+        - '&a左键：管理'
+        - '&b右键：传送'
+        - '&cShift+左键：删除'
+    Empty-Display:
+      material: BARRIER
+      name: '&7该玩家当前没有领地。'
+    Clicks:
+      left:
+        action-group: manage-dominion
+      right:
+        action-group: teleport-dominion
+      shift-left:
+        action-group: delete-dominion
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a上一页'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回主菜单'
+    Clicks:
+      left:
+        action-group: back-main
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a下一页'
+    Clicks:
+      left:
+        action-group: next-page

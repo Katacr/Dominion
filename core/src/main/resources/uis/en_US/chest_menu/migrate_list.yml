@@ -1,0 +1,62 @@
+schema-version: 1
+Title: '&0Migrate From Residence'
+Layout:
+  - '#a#######'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'a':
+    capability: residence-migration
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: DIAMOND
+      name: '&cMigrate All'
+    Clicks:
+      left:
+        action-group: migrate-all
+  'e':
+    source: entries
+    capability: residence-migration
+    Display:
+      material: PAPER
+      name: '&f{entry.prefix}{entry.name}'
+      lore:
+        - '&7Owner: {entry.owner}'
+        - '&eClick to migrate this Residence'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No Residence data is available to migrate.'
+    Clicks:
+      left:
+        action-group: migrate-residence
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Main Menu'
+    Clicks:
+      left:
+        action-group: back-main
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

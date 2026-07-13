@@ -1,0 +1,45 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6成员列表 &8------------'
+  - '&7领地：&f{route.dominion.name} {add}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7该领地暂无成员。'
+    Layout: ['&8- &e{entry.tag} {remove} {manage} &f{entry.name}']
+    Buttons:
+      remove:
+        type: BUTTON
+        text: '&c[移除]'
+        hover: '&7从领地移除 &f{entry.name}'
+        disabled-text: '&8[移除]'
+        action-group: remove-member
+      manage:
+        type: BUTTON
+        text: '&a[管理]'
+        hover: '&7管理 &f{entry.name} &7的权限'
+        disabled-text: '&8[权限组管理/仅领地主人]'
+        action-group: open-member-flags
+  add:
+    type: BUTTON
+    text: '&a[添加成员]'
+    action-group: add-member
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回领地管理]'
+    action-group: back-dominion-manage

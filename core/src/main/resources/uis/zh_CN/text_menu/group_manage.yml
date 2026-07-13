@@ -1,0 +1,50 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6权限组管理 &8------------'
+  - '&7权限组：&f{route.group.name} &8| &7领地：&f{route.dominion.name}'
+  - '{flags} {add} {rename} {delete}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7该权限组暂无成员。'
+    Layout: ['&8- {remove} &f{entry.name}']
+    Buttons:
+      remove:
+        type: BUTTON
+        text: '&c[移出]'
+        action-group: remove-group-member
+  flags:
+    type: BUTTON
+    text: '&a[权限设置]'
+    action-group: group-flags
+  add:
+    type: BUTTON
+    text: '&a[添加成员]'
+    action-group: select-member
+  rename:
+    type: BUTTON
+    text: '&e[重命名]'
+    action-group: rename-group
+  delete:
+    type: BUTTON
+    text: '&c[删除权限组]'
+    action-group: delete-group
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回权限组列表]'
+    action-group: back-group-list

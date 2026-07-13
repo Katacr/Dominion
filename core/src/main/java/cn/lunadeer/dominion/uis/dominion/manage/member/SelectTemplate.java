@@ -5,6 +5,8 @@ import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.doos.TemplateDOO;
 import cn.lunadeer.dominion.uis.AbstractUI;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
 import cn.lunadeer.dominion.utils.scui.ChestListView;
@@ -22,6 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Converts.toIntegrity;
@@ -59,6 +62,16 @@ public class SelectTemplate extends AbstractUI {
         String pageStr = args[2];
 
         int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("select_template")) {
+            // Preserve the legacy entry point while keeping route targets in server-owned state.
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "select_template",
+                    page,
+                    Map.of("dominion.name", dominionName, "member.name", playerName)
+            ));
+            return;
+        }
         List<TemplateDOO> templates = TemplateDOO.selectAll(player.getUniqueId());
 
         ListView view = ListView.create(10, button(player, dominionName, playerName));
@@ -128,6 +141,13 @@ public class SelectTemplate extends AbstractUI {
     protected void showCUI(Player player, String... args) throws Exception {
         String dominionName = args[0];
         String playerName = args[1];
+        int page = toIntegrity(args.length > 2 ? args[2] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("select_template")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "select_template", page, Map.of("dominion.name", dominionName, "member.name", playerName)));
+            return;
+        }
 
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(formatString(ChestUserInterface.selectTemplateCui.title, playerName));

@@ -1,0 +1,20 @@
+schema-version: 1
+menu-id: all_dominions_of_player
+route:
+  required: [player.name]
+data:
+  entries:
+    provider: dominions.by-player
+action-groups:
+  manage-dominion:
+    actions: ['dominion: manage-dominion']
+  delete-dominion:
+    actions: ['dominion: delete-dominion']
+  teleport-dominion:
+    actions: ['dominion: teleport-dominion']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-main:
+    actions: ['dominion: back-main-menu-route']

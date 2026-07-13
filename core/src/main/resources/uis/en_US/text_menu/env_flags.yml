@@ -1,0 +1,44 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6Environment Flags &8------------'
+  - '&7Dominion: &f{route.dominion.name}'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total}&7, &f{page.items} &7items {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7No environment flags are currently enabled.'
+    Layout:
+      - '&8- {toggle} &f{entry.name}'
+    Buttons:
+      toggle:
+        type: BUTTON
+        text: '&e[{entry.state}]'
+        hover: '&f{entry.description}'
+        disabled-text: '&8[Unavailable]'
+        permission: dominion.default
+        action-group: toggle-env-flag
+
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion Management]'
+    permission: dominion.default
+    action-group: back-dominion-manage

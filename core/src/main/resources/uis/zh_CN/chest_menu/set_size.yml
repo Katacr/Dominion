@@ -1,0 +1,105 @@
+schema-version: 1
+Title: '&0调整尺寸：{route.dominion.name}'
+Layout:
+  - '#########'
+  - '#Nn#Ss###'
+  - '#Ww#Ee###'
+  - '#Uu#Dd###'
+  - '#########'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'N':
+    Display:
+      material: LIME_DYE
+      name: '&a向北扩张'
+    Clicks:
+      left:
+        action-group: north-expand
+  'n':
+    Display:
+      material: RED_DYE
+      name: '&c从北收缩'
+    Clicks:
+      left:
+        action-group: north-contract
+  'S':
+    Display:
+      material: LIME_DYE
+      name: '&a向南扩张'
+    Clicks:
+      left:
+        action-group: south-expand
+  's':
+    Display:
+      material: RED_DYE
+      name: '&c从南收缩'
+    Clicks:
+      left:
+        action-group: south-contract
+  'W':
+    Display:
+      material: LIME_DYE
+      name: '&a向西扩张'
+    Clicks:
+      left:
+        action-group: west-expand
+  'w':
+    Display:
+      material: RED_DYE
+      name: '&c从西收缩'
+    Clicks:
+      left:
+        action-group: west-contract
+  'E':
+    Display:
+      material: LIME_DYE
+      name: '&a向东扩张'
+    Clicks:
+      left:
+        action-group: east-expand
+  'e':
+    Display:
+      material: RED_DYE
+      name: '&c从东收缩'
+    Clicks:
+      left:
+        action-group: east-contract
+  'U':
+    Display:
+      material: LIME_DYE
+      name: '&a向上扩张'
+    Clicks:
+      left:
+        action-group: up-expand
+  'u':
+    Display:
+      material: RED_DYE
+      name: '&c从上收缩'
+    Clicks:
+      left:
+        action-group: up-contract
+  'D':
+    Display:
+      material: LIME_DYE
+      name: '&a向下扩张'
+    Clicks:
+      left:
+        action-group: down-expand
+  'd':
+    Display:
+      material: RED_DYE
+      name: '&c从下收缩'
+    Clicks:
+      left:
+        action-group: down-contract
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&c返回领地管理'
+    Clicks:
+      left:
+        action-group: back

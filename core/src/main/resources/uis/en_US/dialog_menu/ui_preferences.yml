@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6Interface Type'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 320
+    text: '&7Choose the interface used by Dominion menus.'
+Bottom:
+  type: multi
+  columns: 3
+  buttons:
+    tui:
+      text: '&aText UI'
+      tooltip: '&7Clickable text in chat'
+      action-group: tui
+    cui:
+      text: '&aChest UI'
+      tooltip: '&7Chest inventory menus'
+      action-group: cui
+    dui:
+      text: '&aDialog UI'
+      tooltip: '&7Native Dialog menus'
+      action-group: dui
+    back:
+      text: '&cBack'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

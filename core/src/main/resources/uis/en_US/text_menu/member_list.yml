@@ -1,0 +1,45 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Members &8------------'
+  - '&7Dominion: &f{route.dominion.name} {add}'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7This dominion has no members.'
+    Layout: ['&8- &e{entry.tag} {remove} {manage} &f{entry.name}']
+    Buttons:
+      remove:
+        type: BUTTON
+        text: '&c[Remove]'
+        hover: '&7Remove &f{entry.name}'
+        disabled-text: '&8[Remove]'
+        action-group: remove-member
+      manage:
+        type: BUTTON
+        text: '&a[Manage]'
+        hover: '&7Manage privileges for &f{entry.name}'
+        disabled-text: '&8[Managed by group/owner only]'
+        action-group: open-member-flags
+  add:
+    type: BUTTON
+    text: '&a[Add Member]'
+    action-group: add-member
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion Management]'
+    action-group: back-dominion-manage

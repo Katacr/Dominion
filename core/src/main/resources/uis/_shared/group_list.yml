@@ -1,0 +1,20 @@
+schema-version: 1
+menu-id: group_list
+route:
+  required: [dominion.name]
+data:
+  entries:
+    provider: groups.by-dominion
+action-groups:
+  open-group:
+    actions: ['dominion: open-group']
+  delete-group:
+    actions: ['dominion: delete-group']
+  create-group:
+    actions: ['dominion: create-group-input']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-dominion-manage:
+    actions: ['dominion: back-members-dominion-manage']

@@ -1,0 +1,41 @@
+schema-version: 1
+Layout:
+  - '&8------ &6Migrate From Residence &8------'
+  - '{migrate-all}'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7No Residence data is available to migrate.'
+    Layout: ['{migrate} &f{entry.prefix}{entry.name}']
+    Buttons:
+      migrate:
+        type: BUTTON
+        text: '&a[Migrate]'
+        hover: '&7Migrate this Residence and its children.'
+        disabled-text: '&8[With parent]'
+        action-group: migrate-residence
+  migrate-all:
+    type: BUTTON
+    text: '&c[Migrate All]'
+    action-group: migrate-all
+    permission: dominion.admin
+    hidden-when-disabled: true
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Main Menu]'
+    action-group: back-main

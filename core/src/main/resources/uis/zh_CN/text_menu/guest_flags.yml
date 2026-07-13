@@ -1,0 +1,41 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6访客权限 &8------------'
+  - '&7领地：&f{route.dominion.name}'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页，共 &f{page.items} &7项 {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7当前没有已启用的访客权限。'
+    Layout:
+      - '&8- {toggle} &f{entry.name}'
+    Buttons:
+      toggle:
+        type: BUTTON
+        text: '&e[{entry.state}]'
+        hover: '&f{entry.description}'
+        disabled-text: '&8[不可用]'
+        permission: dominion.default
+        action-group: toggle-guest-flag
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回领地管理]'
+    permission: dominion.default
+    action-group: back-dominion-manage

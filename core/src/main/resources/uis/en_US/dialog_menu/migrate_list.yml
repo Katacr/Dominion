@@ -1,0 +1,44 @@
+schema-version: 1
+Title: '&6Residence Migration {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7No Residence data can be migrated.'
+  layout: '&f{entry.prefix}{entry.name} {migrate}'
+  width: 460
+  buttons:
+    migrate:
+      text: '&a[Migrate]'
+      tooltip: '&7Migrate this Residence and its children'
+      action-group: migrate-residence
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    migrate-all:
+      text: '&cMigrate All'
+      permission: dominion.admin
+      action-group: migrate-all
+      confirmation:
+        title: '&cConfirm Bulk Migration'
+        body: '&7Migrate all available Residence data?'
+        confirm:
+          text: '&cMigrate All'
+        deny:
+          text: '&aCancel'
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Main Menu'
+      action-group: back-main
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

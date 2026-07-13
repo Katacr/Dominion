@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6Select Template: {route.member.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7No templates are available.'
+  layout: '&f{entry.name} {apply}'
+  width: 400
+  buttons:
+    apply:
+      text: '&a[Apply]'
+      action-group: apply-template
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Member Flags'
+      action-group: back-member-flags
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

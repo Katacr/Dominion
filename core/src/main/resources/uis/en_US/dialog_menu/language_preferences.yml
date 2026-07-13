@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6Language {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7No menu languages are available.'
+  layout: '&f{entry.name} {select}'
+  width: 360
+  buttons:
+    select:
+      text: '&a[Select]'
+      tooltip: '&7Use &f{entry.name}'
+      action-group: select-language
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

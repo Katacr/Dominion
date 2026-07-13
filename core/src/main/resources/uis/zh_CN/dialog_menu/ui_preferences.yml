@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6界面类型'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 320
+    text: '&7选择 Dominion 菜单使用的界面类型。'
+Bottom:
+  type: multi
+  columns: 3
+  buttons:
+    tui:
+      text: '&a文本菜单'
+      tooltip: '&7聊天栏可点击文本菜单'
+      action-group: tui
+    cui:
+      text: '&a箱子菜单'
+      tooltip: '&7箱子物品栏菜单'
+      action-group: cui
+    dui:
+      text: '&a对话框菜单'
+      tooltip: '&7原生 Dialog 对话框菜单'
+      action-group: dui
+    back:
+      text: '&c返回'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

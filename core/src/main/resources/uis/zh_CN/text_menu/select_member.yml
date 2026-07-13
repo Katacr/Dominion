@@ -1,0 +1,33 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6选择成员 &8------------'
+  - '&7权限组：&f{route.group.name}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7没有可加入的未分组成员。'
+    Layout: ['&8- {add} &f{entry.name}']
+    Buttons:
+      add:
+        type: BUTTON
+        text: '&a[加入]'
+        action-group: add-member
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回权限组管理]'
+    action-group: back-group-manage

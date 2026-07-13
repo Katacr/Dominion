@@ -10,6 +10,8 @@ import cn.lunadeer.dominion.doos.TemplateDOO;
 import cn.lunadeer.dominion.inputters.RenameTemplateInputter;
 import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
@@ -28,6 +30,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Converts.toIntegrity;
@@ -60,6 +63,14 @@ public class TemplateFlags extends AbstractUI {
     protected void showTUI(Player player, String... args) throws Exception {
         String pageStr = args.length > 1 ? args[1] : "1";
         String templateName = args[0];
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("template_flags")) {
+            // Keep the legacy entry point while route state remains owned by the configured TUI.
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "template_flags", page, Map.of("template.name", templateName)));
+            return;
+        }
 
         TemplateDOO template = TemplateDOO.select(player.getUniqueId(), templateName);
         if (template == null) {
@@ -172,6 +183,13 @@ public class TemplateFlags extends AbstractUI {
     protected void showCUI(Player player, String... args) throws Exception {
         String templateName = args[0];
         String pageStr = args.length > 1 ? args[1] : "1";
+        int page = toIntegrity(pageStr, 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("template_flags")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "template_flags", page, Map.of("template.name", templateName)));
+            return;
+        }
 
         TemplateDOO template = TemplateDOO.select(player.getUniqueId(), templateName);
         if (template == null) {
@@ -181,7 +199,7 @@ public class TemplateFlags extends AbstractUI {
 
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(formatString(ChestUserInterface.templateSettingCui.title, templateName));
-        view.applyListConfiguration(ChestUserInterface.templateSettingCui.listConfiguration, toIntegrity(pageStr));
+        view.applyListConfiguration(ChestUserInterface.templateSettingCui.listConfiguration, page);
 
         view.setButton(ChestUserInterface.templateSettingCui.backButton.getSymbol(),
                 new ChestButton(ChestUserInterface.templateSettingCui.backButton) {
@@ -213,7 +231,7 @@ public class TemplateFlags extends AbstractUI {
 
         for (int i = 0; i < Flags.getAllPriFlags().size(); i++) {
             PriFlag flag = Flags.getAllPriFlags().get(i);
-            Integer page = (int) Math.ceil((double) (i + 1) / view.getPageSize());
+            Integer itemPage = (int) Math.ceil((double) (i + 1) / view.getPageSize());
             String flagState = template.getFlagValue(flag) ? ChestUserInterface.templateSettingCui.flagItemStateTrue : ChestUserInterface.templateSettingCui.flagItemStateFalse;
             String flagName = formatString(ChestUserInterface.templateSettingCui.flagItemName, flag.getDisplayName());
             List<String> descriptions = foldLore2Line(flag.getDescription(), 30);
@@ -227,7 +245,8 @@ public class TemplateFlags extends AbstractUI {
             view.addItem(new ChestButton(btnConfig) {
                 @Override
                 public void onClick(ClickType type) {
-                    TemplateCommand.setTemplateFlag(player, templateName, flag.getFlagName(), String.valueOf(!template.getFlagValue(flag)), page.toString());
+                    TemplateCommand.setTemplateFlag(player, templateName, flag.getFlagName(),
+                            String.valueOf(!template.getFlagValue(flag)), itemPage.toString());
                 }
             });
         }

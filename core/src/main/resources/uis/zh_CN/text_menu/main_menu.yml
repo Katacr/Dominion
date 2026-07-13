@@ -1,0 +1,63 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6领地主菜单 &8------------'
+  - '{create} &7创建新的领地。'
+  - '{dominions} &7查看可管理的领地。'
+  - '{titles} &7选择权限组称号。'
+  - '{templates} &7管理权限模板。'
+  - '{migrate} &7迁移 Residence 数据。'
+  - '{documentation} &7打开玩家文档。'
+  - '{all} {cache} {config}'
+  - '{language} {interface}'
+Buttons:
+  create:
+    type: BUTTON
+    text: '&a[创建领地]'
+    action-group: create
+    permission: dominion.default
+  dominions:
+    type: BUTTON
+    text: '&a[领地列表]'
+    action-group: dominions
+  titles:
+    type: BUTTON
+    text: '&a[称号列表]'
+    action-group: titles
+  templates:
+    type: BUTTON
+    text: '&a[权限模板]'
+    action-group: templates
+  migrate:
+    type: BUTTON
+    text: '&a[迁移数据]'
+    action-group: migrate
+  documentation:
+    type: URL
+    text: '&b[玩家文档]'
+    url: 'https://dominion.lunadeer.cn/notes/doc/player/'
+  all:
+    type: BUTTON
+    text: '&c[全部领地]'
+    action-group: all-dominions
+    permission: dominion.admin
+    hidden-when-disabled: true
+  cache:
+    type: BUTTON
+    text: '&c[重载缓存]'
+    action-group: reload-cache
+    permission: dominion.admin
+    hidden-when-disabled: true
+  config:
+    type: BUTTON
+    text: '&c[重载配置]'
+    action-group: reload-config
+    permission: dominion.admin
+    hidden-when-disabled: true
+  interface:
+    type: BUTTON
+    text: '&e[界面类型]'
+    action-group: ui-preferences
+  language:
+    type: BUTTON
+    text: '&b[语言]'
+    action-group: language

@@ -1,0 +1,78 @@
+schema-version: 1
+Title: '&0Group: {route.group.name}'
+Layout:
+  - '#f#a#r#d#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#########'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'f':
+    Display:
+      material: COMPARATOR
+      name: '&aPermissions'
+    Clicks:
+      left:
+        action-group: group-flags
+  'a':
+    Display:
+      material: LIME_DYE
+      name: '&aAdd Member'
+    Clicks:
+      left:
+        action-group: select-member
+  'r':
+    Display:
+      material: NAME_TAG
+      name: '&eRename Group'
+    Clicks:
+      left:
+        action-group: rename-group
+  'd':
+    Display:
+      material: RED_DYE
+      name: '&cDelete Group'
+    Clicks:
+      left:
+        action-group: delete-group
+  'e':
+    source: entries
+    Display:
+      material: PLAYER_HEAD
+      name: '&f{entry.name}'
+      lore:
+        - '&cClick to remove from group'
+    Empty-Display:
+      material: BARRIER
+      name: '&7This group has no members.'
+    Clicks:
+      left:
+        action-group: remove-group-member
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Group List'
+    Clicks:
+      left:
+        action-group: back-group-list
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

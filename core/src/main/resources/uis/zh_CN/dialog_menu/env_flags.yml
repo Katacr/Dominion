@@ -1,0 +1,33 @@
+schema-version: 1
+Title: '&6环境权限：{route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7当前没有可配置的环境权限。'
+  layout: '&e[{entry.state}] &f{entry.name}: &7{entry.description} {toggle-env-flag}'
+  width: 520
+  buttons:
+    toggle-env-flag:
+      text: '&a[切换]'
+      tooltip: '&7点击切换该环境权限'
+      action-group: toggle-env-flag
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回领地管理'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

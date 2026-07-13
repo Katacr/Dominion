@@ -24,6 +24,7 @@ public class PlayerDOO implements PlayerDTO {
     private Integer using_group_title_id;
     private String skinUrl;
     private String ui_preference;
+    private String language;
 
     private static PlayerDOO parse(PlayerRepository.PlayerRow row) {
         if (row == null) return null;
@@ -34,7 +35,8 @@ public class PlayerDOO implements PlayerDTO {
                 row.lastJoinAt(),
                 row.usingGroupTitleId(),
                 row.skinUrl(),
-                row.uiPreference()
+                row.uiPreference(),
+                row.language()
         );
     }
 
@@ -62,7 +64,8 @@ public class PlayerDOO implements PlayerDTO {
         return player;
     }
 
-    private PlayerDOO(Integer id, UUID uuid, String lastKnownName, LocalDateTime lastJoinAt, Integer using_group_title_id, String skinUrl, String uiPreference) {
+    private PlayerDOO(Integer id, UUID uuid, String lastKnownName, LocalDateTime lastJoinAt,
+                      Integer using_group_title_id, String skinUrl, String uiPreference, String language) {
         this.id = id;
         this.uuid = uuid;
         this.lastKnownName = lastKnownName;
@@ -70,6 +73,7 @@ public class PlayerDOO implements PlayerDTO {
         this.using_group_title_id = using_group_title_id;
         this.skinUrl = skinUrl;
         this.ui_preference = uiPreference;
+        this.language = language;
     }
 
     @Override
@@ -169,6 +173,17 @@ public class PlayerDOO implements PlayerDTO {
             }
             return UI_TYPE.CUI; // Fallback to CUI if the value is invalid
         }
+    }
+
+    @Override
+    public @NotNull String getLanguage() {
+        return language == null || language.isBlank() ? "NONE" : language;
+    }
+
+    @Override
+    public void setLanguage(@NotNull String language) throws SQLException {
+        this.language = language;
+        PlayerRepository.updateLanguage(this.uuid, language);
     }
 
     public void setUsingGroupTitleID(Integer usingGroupTitleID) throws SQLException {

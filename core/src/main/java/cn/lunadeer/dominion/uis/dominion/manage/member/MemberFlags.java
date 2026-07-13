@@ -13,6 +13,8 @@ import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.MainMenu;
 import cn.lunadeer.dominion.uis.dominion.DominionList;
 import cn.lunadeer.dominion.uis.dominion.DominionManage;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -33,6 +35,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.misc.Converts.*;
@@ -78,9 +81,19 @@ public class MemberFlags extends AbstractUI {
         String dominionName = args[0];
         String playerName = args[1];
         String pageStr = args.length > 2 ? args[2] : "1";
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("member_flags")) {
+            // Preserve the legacy command while keeping member identity in server-owned route state.
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "member_flags", page, Map.of(
+                    "dominion.name", dominionName,
+                    "member.name", playerName
+            )));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(dominionName);
         MemberDTO member = toMemberDTO(dominion, playerName);
-        int page = toIntegrity(pageStr);
         ListView view = ListView.create(10, button(player, dominionName, playerName));
         view.title(formatString(TextUserInterface.memberSettingTuiText.title, playerName));
         view.navigator(
@@ -176,6 +189,16 @@ public class MemberFlags extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
+        String dominionName = args[0];
+        String memberName = args[1];
+        int configuredPage = toIntegrity(args.length > 2 ? args[2] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("member_flags")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "member_flags", configuredPage,
+                    Map.of("dominion.name", dominionName, "member.name", memberName)));
+            return;
+        }
         DominionDTO dominion = toDominionDTO(args[0]);
         MemberDTO member = toMemberDTO(dominion, args[1]);
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);

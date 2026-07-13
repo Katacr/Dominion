@@ -9,6 +9,8 @@ import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.doos.PlayerDOO;
 import cn.lunadeer.dominion.inputters.SearchPlayerInputter;
 import cn.lunadeer.dominion.uis.AbstractUI;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
 import cn.lunadeer.dominion.utils.scui.ChestListView;
@@ -25,6 +27,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
@@ -62,9 +65,16 @@ public class SelectPlayer extends AbstractUI {
         String dominionName = args[0];
         String pageStr = args[1];
 
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("select_player")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "select_player", page, Map.of("dominion.name", dominionName)));
+            return;
+        }
+
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);
-        int page = toIntegrity(pageStr);
 
         ListView view = ListView.create(10, button(player, dominionName));
         Line sub = Line.create()
@@ -139,6 +149,13 @@ public class SelectPlayer extends AbstractUI {
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
         String dominionName = args[0];
+        int page = toIntegrity(args.length > 1 ? args[1] : "1", 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("select_player")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "select_player", page, Map.of("dominion.name", dominionName)));
+            return;
+        }
 
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);

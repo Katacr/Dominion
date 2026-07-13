@@ -1,0 +1,50 @@
+schema-version: 1
+Title: '&0Add Group Member: {route.group.name}'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    Display:
+      material: PLAYER_HEAD
+      name: '&f{entry.name}'
+      lore:
+        - '&eClick to add to group'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No ungrouped members are available.'
+    Clicks:
+      left:
+        action-group: add-member
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Group Management'
+    Clicks:
+      left:
+        action-group: back-group-manage
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

@@ -1,0 +1,44 @@
+schema-version: 1
+
+Layout:
+  - '&8------------ &6Select Template &8------------'
+  - '&7Select a template for member &f{route.member.name}&7.'
+  - '{entries}'
+  - '&8------------------------------------'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total}&7, &f{page.items} &7items {next}'
+  - '{back}'
+
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7You do not have any available privilege templates.'
+    Layout:
+      - '&8- {apply} &f{entry.name}'
+    Buttons:
+      apply:
+        type: BUTTON
+        text: '&a[Apply]'
+        hover: '&7Apply &f{entry.name} &7to member &f{route.member.name}'
+        disabled-text: '&8[Unavailable]'
+        permission: dominion.default
+        action-group: apply-template
+
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+
+  back:
+    type: BUTTON
+    text: '&c[Back to Member Settings]'
+    permission: dominion.default
+    action-group: back-member-flags

@@ -1,0 +1,27 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Copy Settings &8------------'
+  - '&7Target: &f{route.dominion.name}'
+  - '{environment} {guest} {member} {group}'
+  - '{back}'
+Buttons:
+  environment:
+    type: BUTTON
+    text: '&a[Environment]'
+    action-group: environment
+  guest:
+    type: BUTTON
+    text: '&a[Guest Flags]'
+    action-group: guest
+  member:
+    type: BUTTON
+    text: '&a[Members]'
+    action-group: member
+  group:
+    type: BUTTON
+    text: '&a[Groups]'
+    action-group: group
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion Management]'
+    action-group: back

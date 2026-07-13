@@ -1,0 +1,57 @@
+schema-version: 1
+Title: '&6调整尺寸：{route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  hint:
+    type: message
+    width: 360
+    text: '&7选择方向和操作后，在聊天栏输入调整距离。'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    north-expand:
+      text: '&a向北扩张'
+      action-group: north-expand
+    north-contract:
+      text: '&c从北收缩'
+      action-group: north-contract
+    south-expand:
+      text: '&a向南扩张'
+      action-group: south-expand
+    south-contract:
+      text: '&c从南收缩'
+      action-group: south-contract
+    west-expand:
+      text: '&a向西扩张'
+      action-group: west-expand
+    west-contract:
+      text: '&c从西收缩'
+      action-group: west-contract
+    east-expand:
+      text: '&a向东扩张'
+      action-group: east-expand
+    east-contract:
+      text: '&c从东收缩'
+      action-group: east-contract
+    up-expand:
+      text: '&a向上扩张'
+      action-group: up-expand
+    up-contract:
+      text: '&c从上收缩'
+      action-group: up-contract
+    down-expand:
+      text: '&a向下扩张'
+      action-group: down-expand
+    down-contract:
+      text: '&c从下收缩'
+      action-group: down-contract
+    back:
+      text: '&c返回领地管理'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

@@ -1,0 +1,31 @@
+schema-version: 1
+menu-id: template_list
+
+data:
+  entries:
+    provider: templates.owned
+
+action-groups:
+  open-template:
+    actions:
+      - 'dominion: open-template'
+
+  delete-template:
+    actions:
+      - 'dominion: delete-template'
+
+  create-template:
+    actions:
+      - 'dominion: create-template-input'
+
+  previous-page:
+    actions:
+      - 'page: previous'
+
+  next-page:
+    actions:
+      - 'page: next'
+
+  back-main-menu:
+    actions:
+      - 'dominion: legacy-main-menu'

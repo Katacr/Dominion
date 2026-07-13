@@ -1,0 +1,51 @@
+schema-version: 1
+Title: '&0环境权限：{route.dominion.name}'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    permission: dominion.default
+    Display:
+      material: '{entry.material}'
+      name: '&e[{entry.state}] &f{entry.name}'
+      lore: ['&7{entry.description}', '', '&e点击切换状态']
+    Empty-Display:
+      material: BARRIER
+      name: '&7当前没有已启用的环境权限。'
+    Clicks:
+      left:
+        action-group: toggle-env-flag
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a上一页'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    permission: dominion.default
+    Display:
+      material: OAK_DOOR
+      name: '&c返回领地管理'
+    Clicks:
+      left:
+        action-group: back-dominion-manage
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&a下一页'
+    Clicks:
+      left:
+        action-group: next-page

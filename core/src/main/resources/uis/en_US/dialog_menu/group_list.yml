@@ -1,0 +1,60 @@
+schema-version: 1
+Title: '&6Groups: {route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7This dominion has no groups.'
+  layout: '&f{entry.name} {open} {delete}'
+  width: 440
+  buttons:
+    open:
+      text: '&a[Manage]'
+      action-group: open-group
+    delete:
+      text: '&c[Delete]'
+      action-group: delete-group
+      confirmation:
+        title: '&cConfirm Group Deletion'
+        body: '&7Delete group &f{entry.name}&7?'
+        confirm:
+          text: '&cDelete'
+        deny:
+          text: '&aCancel'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&aCreate Group'
+      action-group: create-group
+      input-capture:
+        title: '&aCreate Group'
+        body: '&7Enter a name for the new group.'
+        input:
+          key: group_name
+          type: input
+          text: '&fGroup Name'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&aCreate'
+          tooltip: '&7Create the group with this name'
+        deny:
+          text: '&cCancel'
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Management'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

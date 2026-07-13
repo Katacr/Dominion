@@ -1,0 +1,31 @@
+schema-version: 1
+menu-id: set_size
+route:
+  required: [dominion.name]
+action-groups:
+  north-expand:
+    actions: ['dominion: resize-input EXPAND NORTH']
+  north-contract:
+    actions: ['dominion: resize-input CONTRACT NORTH']
+  south-expand:
+    actions: ['dominion: resize-input EXPAND SOUTH']
+  south-contract:
+    actions: ['dominion: resize-input CONTRACT SOUTH']
+  west-expand:
+    actions: ['dominion: resize-input EXPAND WEST']
+  west-contract:
+    actions: ['dominion: resize-input CONTRACT WEST']
+  east-expand:
+    actions: ['dominion: resize-input EXPAND EAST']
+  east-contract:
+    actions: ['dominion: resize-input CONTRACT EAST']
+  up-expand:
+    actions: ['dominion: resize-input EXPAND UP']
+  up-contract:
+    actions: ['dominion: resize-input CONTRACT UP']
+  down-expand:
+    actions: ['dominion: resize-input EXPAND DOWN']
+  down-contract:
+    actions: ['dominion: resize-input CONTRACT DOWN']
+  back:
+    actions: ['dominion: back-size-dominion-manage']

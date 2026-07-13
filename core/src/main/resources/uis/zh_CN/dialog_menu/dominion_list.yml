@@ -1,0 +1,50 @@
+schema-version: 1
+Title: '&6我的领地 {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 8
+  empty: '&7暂无可显示的领地。'
+  layout: '&f{entry.prefix}{entry.name} {manage} {teleport} {delete}'
+  width: 500
+  buttons:
+    manage:
+      text: '&a[管理]'
+      tooltip: '&7打开领地管理菜单'
+      action-group: manage-dominion
+    teleport:
+      text: '&b[传送]'
+      tooltip: '&7传送到该领地'
+      action-group: teleport-dominion
+    delete:
+      text: '&c[删除]'
+      tooltip: '&7删除该领地'
+      action-group: delete-dominion
+      confirmation:
+        title: '&c确认删除领地'
+        body: '&7确定要删除领地 &f{entry.name}&7 吗？此操作无法撤销。'
+        confirm:
+          text: '&c确认删除'
+          tooltip: '&7永久删除该领地'
+        deny:
+          text: '&a取消'
+          tooltip: '&7返回领地列表'
+Bottom:
+  type: multi
+  columns: 3
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回主菜单'
+      action-group: back-main
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

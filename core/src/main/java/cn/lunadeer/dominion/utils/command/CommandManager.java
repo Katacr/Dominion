@@ -109,7 +109,7 @@ public class CommandManager implements TabExecutor, Listener {
      */
     public static void registerCommand(SecondaryCommand command) {
         commands.put(command.getCommand(), command);
-        if (!command.isDynamic()) {
+        if (!command.isHidden()) {
             commandsUsable.put(command.getCommand(), command);
         }
     }

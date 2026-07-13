@@ -9,6 +9,7 @@ import cn.lunadeer.dominion.configuration.Language;
 import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.misc.CommandArguments;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -75,6 +76,11 @@ public class TitleList extends AbstractUI {
     @Override
     protected void showTUI(Player player, String... args) throws Exception {
         int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("title_list")) {
+            ConfiguredTuiManager.getInstance().show(player, "title_list", page);
+            return;
+        }
 
         ListView view = ListView.create(10, button(player));
 
@@ -180,9 +186,16 @@ public class TitleList extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) throws Exception {
+        int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("title_list")) {
+            ConfiguredTuiManager.getInstance().showCui(player, "title_list", page);
+            return;
+        }
+
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(ChestUserInterface.titleListCui.title);
-        view.applyListConfiguration(ChestUserInterface.titleListCui.listConfiguration, toIntegrity(args[0], 1));
+        view.applyListConfiguration(ChestUserInterface.titleListCui.listConfiguration, page);
 
         List<GroupDTO> groups = CacheManager.instance.getPlayerCache().getPlayerGroupTitleList(player.getUniqueId());
         List<DominionDTO> dominions = CacheManager.instance.getCache().getDominionCache().getPlayerOwnDominionDTOs(player.getUniqueId());

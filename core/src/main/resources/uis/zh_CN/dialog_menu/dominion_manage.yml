@@ -1,0 +1,109 @@
+schema-version: 1
+Title: '&6管理领地：{route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 360
+    text: '&7配置领地范围、权限、成员与显示信息。'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    size:
+      text: '&a调整尺寸'
+      action-group: size
+    environment:
+      text: '&a环境权限'
+      action-group: environment
+    guest:
+      text: '&a访客权限'
+      action-group: guest
+    members:
+      text: '&a成员管理'
+      action-group: members
+    groups:
+      text: '&a权限组管理'
+      action-group: groups
+    set-tp:
+      text: '&a设置传送点'
+      action-group: set-tp
+    rename:
+      text: '&e重命名领地'
+      action-group: rename
+      input-capture:
+        title: '&e重命名领地'
+        body: '&7为领地 &f{route.dominion.name} &7输入新名称。'
+        input:
+          key: dominion_new_name
+          type: input
+          text: '&f新领地名称'
+          default: '{route.dominion.name}'
+          min_length: 1
+          max_length: 64
+          pattern: '[^ .§&~,]+'
+        confirm:
+          text: '&a重命名'
+        deny:
+          text: '&c取消'
+    enter-message:
+      text: '&e进入提示语'
+      action-group: enter-message
+      input-capture:
+        title: '&e修改进入提示语'
+        body: '&7输入玩家进入该领地时显示的消息。'
+        input:
+          key: dominion_enter_message
+          type: input
+          text: '&f进入提示语'
+          min_length: 0
+          max_length: 256
+        confirm:
+          text: '&a保存'
+        deny:
+          text: '&c取消'
+    leave-message:
+      text: '&e离开提示语'
+      action-group: leave-message
+      input-capture:
+        title: '&e修改离开提示语'
+        body: '&7输入玩家离开该领地时显示的消息。'
+        input:
+          key: dominion_leave_message
+          type: input
+          text: '&f离开提示语'
+          min_length: 0
+          max_length: 256
+        confirm:
+          text: '&a保存'
+        deny:
+          text: '&c取消'
+    map-color:
+      text: '&e地图颜色'
+      action-group: map-color
+      input-capture:
+        title: '&e设置地图颜色'
+        body: '&7输入 &f0xRRGGBB &7格式的十六进制颜色。'
+        input:
+          key: dominion_map_color
+          type: input
+          text: '&f地图颜色'
+          min_length: 8
+          max_length: 8
+          pattern: '0x[0-9A-Fa-f]{6}'
+        confirm:
+          text: '&a保存'
+        deny:
+          text: '&c取消'
+    copy:
+      text: '&b复制配置'
+      action-group: copy
+    back:
+      text: '&c返回领地列表'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

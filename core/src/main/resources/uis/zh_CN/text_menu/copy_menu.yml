@@ -1,0 +1,27 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6复制设置 &8------------'
+  - '&7目标领地：&f{route.dominion.name}'
+  - '{environment} {guest} {member} {group}'
+  - '{back}'
+Buttons:
+  environment:
+    type: BUTTON
+    text: '&a[环境设置]'
+    action-group: environment
+  guest:
+    type: BUTTON
+    text: '&a[访客权限]'
+    action-group: guest
+  member:
+    type: BUTTON
+    text: '&a[成员设置]'
+    action-group: member
+  group:
+    type: BUTTON
+    text: '&a[权限组设置]'
+    action-group: group
+  back:
+    type: BUTTON
+    text: '&c[返回领地管理]'
+    action-group: back

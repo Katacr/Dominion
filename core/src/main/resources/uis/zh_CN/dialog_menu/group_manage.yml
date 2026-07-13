@@ -1,0 +1,67 @@
+schema-version: 1
+Title: '&6权限组：{route.group.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7该权限组暂无成员。'
+  layout: '&f{entry.name} {remove}'
+  width: 420
+  buttons:
+    remove:
+      text: '&c[移除]'
+      tooltip: '&7从权限组移除该成员'
+      action-group: remove-group-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    flags:
+      text: '&a权限设置'
+      action-group: group-flags
+    select:
+      text: '&a添加成员'
+      action-group: select-member
+    rename:
+      text: '&e重命名权限组'
+      action-group: rename-group
+      input-capture:
+        title: '&e重命名权限组'
+        body: '&7输入权限组的新名称。'
+        input:
+          key: group_new_name
+          type: input
+          text: '&f新名称'
+          default: '{route.group.name}'
+          min_length: 1
+          max_length: 64
+          pattern: '\S+'
+        confirm:
+          text: '&a保存'
+        deny:
+          text: '&c取消'
+    delete:
+      text: '&c删除权限组'
+      action-group: delete-group
+      confirmation:
+        title: '&c确认删除权限组'
+        body: '&7确定要删除权限组 &f{route.group.name}&7 吗？'
+        confirm:
+          text: '&c确认删除'
+        deny:
+          text: '&a取消'
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回权限组列表'
+      action-group: back-group-list
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

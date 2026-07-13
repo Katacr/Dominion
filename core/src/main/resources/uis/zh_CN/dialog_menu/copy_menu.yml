@@ -1,0 +1,28 @@
+schema-version: 1
+Title: '&6复制配置：{route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    environment:
+      text: '&a复制环境权限'
+      action-group: environment
+    guest:
+      text: '&a复制访客权限'
+      action-group: guest
+    member:
+      text: '&a复制成员权限'
+      action-group: member
+    group:
+      text: '&a复制权限组'
+      action-group: group
+    back:
+      text: '&c返回领地管理'
+      action-group: back
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

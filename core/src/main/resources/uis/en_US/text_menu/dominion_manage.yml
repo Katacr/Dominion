@@ -1,0 +1,58 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Manage Dominion &8------------'
+  - '&7Dominion: &f{route.dominion.name}'
+  - '{size} {environment} {guest}'
+  - '{members} {groups} {copy}'
+  - '{tp} {rename} {color}'
+  - '{enter} {leave}'
+  - '{back}'
+Buttons:
+  size:
+    type: BUTTON
+    text: '&a[Resize]'
+    action-group: size
+  environment:
+    type: BUTTON
+    text: '&a[Environment]'
+    action-group: environment
+  guest:
+    type: BUTTON
+    text: '&a[Guest Flags]'
+    action-group: guest
+  members:
+    type: BUTTON
+    text: '&a[Members]'
+    action-group: members
+  groups:
+    type: BUTTON
+    text: '&a[Groups]'
+    action-group: groups
+  copy:
+    type: BUTTON
+    text: '&a[Copy Settings]'
+    action-group: copy
+  tp:
+    type: BUTTON
+    text: '&e[Set Teleport]'
+    action-group: set-tp
+  rename:
+    type: BUTTON
+    text: '&e[Rename]'
+    action-group: rename
+  color:
+    type: BUTTON
+    text: '&e[Map Color]'
+    action-group: map-color
+  enter:
+    type: BUTTON
+    text: '&e[Enter Message]'
+    action-group: enter-message
+  leave:
+    type: BUTTON
+    text: '&e[Leave Message]'
+    action-group: leave-message
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion List]'
+    action-group: back

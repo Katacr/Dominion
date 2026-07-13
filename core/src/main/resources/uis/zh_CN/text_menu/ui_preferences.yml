@@ -1,0 +1,24 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6界面类型 &8------------'
+  - '{tui} &7聊天栏可点击文本菜单。'
+  - '{cui} &7箱子物品栏菜单。'
+  - '{dui} &7原生 Dialog 对话框菜单。'
+  - '{back}'
+Buttons:
+  tui:
+    type: BUTTON
+    text: '&a[TUI]'
+    action-group: tui
+  cui:
+    type: BUTTON
+    text: '&a[CUI]'
+    action-group: cui
+  dui:
+    type: BUTTON
+    text: '&a[DUI]'
+    action-group: dui
+  back:
+    type: BUTTON
+    text: '&c[返回]'
+    action-group: back

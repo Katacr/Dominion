@@ -1,0 +1,31 @@
+schema-version: 1
+menu-id: template_flags
+
+route:
+  required:
+    - template.name
+
+data:
+  entries:
+    provider: flags.template
+
+action-groups:
+  toggle-template-flag:
+    actions:
+      - 'dominion: toggle-template-flag'
+
+  rename-template:
+    actions:
+      - 'dominion: rename-template-input'
+
+  previous-page:
+    actions:
+      - 'page: previous'
+
+  next-page:
+    actions:
+      - 'page: next'
+
+  back-template-list:
+    actions:
+      - 'dominion: back-template-list'

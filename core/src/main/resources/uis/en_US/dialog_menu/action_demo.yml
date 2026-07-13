@@ -1,0 +1,55 @@
+schema-version: 1
+Title: '&6Dominion Dialog Demo'
+Settings:
+  can_escape: true
+  pause: false
+  after_action: NONE
+Variables:
+  text:
+    intro: '&7This menu validates the first Spigot Dialog adapter.'
+    input-label: '&fMessage'
+Body:
+  icon:
+    type: item
+    material: GRASS_BLOCK
+    description: '&7Native item body rendered by the active platform adapter.'
+    width: 32
+    height: 32
+    show_overlays: true
+    show_tooltip: true
+  intro:
+    type: message
+    width: 320
+    text:
+      - '{text.intro}'
+      - '&8Callbacks use player-bound one-time tokens.'
+Inputs:
+  message:
+    type: input
+    text: '{text.input-label}'
+    default: 'Hello Dominion'
+    min_length: 1
+    max_length: 64
+    width: 280
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    submit:
+      text: '&aSend Input'
+      tooltip: '&7Send the entered text to chat'
+      actions:
+        - 'tell: &a{input.message}'
+    actionbar:
+      text: '&eAction Bar'
+      action-group: actionbar-demo
+    toast:
+      text: '&bToast'
+      action-group: toast-demo
+    back:
+      text: '&cLegacy Main Menu'
+      action-group: legacy-main-menu
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

@@ -49,6 +49,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://oss.sonatype.org/content/groups/public")
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://jitpack.io")
@@ -101,6 +102,8 @@ allprojects {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":dialog-paper"))
+    implementation(project(":dialog-spigot"))
     implementation(project(path = ":versions:v1_20_1", configuration = "reobf"))
     implementation(project(path = ":versions:v1_21", configuration = "reobf"))
     implementation(project(path = ":versions:v1_21_4", configuration = "reobf"))

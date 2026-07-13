@@ -1,0 +1,20 @@
+schema-version: 1
+menu-id: member_list
+route:
+  required: [dominion.name]
+data:
+  entries:
+    provider: members.by-dominion
+action-groups:
+  open-member-flags:
+    actions: ['dominion: open-member-flags']
+  remove-member:
+    actions: ['dominion: remove-member']
+  add-member:
+    actions: ['dominion: open-player-selection']
+  previous-page:
+    actions: ['page: previous']
+  next-page:
+    actions: ['page: next']
+  back-dominion-manage:
+    actions: ['dominion: back-members-dominion-manage']

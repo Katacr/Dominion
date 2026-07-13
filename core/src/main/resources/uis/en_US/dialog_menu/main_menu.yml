@@ -1,0 +1,66 @@
+schema-version: 1
+Title: '&6Dominion Main Menu'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 320
+    text: '&7Choose a dominion operation.'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    create:
+      text: '&aCreate Dominion'
+      permission: dominion.default
+      action-group: create
+      input-capture:
+        title: '&aCreate Dominion'
+        body: '&7Enter the name of the dominion to create around your current position.'
+        input:
+          key: dominion_name
+          type: input
+          text: '&fDominion Name'
+          min_length: 1
+          max_length: 64
+          pattern: '[^ .§&~,]+'
+        confirm:
+          text: '&aCreate'
+        deny:
+          text: '&cCancel'
+    dominions:
+      text: '&aMy Dominions'
+      action-group: dominions
+    titles:
+      text: '&aGroup Titles'
+      action-group: titles
+    templates:
+      text: '&aTemplates'
+      action-group: templates
+    migrate:
+      text: '&eResidence Migration'
+      action-group: migrate
+    all-dominions:
+      text: '&cAll Dominions'
+      permission: dominion.admin
+      action-group: all-dominions
+    reload-cache:
+      text: '&cReload Cache'
+      permission: dominion.admin
+      action-group: reload-cache
+    reload-config:
+      text: '&cReload Config'
+      permission: dominion.admin
+      action-group: reload-config
+    interface:
+      text: '&eInterface Type'
+      action-group: ui-preferences
+    language:
+      text: '&bLanguage'
+      action-group: language
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

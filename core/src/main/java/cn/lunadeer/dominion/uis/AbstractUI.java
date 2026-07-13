@@ -36,6 +36,13 @@ public abstract class AbstractUI {
 
     protected abstract void showCUI(Player player, String... args) throws Exception;
 
+    /**
+     * Reuses each migrated page's configured route builder for the native Dialog renderer.
+     */
+    protected void showDUI(Player player, String... args) throws Exception {
+        showTUI(player, args);
+    }
+
     protected abstract void showConsole(CommandSender sender, String... args) throws Exception;
 
     protected void displayByPreference(CommandSender sender, String... args) {
@@ -54,19 +61,15 @@ public abstract class AbstractUI {
                     showCUI(player, args);
                     return;
                 }
-                if (PlayerDTO.UI_TYPE.valueOf(Configuration.defaultUiType).equals(PlayerDTO.UI_TYPE.BY_PLAYER)) {
-                    if (playerDTO.getUiPreference().equals(PlayerDTO.UI_TYPE.CUI)) {
-                        showCUI(player, args);
-                    } else if (playerDTO.getUiPreference().equals(PlayerDTO.UI_TYPE.TUI)) {
-                        showTUI(player, args);
-                    }
+                PlayerDTO.UI_TYPE configuredType = PlayerDTO.UI_TYPE.valueOf(Configuration.defaultUiType);
+                PlayerDTO.UI_TYPE activeType = configuredType == PlayerDTO.UI_TYPE.BY_PLAYER
+                        ? playerDTO.getUiPreference() : configuredType;
+                if (activeType == PlayerDTO.UI_TYPE.CUI) {
+                    showCUI(player, args);
+                } else if (activeType == PlayerDTO.UI_TYPE.DUI) {
+                    showDUI(player, args);
                 } else {
-                    PlayerDTO.UI_TYPE type = PlayerDTO.UI_TYPE.valueOf(Configuration.defaultUiType);
-                    if (type.equals(PlayerDTO.UI_TYPE.CUI)) {
-                        showCUI(player, args);
-                    } else if (type.equals(PlayerDTO.UI_TYPE.TUI)) {
-                        showTUI(player, args);
-                    }
+                    showTUI(player, args);
                 }
             } else {
                 Notification.info(sender, "--------------------------------------------------");

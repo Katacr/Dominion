@@ -11,6 +11,7 @@ import cn.lunadeer.dominion.misc.CommandArguments;
 import cn.lunadeer.dominion.uis.AbstractUI;
 import cn.lunadeer.dominion.uis.AllDominion;
 import cn.lunadeer.dominion.uis.MainMenu;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.command.SecondaryCommand;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
@@ -109,6 +110,11 @@ public class DominionList extends AbstractUI {
     @Override
     protected void showTUI(Player player, String... args) throws Exception {
         int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("dominion_list")) {
+            ConfiguredTuiManager.getInstance().show(player, "dominion_list", page);
+            return;
+        }
         ListView view = ListView.create(10, button(player));
 
         view.title(TextUserInterface.dominionListTuiText.title);
@@ -224,6 +230,13 @@ public class DominionList extends AbstractUI {
 
     @Override
     protected void showCUI(Player player, String... args) {
+        int page = toIntegrity(args[0], 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("dominion_list")) {
+            ConfiguredTuiManager.getInstance().showCui(player, "dominion_list", page);
+            return;
+        }
+
         ChestListView view = ChestUserInterfaceManager.getInstance().getListViewOf(player);
         view.setTitle(ChestUserInterface.dominionListCui.title);
         view.applyListConfiguration(ChestUserInterface.dominionListCui.listConfiguration, toIntegrity(args[0]));

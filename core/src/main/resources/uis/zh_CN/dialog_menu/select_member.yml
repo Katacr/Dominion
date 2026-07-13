@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6添加权限组成员：{route.group.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7暂无未分组成员。'
+  layout: '&f{entry.name} {add}'
+  width: 400
+  buttons:
+    add:
+      text: '&a[添加]'
+      action-group: add-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回权限组管理'
+      action-group: back-group-manage
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

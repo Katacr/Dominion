@@ -1,0 +1,32 @@
+schema-version: 1
+Title: '&6Group Titles {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 12
+  empty: '&7No group titles are available.'
+  layout: '&e[{entry.state}] &f{entry.name} {toggle}'
+  width: 440
+  buttons:
+    toggle:
+      text: '&a[Toggle]'
+      action-group: toggle-title
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    previous:
+      text: '&aPrevious'
+      action-group: previous-page
+    next:
+      text: '&aNext'
+      action-group: next-page
+    back:
+      text: '&cBack to Main Menu'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

@@ -1,0 +1,53 @@
+schema-version: 1
+Title: '&0Group Titles'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    capability: group-title
+    hidden-when-disabled: true
+    Display:
+      material: NAME_TAG
+      name: '&e[{entry.state}] &f{entry.name}'
+      lore:
+        - '&7Dominion: {entry.dominion}'
+        - '&eClick to toggle title'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No group titles are available.'
+    Clicks:
+      left:
+        action-group: toggle-title
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Main Menu'
+    Clicks:
+      left:
+        action-group: back
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

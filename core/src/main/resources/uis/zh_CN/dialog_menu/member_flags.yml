@@ -1,0 +1,36 @@
+schema-version: 1
+Title: '&6成员权限：{route.member.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7当前没有可配置的成员权限。'
+  layout: '&e[{entry.state}] &f{entry.name}: &7{entry.description} {toggle-member-flag}'
+  width: 520
+  buttons:
+    toggle-member-flag:
+      text: '&a[切换]'
+      tooltip: '&7切换该成员权限'
+      action-group: toggle-member-flag
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    select-template:
+      text: '&a应用模板'
+      action-group: select-template
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回成员列表'
+      action-group: back-member-list
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

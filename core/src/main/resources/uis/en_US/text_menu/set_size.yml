@@ -1,0 +1,64 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Resize Dominion &8------------'
+  - '&7Dominion: &f{route.dominion.name}'
+  - '&7North: {north-expand} {north-contract}'
+  - '&7South: {south-expand} {south-contract}'
+  - '&7West: {west-expand} {west-contract}'
+  - '&7East: {east-expand} {east-contract}'
+  - '&7Up: {up-expand} {up-contract}'
+  - '&7Down: {down-expand} {down-contract}'
+  - '{back}'
+Buttons:
+  north-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: north-expand
+  north-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: north-contract
+  south-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: south-expand
+  south-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: south-contract
+  west-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: west-expand
+  west-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: west-contract
+  east-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: east-expand
+  east-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: east-contract
+  up-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: up-expand
+  up-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: up-contract
+  down-expand:
+    type: BUTTON
+    text: '&a[Expand]'
+    action-group: down-expand
+  down-contract:
+    type: BUTTON
+    text: '&c[Contract]'
+    action-group: down-contract
+  back:
+    type: BUTTON
+    text: '&c[Back to Dominion Management]'
+    action-group: back

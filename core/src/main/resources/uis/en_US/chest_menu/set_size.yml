@@ -1,0 +1,105 @@
+schema-version: 1
+Title: '&0Resize: {route.dominion.name}'
+Layout:
+  - '#########'
+  - '#Nn#Ss###'
+  - '#Ww#Ee###'
+  - '#Uu#Dd###'
+  - '#########'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'N':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand North'
+    Clicks:
+      left:
+        action-group: north-expand
+  'n':
+    Display:
+      material: RED_DYE
+      name: '&cContract North'
+    Clicks:
+      left:
+        action-group: north-contract
+  'S':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand South'
+    Clicks:
+      left:
+        action-group: south-expand
+  's':
+    Display:
+      material: RED_DYE
+      name: '&cContract South'
+    Clicks:
+      left:
+        action-group: south-contract
+  'W':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand West'
+    Clicks:
+      left:
+        action-group: west-expand
+  'w':
+    Display:
+      material: RED_DYE
+      name: '&cContract West'
+    Clicks:
+      left:
+        action-group: west-contract
+  'E':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand East'
+    Clicks:
+      left:
+        action-group: east-expand
+  'e':
+    Display:
+      material: RED_DYE
+      name: '&cContract East'
+    Clicks:
+      left:
+        action-group: east-contract
+  'U':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand Up'
+    Clicks:
+      left:
+        action-group: up-expand
+  'u':
+    Display:
+      material: RED_DYE
+      name: '&cContract Up'
+    Clicks:
+      left:
+        action-group: up-contract
+  'D':
+    Display:
+      material: LIME_DYE
+      name: '&aExpand Down'
+    Clicks:
+      left:
+        action-group: down-expand
+  'd':
+    Display:
+      material: RED_DYE
+      name: '&cContract Down'
+    Clicks:
+      left:
+        action-group: down-contract
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Dominion Management'
+    Clicks:
+      left:
+        action-group: back

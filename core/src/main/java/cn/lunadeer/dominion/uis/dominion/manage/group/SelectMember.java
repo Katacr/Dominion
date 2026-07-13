@@ -7,6 +7,8 @@ import cn.lunadeer.dominion.commands.GroupCommand;
 import cn.lunadeer.dominion.configuration.uis.ChestUserInterface;
 import cn.lunadeer.dominion.configuration.uis.TextUserInterface;
 import cn.lunadeer.dominion.uis.AbstractUI;
+import cn.lunadeer.dominion.uis.menu.route.MenuRoute;
+import cn.lunadeer.dominion.uis.menu.tui.ConfiguredTuiManager;
 import cn.lunadeer.dominion.utils.configuration.ConfigurationPart;
 import cn.lunadeer.dominion.utils.scui.ChestButton;
 import cn.lunadeer.dominion.utils.scui.ChestListView;
@@ -24,6 +26,7 @@ import org.bukkit.event.inventory.ClickType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static cn.lunadeer.dominion.Dominion.defaultPermission;
 import static cn.lunadeer.dominion.doos.MemberDOO.selectByDominionId;
@@ -61,9 +64,19 @@ public class SelectMember extends AbstractUI {
         String backPageStr = args[2];
         String pageStr = args[3];
 
+        int page = toIntegrity(pageStr);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasMenu("select_member")) {
+            ConfiguredTuiManager.getInstance().show(player, new MenuRoute(
+                    "select_member", page, Map.of(
+                    "dominion.name", dominionName,
+                    "group.name", groupName
+            )));
+            return;
+        }
+
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);
-        int page = toIntegrity(pageStr);
 
         ListView view = ListView.create(10, button(player, dominionName, groupName, backPageStr));
         view.title(TextUserInterface.selectMemberTuiText.title);
@@ -137,6 +150,13 @@ public class SelectMember extends AbstractUI {
         String dominionName = args[0];
         String groupName = args[1];
         String backPageStr = args[2];
+        int page = toIntegrity(backPageStr, 1);
+        if (ConfiguredTuiManager.isInitialized()
+                && ConfiguredTuiManager.getInstance().hasChestMenu("select_member")) {
+            ConfiguredTuiManager.getInstance().showCui(player, new MenuRoute(
+                    "select_member", page, Map.of("dominion.name", dominionName, "group.name", groupName)));
+            return;
+        }
 
         DominionDTO dominion = toDominionDTO(dominionName);
         assertDominionAdmin(player, dominion);

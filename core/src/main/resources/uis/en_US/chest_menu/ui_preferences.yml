@@ -1,0 +1,42 @@
+schema-version: 1
+Title: '&0Interface Type'
+Layout:
+  - '#########'
+  - '#t##c##d#'
+  - '####b####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  't':
+    Display:
+      material: OAK_SIGN
+      name: '&aText UI'
+      lore: ['&7Use clickable text in chat.']
+    Clicks:
+      left:
+        action-group: tui
+  'c':
+    Display:
+      material: CHEST
+      name: '&aChest UI'
+      lore: ['&7Use chest inventory menus.']
+    Clicks:
+      left:
+        action-group: cui
+  'd':
+    Display:
+      material: BOOK
+      name: '&aDialog UI'
+      lore: ['&7Use native Dialog menus.']
+    Clicks:
+      left:
+        action-group: dui
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack'
+    Clicks:
+      left:
+        action-group: back

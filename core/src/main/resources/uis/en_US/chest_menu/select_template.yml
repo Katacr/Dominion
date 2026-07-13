@@ -1,0 +1,50 @@
+schema-version: 1
+Title: '&0Select Template: {route.member.name}'
+Layout:
+  - '#########'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#eeeeeee#'
+  - '#p##b##n#'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'e':
+    source: entries
+    Display:
+      material: WRITABLE_BOOK
+      name: '&f{entry.name}'
+      lore:
+        - '&eClick to apply template'
+    Empty-Display:
+      material: BARRIER
+      name: '&7No templates are available.'
+    Clicks:
+      left:
+        action-group: apply-template
+  'p':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aPrevious Page'
+    Clicks:
+      left:
+        action-group: previous-page
+  'b':
+    Display:
+      material: OAK_DOOR
+      name: '&cBack to Member Flags'
+    Clicks:
+      left:
+        action-group: back-member-flags
+  'n':
+    hidden-when-disabled: true
+    Display:
+      material: ARROW
+      name: '&aNext Page'
+    Clicks:
+      left:
+        action-group: next-page

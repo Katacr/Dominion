@@ -2,6 +2,8 @@ package cn.lunadeer.dominion.utils;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.ChatColor;
 
 import java.util.Map;
@@ -38,14 +40,38 @@ public class LegacyToMiniMessage {
     );
 
     public static Component parse(String legacyText) {
+        initialize();
+        return miniMessage.deserialize(convertLegacyCodes(legacyText));
+    }
+
+    /**
+     * Parses configured formatting while inserting variables as literal unparsed text.
+     */
+    public static Component parseTemplate(String legacyText, Map<String, String> variables) {
+        initialize();
+        String template = legacyText;
+        TagResolver.Builder resolvers = TagResolver.builder();
+        int index = 0;
+        for (Map.Entry<String, String> entry : variables.entrySet()) {
+            String tag = "dominion_var_" + index++;
+            template = template.replace("{" + entry.getKey() + "}", "<" + tag + ">");
+            resolvers.resolver(Placeholder.unparsed(tag, entry.getValue()));
+        }
+        return miniMessage.deserialize(convertLegacyCodes(template), resolvers.build());
+    }
+
+    private static void initialize() {
         if (miniMessage == null) {
             miniMessage = MiniMessage.miniMessage();
         }
+    }
+
+    private static String convertLegacyCodes(String legacyText) {
         String miniMessageText = ChatColor.translateAlternateColorCodes('&', legacyText);
         for (Map.Entry<String, String> entry : legacyToMiniMessageMap.entrySet()) {
             miniMessageText = miniMessageText.replace(entry.getKey(), entry.getValue());
         }
-        return miniMessage.deserialize(miniMessageText);
+        return miniMessageText;
     }
 
 }

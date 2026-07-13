@@ -1,0 +1,40 @@
+schema-version: 1
+Title: '&6成员：{route.dominion.name} {page.current}/{page.total}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Dynamic:
+  source: entries
+  page-size: 10
+  empty: '&7该领地暂无成员。'
+  layout: '&f{entry.name} {entry.tag} {flags} {remove}'
+  width: 480
+  buttons:
+    flags:
+      text: '&a[权限]'
+      tooltip: '&7管理该成员权限'
+      action-group: open-member-flags
+    remove:
+      text: '&c[移除]'
+      tooltip: '&7移除该领地成员'
+      action-group: remove-member
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    add:
+      text: '&a添加成员'
+      action-group: add-member
+    previous:
+      text: '&a上一页'
+      action-group: previous-page
+    next:
+      text: '&a下一页'
+      action-group: next-page
+    back:
+      text: '&c返回领地管理'
+      action-group: back-dominion-manage
+  exit:
+    text: '&8关闭'
+    actions:
+      - 'close'

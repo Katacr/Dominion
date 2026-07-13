@@ -1,0 +1,32 @@
+schema-version: 1
+menu-id: member_flags
+
+route:
+  required:
+    - dominion.name
+    - member.name
+
+data:
+  entries:
+    provider: flags.member
+
+action-groups:
+  toggle-member-flag:
+    actions:
+      - 'dominion: toggle-member-flag'
+
+  select-template:
+    actions:
+      - 'dominion: open-member-template-list'
+
+  previous-page:
+    actions:
+      - 'page: previous'
+
+  next-page:
+    actions:
+      - 'page: next'
+
+  back-member-list:
+    actions:
+      - 'dominion: back-member-list'

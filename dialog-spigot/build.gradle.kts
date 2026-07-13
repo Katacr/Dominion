@@ -1,0 +1,17 @@
+plugins {
+    id("java")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    compileOnly(project(":core"))
+    compileOnly(project(":api"))
+    compileOnly("org.spigotmc:spigot-api:1.21.6-R0.1-SNAPSHOT")
+}

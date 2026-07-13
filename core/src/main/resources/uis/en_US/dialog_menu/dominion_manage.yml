@@ -1,0 +1,109 @@
+schema-version: 1
+Title: '&6Manage: {route.dominion.name}'
+Settings:
+  can_escape: true
+  after_action: NONE
+Body:
+  summary:
+    type: message
+    width: 360
+    text: '&7Configure size, privileges, members, and display settings.'
+Bottom:
+  type: multi
+  columns: 2
+  buttons:
+    size:
+      text: '&aResize'
+      action-group: size
+    environment:
+      text: '&aEnvironment Flags'
+      action-group: environment
+    guest:
+      text: '&aGuest Flags'
+      action-group: guest
+    members:
+      text: '&aMembers'
+      action-group: members
+    groups:
+      text: '&aGroups'
+      action-group: groups
+    set-tp:
+      text: '&aSet Teleport Point'
+      action-group: set-tp
+    rename:
+      text: '&eRename Dominion'
+      action-group: rename
+      input-capture:
+        title: '&eRename Dominion'
+        body: '&7Enter a new name for &f{route.dominion.name}&7.'
+        input:
+          key: dominion_new_name
+          type: input
+          text: '&fNew Dominion Name'
+          default: '{route.dominion.name}'
+          min_length: 1
+          max_length: 64
+          pattern: '[^ .§&~,]+'
+        confirm:
+          text: '&aRename'
+        deny:
+          text: '&cCancel'
+    enter-message:
+      text: '&eEnter Message'
+      action-group: enter-message
+      input-capture:
+        title: '&eEdit Enter Message'
+        body: '&7Enter the message shown when a player enters this dominion.'
+        input:
+          key: dominion_enter_message
+          type: input
+          text: '&fEnter Message'
+          min_length: 0
+          max_length: 256
+        confirm:
+          text: '&aSave'
+        deny:
+          text: '&cCancel'
+    leave-message:
+      text: '&eLeave Message'
+      action-group: leave-message
+      input-capture:
+        title: '&eEdit Leave Message'
+        body: '&7Enter the message shown when a player leaves this dominion.'
+        input:
+          key: dominion_leave_message
+          type: input
+          text: '&fLeave Message'
+          min_length: 0
+          max_length: 256
+        confirm:
+          text: '&aSave'
+        deny:
+          text: '&cCancel'
+    map-color:
+      text: '&eMap Color'
+      action-group: map-color
+      input-capture:
+        title: '&eSet Map Color'
+        body: '&7Enter a hexadecimal color in the form &f0xRRGGBB&7.'
+        input:
+          key: dominion_map_color
+          type: input
+          text: '&fMap Color'
+          min_length: 8
+          max_length: 8
+          pattern: '0x[0-9A-Fa-f]{6}'
+        confirm:
+          text: '&aSave'
+        deny:
+          text: '&cCancel'
+    copy:
+      text: '&bCopy Settings'
+      action-group: copy
+    back:
+      text: '&cBack to Dominions'
+      action-group: back
+  exit:
+    text: '&8Close'
+    actions:
+      - 'close'

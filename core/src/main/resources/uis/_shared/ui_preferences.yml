@@ -1,0 +1,11 @@
+schema-version: 1
+menu-id: ui_preferences
+action-groups:
+  tui:
+    actions: ['dominion: switch-to-tui']
+  cui:
+    actions: ['dominion: switch-to-cui']
+  dui:
+    actions: ['dominion: switch-to-dui']
+  back:
+    actions: ['open: main_menu']

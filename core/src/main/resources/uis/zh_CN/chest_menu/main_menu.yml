@@ -1,0 +1,105 @@
+schema-version: 1
+Title: '&0领地主菜单'
+Layout:
+  - '#########'
+  - '#c d t p#'
+  - '#m a r f#'
+  - '#   l   #'
+  - '#       #'
+  - '####i####'
+Buttons:
+  '#':
+    Display:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+  'c':
+    permission: dominion.default
+    Display:
+      material: GRASS_BLOCK
+      name: '&a创建领地'
+      lore: ['&7创建一个新领地。']
+    Clicks:
+      left:
+        action-group: create
+  'd':
+    Display:
+      material: FILLED_MAP
+      name: '&a我的领地'
+      lore: ['&7查看你可以管理的领地。']
+    Clicks:
+      left:
+        action-group: dominions
+  't':
+    capability: group-title
+    hidden-when-disabled: true
+    Display:
+      material: NAME_TAG
+      name: '&a权限组称号'
+      lore: ['&7选择一个可用的权限组称号。']
+    Clicks:
+      left:
+        action-group: titles
+  'p':
+    Display:
+      material: WRITABLE_BOOK
+      name: '&a权限模板'
+      lore: ['&7管理可复用的权限模板。']
+    Clicks:
+      left:
+        action-group: templates
+  'm':
+    capability: residence-migration
+    hidden-when-disabled: true
+    Display:
+      material: MINECART
+      name: '&aResidence 迁移'
+      lore: ['&7将 Residence 数据迁移到 Dominion。']
+    Clicks:
+      left:
+        action-group: migrate
+  'a':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: COMPASS
+      name: '&c全部领地'
+      lore: ['&7打开管理员领地列表。']
+    Clicks:
+      left:
+        action-group: all-dominions
+  'r':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: CLOCK
+      name: '&c重载缓存'
+      lore: ['&7重新加载 Dominion 缓存数据。']
+    Clicks:
+      left:
+        action-group: reload-cache
+  'f':
+    permission: dominion.admin
+    hidden-when-disabled: true
+    Display:
+      material: REPEATER
+      name: '&c重载配置'
+      lore: ['&7重新加载 Dominion 配置。']
+    Clicks:
+      left:
+        action-group: reload-config
+  'i':
+    Display:
+      material: COMPARATOR
+      name: '&e界面类型'
+      lore: ['&7选择文本、箱子或对话框菜单。']
+    Clicks:
+      left:
+        action-group: ui-preferences
+  'l':
+    Display:
+      material: PAPER
+      name: '&b语言'
+      lore: ['&7选择菜单显示语言。']
+    Clicks:
+      left:
+        action-group: language

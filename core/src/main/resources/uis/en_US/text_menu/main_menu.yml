@@ -1,0 +1,63 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6Dominion Menu &8------------'
+  - '{create} &7Create a new dominion.'
+  - '{dominions} &7View dominions you can manage.'
+  - '{titles} &7Select a group title.'
+  - '{templates} &7Manage privilege templates.'
+  - '{migrate} &7Migrate Residence data.'
+  - '{documentation} &7Open player documentation.'
+  - '{all} {cache} {config}'
+  - '{language} {interface}'
+Buttons:
+  create:
+    type: BUTTON
+    text: '&a[Create]'
+    action-group: create
+    permission: dominion.default
+  dominions:
+    type: BUTTON
+    text: '&a[Dominions]'
+    action-group: dominions
+  titles:
+    type: BUTTON
+    text: '&a[Titles]'
+    action-group: titles
+  templates:
+    type: BUTTON
+    text: '&a[Templates]'
+    action-group: templates
+  migrate:
+    type: BUTTON
+    text: '&a[Migrate]'
+    action-group: migrate
+  documentation:
+    type: URL
+    text: '&b[Documentation]'
+    url: 'https://dominion.lunadeer.cn/notes/doc/player/'
+  all:
+    type: BUTTON
+    text: '&c[All Dominions]'
+    action-group: all-dominions
+    permission: dominion.admin
+    hidden-when-disabled: true
+  cache:
+    type: BUTTON
+    text: '&c[Reload Cache]'
+    action-group: reload-cache
+    permission: dominion.admin
+    hidden-when-disabled: true
+  config:
+    type: BUTTON
+    text: '&c[Reload Config]'
+    action-group: reload-config
+    permission: dominion.admin
+    hidden-when-disabled: true
+  interface:
+    type: BUTTON
+    text: '&e[Interface Type]'
+    action-group: ui-preferences
+  language:
+    type: BUTTON
+    text: '&b[Language]'
+    action-group: language

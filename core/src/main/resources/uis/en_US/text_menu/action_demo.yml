@@ -1,0 +1,84 @@
+schema-version: 1
+
+Variables:
+  text:
+    tell-demo: '&aThe configured tell action is working.'
+    actionbar-demo: '&eThe configured action bar is working.'
+    title: '&6Dominion'
+    subtitle: '&fConfigured TUI action'
+    toast: '&aDominion TUI'
+    hover-prefix: '&7Generated clickable text:'
+    hover-button: '&a[Click]'
+    hover-tip: '&eExecute another shared operation'
+    nested-tell: '&bThe clickable text callback is working.'
+    ordered-step-1: '&7Step 1: tell'
+    ordered-step-2: '&eStep 2: action bar'
+    ordered-step-3: '&aStep 3'
+    ordered-subtitle: '&fActions execute in order'
+
+Layout:
+  - '&8------------ &6Dominion Action Demo &8------------'
+  - '&7This isolated menu validates the first configured TUI slice.'
+  - ''
+  - '{tell} &7Send a chat message'
+  - '{actionbar} &7Send an action bar'
+  - '{title} &7Show a title'
+  - '{toast} &7Show a toast'
+  - '{hovertext} &7Generate clickable text'
+  - '{ordered} &7Run an ordered action sequence'
+  - ''
+  - '{copy} {documentation} {back}'
+
+Buttons:
+  tell:
+    type: BUTTON
+    text: '&a[Tell]'
+    hover: '&7Execute inline button actions'
+    actions:
+      - 'tell: {text.tell-demo}'
+
+  actionbar:
+    type: BUTTON
+    text: '&e[Action Bar]'
+    action-group: actionbar-demo
+
+  title:
+    type: BUTTON
+    text: '&6[Title]'
+    actions:
+      - 'title: title={text.title};subtitle={text.subtitle}'
+
+  toast:
+    type: BUTTON
+    text: '&b[Toast]'
+    action-group: toast-demo
+
+  hovertext:
+    type: BUTTON
+    text: '&d[Clickable Text]'
+    action-group: hovertext-demo
+
+  ordered:
+    type: BUTTON
+    text: '&2[Ordered Actions]'
+    actions:
+      - 'tell: {text.ordered-step-1}'
+      - 'actionbar: {text.ordered-step-2}'
+      - 'title: title={text.ordered-step-3};subtitle={text.ordered-subtitle}'
+
+  copy:
+    type: COPY
+    text: '&f[Copy Menu ID]'
+    hover: '&7Copy action_demo to the clipboard'
+    copy: 'action_demo'
+
+  documentation:
+    type: URL
+    text: '&9[Documentation]'
+    hover: '&7Open the Dominion documentation'
+    url: 'https://dominion.lunadeer.cn/'
+
+  back:
+    type: BUTTON
+    text: '&c[Legacy Main Menu]'
+    action-group: legacy-main-menu

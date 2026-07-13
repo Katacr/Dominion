@@ -1,0 +1,41 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6权限组 &8------------'
+  - '&7领地：&f{route.dominion.name} {create}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7该领地暂无权限组。'
+    Layout: ['&8- {delete} {manage} &f{entry.name} &7({entry.members} 人)']
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[删除]'
+        action-group: delete-group
+      manage:
+        type: BUTTON
+        text: '&a[管理]'
+        action-group: open-group
+  create:
+    type: BUTTON
+    text: '&a[创建权限组]'
+    action-group: create-group
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回领地管理]'
+    action-group: back-dominion-manage

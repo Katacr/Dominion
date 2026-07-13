@@ -1,0 +1,46 @@
+schema-version: 1
+Layout:
+  - '&8------ &6Dominions of {route.player.name} &8------'
+  - '{entries}'
+  - '{previous} &7Page &f{page.current}&7/&f{page.total} {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7This player owns no dominions.'
+    Layout: ['{delete} {manage} {teleport} &f{entry.prefix}{entry.name}']
+    Buttons:
+      delete:
+        type: BUTTON
+        text: '&c[Delete]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: delete-dominion
+      manage:
+        type: BUTTON
+        text: '&a[Manage]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: manage-dominion
+      teleport:
+        type: BUTTON
+        text: '&b[TP]'
+        disabled-text: ''
+        hidden-when-disabled: true
+        action-group: teleport-dominion
+  previous:
+    type: BUTTON
+    text: '&a[Previous]'
+    disabled-text: '&8[Previous]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[Next]'
+    disabled-text: '&8[Next]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[Back to Main Menu]'
+    action-group: back-main

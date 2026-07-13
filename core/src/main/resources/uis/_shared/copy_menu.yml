@@ -1,0 +1,15 @@
+schema-version: 1
+menu-id: copy_menu
+route:
+  required: [dominion.name]
+action-groups:
+  environment:
+    actions: ['dominion: open-copy-environment']
+  guest:
+    actions: ['dominion: open-copy-guest']
+  member:
+    actions: ['dominion: open-copy-member']
+  group:
+    actions: ['dominion: open-copy-group']
+  back:
+    actions: ['dominion: back-members-dominion-manage']

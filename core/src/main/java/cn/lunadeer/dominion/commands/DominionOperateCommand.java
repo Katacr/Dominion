@@ -162,7 +162,8 @@ public class DominionOperateCommand {
     }.needPermission(defaultPermission).register();
 
     public static SecondaryCommand switchUi = new SecondaryCommand("switch_ui", List.of(
-            new Option(List.of(PlayerDTO.UI_TYPE.TUI.name(), PlayerDTO.UI_TYPE.CUI.name()), "")
+            new Option(List.of(PlayerDTO.UI_TYPE.TUI.name(), PlayerDTO.UI_TYPE.CUI.name(),
+                    PlayerDTO.UI_TYPE.DUI.name()), "")
     ),
             Language.dominionOperateCommandText.switchUiDescription
     ) {
@@ -177,11 +178,15 @@ public class DominionOperateCommand {
                 PlayerDTO.UI_TYPE uiType;
                 String uiTypeStr = getArgumentValue(0);
                 if (uiTypeStr.isEmpty()) {
-                    // Toggle UI type
-                    uiType = playerDTO.getUiPreference() == PlayerDTO.UI_TYPE.TUI ? PlayerDTO.UI_TYPE.CUI : PlayerDTO.UI_TYPE.TUI;
-                } else if (!Arrays.stream(PlayerDTO.UI_TYPE.values()).map(Enum::name).toList().contains(uiTypeStr)) {
+                    uiType = switch (playerDTO.getUiPreference()) {
+                        case TUI -> PlayerDTO.UI_TYPE.CUI;
+                        case CUI -> PlayerDTO.UI_TYPE.DUI;
+                        case DUI, BY_PLAYER -> PlayerDTO.UI_TYPE.TUI;
+                    };
+                } else if (!List.of(PlayerDTO.UI_TYPE.TUI.name(), PlayerDTO.UI_TYPE.CUI.name(),
+                        PlayerDTO.UI_TYPE.DUI.name()).contains(uiTypeStr)) {
                     throw new DominionException("Invalid UI type: " + uiTypeStr + ". Valid types are: " +
-                            Arrays.stream(PlayerDTO.UI_TYPE.values()).map(Enum::name).toList());
+                            List.of(PlayerDTO.UI_TYPE.TUI, PlayerDTO.UI_TYPE.CUI, PlayerDTO.UI_TYPE.DUI));
                 } else {
                     // Set UI type directly
                     uiType = PlayerDTO.UI_TYPE.valueOf(uiTypeStr);

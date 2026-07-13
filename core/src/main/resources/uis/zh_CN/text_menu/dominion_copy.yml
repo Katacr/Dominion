@@ -1,0 +1,33 @@
+schema-version: 1
+Layout:
+  - '&8------------ &6选择复制来源 &8------------'
+  - '&7目标：&f{route.dominion.name} &8| &7类型：&f{route.copy.type}'
+  - '{entries}'
+  - '{previous} &7第 &f{page.current}&7/&f{page.total} &7页 {next}'
+  - '{back}'
+Buttons:
+  entries:
+    type: LIST
+    source: entries
+    rows: 10
+    empty: '&7没有其他可用的自有领地。'
+    Layout: ['&8- {copy} &f{entry.name}']
+    Buttons:
+      copy:
+        type: BUTTON
+        text: '&a[从此复制]'
+        action-group: copy
+  previous:
+    type: BUTTON
+    text: '&a[上一页]'
+    disabled-text: '&8[上一页]'
+    action-group: previous-page
+  next:
+    type: BUTTON
+    text: '&a[下一页]'
+    disabled-text: '&8[下一页]'
+    action-group: next-page
+  back:
+    type: BUTTON
+    text: '&c[返回复制类型]'
+    action-group: back
