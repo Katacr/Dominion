@@ -1,9 +1,11 @@
 schema-version: 1
 
+# Only bundled locales belong here. Additional locale directories are discovered at runtime.
 locales:
   - en_US
   - zh_CN
 
+# action_demo is an administrator diagnostic menu and is not part of normal player navigation.
 text-menus:
   - action_demo
   - template_list
@@ -57,6 +59,7 @@ chest-menus:
   - all_dominions_of_player
   - migrate_list
 
+# action_demo also exercises platform-specific Dialog feedback and Item Body rendering.
 dialog-menus:
   - action_demo
   - main_menu
