@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -106,12 +107,30 @@ public class DominionNode {
      * @return the DominionNode that contains the location, or null if not found
      */
     public static DominionNode getDominionNodeByLocation(@NotNull CopyOnWriteArrayList<DominionNode> nodes, @NotNull Location loc) {
+        return getDominionNodeByLocation(nodes, loc.getWorld().getUID(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+    }
+
+    /**
+     * Gets the DominionNode that contains the specified block coordinate.
+     *
+     * @param nodes the list of DominionNodes to search
+     * @param world the world UUID to check
+     * @param x     the block x-coordinate
+     * @param y     the block y-coordinate
+     * @param z     the block z-coordinate
+     * @return the DominionNode that contains the block, or null if not found
+     */
+    public static DominionNode getDominionNodeByLocation(@NotNull CopyOnWriteArrayList<DominionNode> nodes,
+                                                         @NotNull UUID world,
+                                                         int x,
+                                                         int y,
+                                                         int z) {
         for (DominionNode node : nodes) {
-            if (isInDominion(node.getDominion(), loc)) {
+            if (isInDominion(node.getDominion(), world, x, y, z)) {
                 if (node.children.isEmpty()) {
                     return node;
                 } else {
-                    DominionNode childDominion = getDominionNodeByLocation(node.children, loc);
+                    DominionNode childDominion = getDominionNodeByLocation(node.children, world, x, y, z);
                     return Objects.requireNonNullElse(childDominion, node);
                 }
             }

@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static cn.lunadeer.dominion.cache.DominionNode.getDominionNodeByLocation;
 
@@ -28,6 +29,8 @@ public class DominionNodeSectored {
      */
 
     private volatile Snapshot snapshot = Snapshot.empty();
+    private static final int NO_DOMINION_ID = Integer.MIN_VALUE;
+    private static final int LOCATION_CACHE_MAX_SIZE = 65536;
 
     /**
      * @param sectorA x >= originX, z >= originZ
@@ -38,14 +41,21 @@ public class DominionNodeSectored {
     private record Snapshot(ConcurrentHashMap<UUID, CopyOnWriteArrayList<DominionNode>> sectorA,
                             ConcurrentHashMap<UUID, CopyOnWriteArrayList<DominionNode>> sectorB,
                             ConcurrentHashMap<UUID, CopyOnWriteArrayList<DominionNode>> sectorC,
-                            ConcurrentHashMap<UUID, CopyOnWriteArrayList<DominionNode>> sectorD, int originX,
+                            ConcurrentHashMap<UUID, CopyOnWriteArrayList<DominionNode>> sectorD,
+                            ConcurrentHashMap<UUID, ConcurrentHashMap<BlockKey, Integer>> locationCache,
+                            AtomicInteger locationCacheSize,
+                            int originX,
                             int originZ) {
 
         private static Snapshot empty() {
-                return new Snapshot(new ConcurrentHashMap<>(), new ConcurrentHashMap<>(),
-                        new ConcurrentHashMap<>(), new ConcurrentHashMap<>(), 0, 0);
-            }
+            return new Snapshot(new ConcurrentHashMap<>(), new ConcurrentHashMap<>(),
+                    new ConcurrentHashMap<>(), new ConcurrentHashMap<>(), new ConcurrentHashMap<>(),
+                    new AtomicInteger(), 0, 0);
         }
+    }
+
+    private record BlockKey(int x, int y, int z) {
+    }
 
     /**
      * Gets the DominionDTO for a given location.
@@ -54,12 +64,49 @@ public class DominionNodeSectored {
      * @return the DominionDTO if found, otherwise null
      */
     public DominionDTO getDominionByLocation(@NotNull Location loc) {
+        return getDominionByLocation(loc.getWorld(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+    }
+
+    /**
+     * Gets the DominionDTO for a given block coordinate.
+     *
+     * @param world the world to check
+     * @param x     the block x-coordinate
+     * @param y     the block y-coordinate
+     * @param z     the block z-coordinate
+     * @return the DominionDTO if found, otherwise null
+     */
+    public DominionDTO getDominionByLocation(@NotNull World world, int x, int y, int z) {
+        return getDominionByLocation(world.getUID(), x, y, z);
+    }
+
+    /**
+     * Gets the DominionDTO for a given block coordinate.
+     *
+     * @param world the world UUID to check
+     * @param x     the block x-coordinate
+     * @param y     the block y-coordinate
+     * @param z     the block z-coordinate
+     * @return the DominionDTO if found, otherwise null
+     */
+    public DominionDTO getDominionByLocation(@NotNull UUID world, int x, int y, int z) {
         try (AutoTimer ignored = new AutoTimer(Configuration.timer)) {
-            CopyOnWriteArrayList<DominionNode> nodes = getNodes(loc);
-            if (nodes == null) return null;
-            if (nodes.isEmpty()) return null;
-            DominionNode dominionNode = getDominionNodeByLocation(nodes, loc);
-            return dominionNode == null ? null : dominionNode.getDominion();
+            Snapshot current = snapshot;
+            BlockKey blockKey = new BlockKey(x, y, z);
+            Integer cachedDominionId = getCachedDominionId(current, world, blockKey);
+            if (cachedDominionId != null) {
+                return cachedDominionId == NO_DOMINION_ID ? null : CacheManager.instance.getDominion(cachedDominionId);
+            }
+
+            CopyOnWriteArrayList<DominionNode> nodes = getNodes(current, world, x, z);
+            if (nodes == null || nodes.isEmpty()) {
+                cacheDominionId(current, world, blockKey, NO_DOMINION_ID);
+                return null;
+            }
+            DominionNode dominionNode = getDominionNodeByLocation(nodes, world, x, y, z);
+            int dominionId = dominionNode == null ? NO_DOMINION_ID : dominionNode.getDominionId();
+            cacheDominionId(current, world, blockKey, dominionId);
+            return dominionId == NO_DOMINION_ID ? null : CacheManager.instance.getDominion(dominionId);
         }
     }
 
@@ -70,7 +117,7 @@ public class DominionNodeSectored {
      * @return the list of DominionNodes
      */
     public CopyOnWriteArrayList<DominionNode> getNodes(@NotNull Location loc) {
-        return getNodes(loc.getWorld().getUID(), loc.getBlockX(), loc.getBlockZ());
+        return getNodes(loc.getWorld(), loc.getBlockX(), loc.getBlockZ());
     }
 
     /**
@@ -94,8 +141,10 @@ public class DominionNodeSectored {
      * @return the list of DominionNodes
      */
     public CopyOnWriteArrayList<DominionNode> getNodes(UUID world, int x, int z) {
-        Snapshot current = snapshot;
+        return getNodes(snapshot, world, x, z);
+    }
 
+    private CopyOnWriteArrayList<DominionNode> getNodes(Snapshot current, UUID world, int x, int z) {
         if (x >= current.originX && z >= current.originZ) {
             return current.sectorA.get(world);
         }
@@ -106,6 +155,30 @@ public class DominionNodeSectored {
             return current.sectorC.get(world);
         }
         return current.sectorD.get(world);
+    }
+
+    private Integer getCachedDominionId(Snapshot current, UUID world, BlockKey blockKey) {
+        ConcurrentHashMap<BlockKey, Integer> worldCache = current.locationCache.get(world);
+        return worldCache == null ? null : worldCache.get(blockKey);
+    }
+
+    private void cacheDominionId(Snapshot current, UUID world, BlockKey blockKey, int dominionId) {
+        if (current.locationCacheSize.get() >= LOCATION_CACHE_MAX_SIZE) {
+            current.locationCache.clear();
+            current.locationCacheSize.set(0);
+        }
+
+        ConcurrentHashMap<BlockKey, Integer> worldCache = current.locationCache.computeIfAbsent(world, ignored -> new ConcurrentHashMap<>());
+        Integer previous = worldCache.putIfAbsent(blockKey, dominionId);
+        if (previous == null) {
+            current.locationCacheSize.incrementAndGet();
+        }
+    }
+
+    public void clearLocationCache() {
+        Snapshot current = snapshot;
+        current.locationCache.clear();
+        current.locationCacheSize.set(0);
     }
 
     /**
@@ -147,7 +220,8 @@ public class DominionNodeSectored {
                 });
 
                 // Atomically publish a new immutable snapshot
-                snapshot = new Snapshot(tempSectorA, tempSectorB, tempSectorC, tempSectorD, tempOriginX, tempOriginZ);
+                snapshot = new Snapshot(tempSectorA, tempSectorB, tempSectorC, tempSectorD,
+                        new ConcurrentHashMap<>(), new AtomicInteger(), tempOriginX, tempOriginZ);
             }
         }, ForkJoinPool.commonPool());
     }

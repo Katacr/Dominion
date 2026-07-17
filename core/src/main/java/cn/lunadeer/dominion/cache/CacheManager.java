@@ -22,6 +22,7 @@ import cn.lunadeer.dominion.utils.Notification;
 import cn.lunadeer.dominion.utils.XLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -393,6 +394,19 @@ public class CacheManager {
      */
     public @Nullable DominionDTO getDominion(Location location) {
         return thisServerCache.getDominionCache().getDominion(location);
+    }
+
+    /**
+     * Retrieves a DominionDTO by block coordinates from this server's cache.
+     *
+     * @param world the world to retrieve the dominion for
+     * @param x     the block x-coordinate
+     * @param y     the block y-coordinate
+     * @param z     the block z-coordinate
+     * @return the DominionDTO associated with the given block, or null if not found
+     */
+    public @Nullable DominionDTO getDominion(World world, int x, int y, int z) {
+        return thisServerCache.getDominionCache().getDominion(world, x, y, z);
     }
 
     /**

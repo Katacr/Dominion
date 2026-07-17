@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static cn.lunadeer.dominion.Dominion.adminPermission;
 import static cn.lunadeer.dominion.misc.Asserts.checkDominionAdmin;
@@ -269,9 +270,13 @@ public class Others {
     }
 
     public static boolean isInDominion(@Nullable DominionDTO dominion, @NotNull Location location) {
+        return isInDominion(dominion, location.getWorld().getUID(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
+    }
+
+    public static boolean isInDominion(@Nullable DominionDTO dominion, @NotNull UUID world, int x, int y, int z) {
         if (dominion == null) return false;
-        if (!Objects.equals(dominion.getWorldUid(), location.getWorld().getUID())) return false;
-        return dominion.getCuboid().contain(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+        if (!Objects.equals(dominion.getWorldUid(), world)) return false;
+        return dominion.getCuboid().contain(x, y, z);
     }
 
     public static boolean isExplodeEntity(@NotNull Entity entity) {
